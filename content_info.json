@@ -28,7 +28,7 @@
     }
   ],
   "socials": [
-    { "label": "instagram", "url": "https://instagram.com/kav.arch" },
-    { "label": "email", "url": "mailto:info@kavarch.com" }
+    { "label": "info@kavarch.com", "url": "mailto:info@kavarch.com" },
+    { "label": "@kav.arch", "url": "https://instagram.com/kav.arch" }
   ]
 }
