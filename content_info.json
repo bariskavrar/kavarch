@@ -1,7 +1,7 @@
 {
   "about": {
-    "en": "kavarch is a speculative architectural laboratory navigating friction within the infinite grid.",
-    "tr": "kavarch sonsuz ızgara içindeki sürtünmeyi araştıran spekülatif bir mimari laboratuvardır."
+    "en": "kavarch is an istanbul-based architectural practice focused on the friction between structural logic and digital craftsmanship. we believe in building different, not just building more.",
+    "tr": "kavarch, yapısal mantık ile dijital ustalık arasındaki sürtünmeye odaklanan istanbul merkezli bir mimarlık pratiğidir. sadece daha fazlasını değil, farklı olanı inşa etmeye inanıyoruz."
   },
   "team": [
     {
@@ -21,15 +21,14 @@
       }
     }
   ],
-  "contact": [
+ "contact": [
     {
-      "title": { "en": "istanbul laboratory", "tr": "istanbul laboratuvarı" },
-      "address": "abbasağa mah. salnameci sk. kaya apt. no:11/4 beşiktaş/istanbul"
+      "title": { "en": "istanbul office", "tr": "istanbul ofis" },
+      "address": "kadıköy, istanbul / turkey"
     }
   ],
   "socials": [
-    { "label": "info@kavarch.com", "url": "mailto:info@kavarch.com" },
-    { "label": "@kav.arch", "url": "https://instagram.com/kav.arch" },
-    { "label": "linkedin", "url": "https://linkedin.com/company/kavarch" }
+    { "label": "instagram", "url": "https://instagram.com/kav.arch" },
+    { "label": "email", "url": "mailto:info@kavarch.com" }
   ]
 }
