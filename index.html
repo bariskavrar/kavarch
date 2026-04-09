@@ -23,13 +23,15 @@
 
         /* RESET */
         * { margin: 0; padding: 0; box-sizing: border-box; text-transform: lowercase !important; -webkit-font-smoothing: antialiased; }
+        
+        /* Layout Fix: Sitting flush at the top */
         html, body { width: 100%; background-color: var(--bg); margin: 0; padding: 0; }
 
         body { 
             font-family: 'Jost', sans-serif; color: var(--text); cursor: crosshair;
             background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
             background-size: var(--grid-size) var(--grid-size); background-attachment: fixed;
-            display: block; 
+            display: block; /* Prevents right column shift */
         }
 
         .logo-text { letter-spacing: -2px; line-height: 1; color: black !important; text-decoration: none !important; display: inline-block; }
@@ -45,6 +47,7 @@
         .lang-btn.active { opacity: 1; color: var(--orange); font-weight: 700; }
         .lang-switch .slash { opacity: 0.2; margin: 0 1px; pointer-events: none; }
 
+        /* SIDEBAR (DESKTOP) */
         aside {
             width: var(--sidebar-w); height: 100vh; position: fixed; left: 0; top: 0;
             border-right: var(--stroke) solid var(--text); 
@@ -61,16 +64,19 @@
 
         .sidebar-content { padding: var(--grid-size); flex-grow: 1; overflow-y: auto; }
         .sidebar-section { margin-bottom: 40px; }
-        .sidebar-section h3 { margin-bottom: 15px; }
+        .sidebar-section h3 { margin-bottom: 15px; color: var(--orange); font-family: 'Space Mono', monospace; font-size: 0.7rem; }
         .sidebar-section p { font-size: 1rem; line-height: 1.5; font-weight: 300; }
         
+        /* Istanbul Laboratory and Team Names Styling */
         .name-style { font-size: 1.1rem; display: block; font-weight: 500; margin-bottom: 4px; }
+        
         .team-member-block { margin-bottom: 25px; }
         .team-member-block .profession { font-size: 0.8rem; display: block; margin-bottom: 6px; opacity: 0.6; }
         .team-member-block .bio { font-size: 0.9rem; opacity: 0.8; line-height: 1.4; font-weight: 300; }
         .contact-link { display: block; margin-top: 5px; text-decoration: underline !important; color: black; font-weight: 500; }
         .office-block { margin-bottom: 25px; }
 
+        /* MOBILE HEADER */
         header {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: var(--header-h-mobile);
             background: white; border-bottom: var(--stroke) solid var(--text); z-index: 3000;
@@ -89,6 +95,7 @@
         }
         #mobile-popup { display: none; position: fixed; top: var(--header-h-mobile); left: 0; width: 100%; height: calc(100vh - var(--header-h-mobile)); background: white; z-index: 2000; padding: 40px 25px; overflow-y: auto; padding-bottom: calc(40px + env(safe-area-inset-bottom)); }
 
+        /* MAIN FIELD */
         main { margin-left: var(--sidebar-w); width: calc(100% - var(--sidebar-w)); position: relative; z-index: 5; margin-top: 0; }
 
         .meta-strip {
@@ -97,6 +104,9 @@
             display: flex; justify-content: space-between; align-items: center;
             font-family: 'Space Mono', monospace; font-size: 0.7rem; position: sticky; top: 0; z-index: 50;
         }
+
+        /* Fixed Log Tag: Not Bold, Matches Footer */
+        #header-log-tag { color: var(--text); font-weight: 400; letter-spacing: 0; }
 
         .updates-container { display: flex; height: 400px; border-bottom: var(--stroke) solid var(--text); background: black; }
         .video-box { position: relative; width: 50%; height: 100%; overflow: hidden; }
@@ -115,7 +125,8 @@
         .project-row:nth-of-type(odd) .project-text { border-right: var(--stroke) solid var(--text); }
         .project-row:nth-of-type(even) .project-text { border-left: var(--stroke) solid var(--text); }
 
-        .mono { font-family: 'Space Mono', monospace; font-size: 0.7rem; font-weight: 700; color: var(--orange); letter-spacing: 2px; }
+        .project-meta { color: var(--orange); font-family: 'Space Mono', monospace; font-size: 0.7rem; font-weight: 700; }
+
         .med { font-weight: 500; }
         .light { font-weight: 300; }
 
@@ -133,7 +144,7 @@
         .nav-label { background: var(--orange); color: white; font-family: 'Space Mono'; padding: 12px 18px; font-weight: 700; font-size: 0.8rem; }
         .nav-zone.right { justify-content: flex-end; }
 
-        footer { padding: var(--grid-size); background: white; display: flex; justify-content: space-between; font-family: 'Space Mono'; font-size: 0.7rem; z-index: 100; position: relative; padding-bottom: calc(var(--grid-size) + env(safe-area-inset-bottom)); }
+        footer { padding: var(--grid-size); background: white; display: flex; justify-content: space-between; font-family: 'Space Mono'; font-size: 0.7rem; z-index: 100; position: relative; padding-bottom: calc(var(--grid-size) + env(safe-area-inset-bottom)); border-top: var(--stroke) solid var(--text); }
 
         #game-layer { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
         .game-token { position: absolute; width: var(--grid-size); height: var(--grid-size); display: flex; align-items: center; justify-content: center; font-family: 'Space Mono'; font-weight: 700; font-size: 1.2rem; animation: tokenIn 0.3s forwards; }
@@ -177,11 +188,11 @@
 
     <main>
         <div class="meta-strip">
-            <div id="header-log-tag" class="mono"></div>
+            <div id="header-log-tag"></div>
             <div class="lang-switch" onclick="toggleLang()">
                 <span class="lang-btn active en-toggle">en</span><span class="slash">/</span><span class="lang-btn tr-toggle">tr</span>
             </div>
-            <span id="clock">00:00:00</span>
+            <span id="clock" class="mono">00:00:00</span>
         </div>
 
         <section class="updates-container">
@@ -231,11 +242,11 @@
 
             let html = `
                 <div class="sidebar-section">
-                    <h3 class="mono">01_about</h3>
+                    <h3>01_about</h3>
                     <p class="light">${info.about[lang]}</p>
                 </div>
                 <div class="sidebar-section">
-                    <h3 class="mono">02_team</h3>
+                    <h3>02_team</h3>
                     ${info.team.map(m => `
                         <div class="team-member-block">
                             <span class="name-style med">${m.name}</span>
@@ -245,7 +256,7 @@
                     `).join('')}
                 </div>
                 <div class="sidebar-section">
-                    <h3 class="mono">03_contact</h3>
+                    <h3>03_contact</h3>
                     ${info.contact.map(office => `
                         <div class="office-block">
                             <span class="name-style med">${office.title[lang]}</span>
@@ -254,7 +265,7 @@
                     `).join('')}
                 </div>
                 <div class="sidebar-section">
-                    <h3 class="mono">04_socials</h3>
+                    <h3>04_socials</h3>
                     ${info.socials.map(soc => `
                         <a href="${soc.url}" target="_blank" class="contact-link med">${soc.label}</a>
                     `).join('')}
@@ -313,7 +324,7 @@
                     row.className = 'project-row';
                     row.innerHTML = `
                         <div class="project-text">
-                            <div class="project-meta mono">${meta.tag}</div>
+                            <div class="project-meta">${meta.tag}</div>
                             <h2 class="med">${meta.title}</h2>
                             <p class="light project-desc">${currentLang === 'en' ? meta.en : meta.tr}</p>
                             <div class="project-specs">${meta.specs}</div>
@@ -364,7 +375,24 @@
         loadDynamicContent();
         initFeed();
 
+        // XOX GAME
         let currentPlayer = 'x'; let board = {};
+        
+        function checkWinner(col, row) {
+            const directions = [
+                [[0, 1], [0, -1]], [[1, 0], [-1, 0]], [[1, 1], [-1, -1]], [[1, -1], [-1, 1]]
+            ];
+            for (const dir of directions) {
+                let count = 1;
+                for (const [dx, dy] of dir) {
+                    let c = col + dx, r = row + dy;
+                    while (board[`${c},${r}`] === currentPlayer) { count++; c += dx; r += dy; }
+                }
+                if (count >= 3) return true;
+            }
+            return false;
+        }
+
         window.addEventListener('mousedown', (e) => {
             if (e.target.closest('aside') || e.target.closest('header') || e.target.closest('button') || e.target.closest('.meta-strip') || e.target.closest('.nav-zone')) return;
             const col = Math.floor(e.clientX / 40); const row = Math.floor(e.clientY / 40);
@@ -375,6 +403,13 @@
                 t.style.left = (col * 40) + 'px'; t.style.top = (row * 40) + 'px';
                 t.style.color = currentPlayer === 'x' ? 'var(--orange)' : 'black';
                 document.getElementById('game-layer').appendChild(t);
+                
+                if (checkWinner(col, row)) {
+                    setTimeout(() => {
+                        alert(`player ${currentPlayer} has connected the grid.`);
+                        board = {}; document.getElementById('game-layer').innerHTML = '';
+                    }, 50);
+                }
                 currentPlayer = (currentPlayer === 'x') ? 'o' : 'x';
             }
         });
