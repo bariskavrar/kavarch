@@ -21,7 +21,6 @@
             --row-h-desktop: 550px;
         }
 
-        /* RESET */
         * { margin: 0; padding: 0; box-sizing: border-box; text-transform: lowercase !important; -webkit-font-smoothing: antialiased; }
         html, body { width: 100%; background-color: var(--bg); margin: 0; padding: 0; }
 
@@ -34,7 +33,6 @@
 
         .logo-text { letter-spacing: -2px; line-height: 1; color: black !important; text-decoration: none !important; display: inline-block; }
         .logo-text .kav { font-weight: 600; } .logo-text .arch { font-weight: 300; }
-        a { text-decoration: none !important; }
 
         .lang-switch { 
             font-family: 'Space Mono', monospace; font-size: 0.7rem; 
@@ -69,27 +67,21 @@
         .team-member-block .profession { font-size: 0.8rem; display: block; margin-bottom: 6px; opacity: 0.6; }
         .team-member-block .bio { font-size: 0.9rem; opacity: 0.8; line-height: 1.4; font-weight: 300; }
         .contact-link { display: block; margin-top: 5px; text-decoration: underline !important; color: black; font-weight: 500; }
-        .office-block { margin-bottom: 25px; }
 
         header {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: var(--header-h-mobile);
             background: white; border-bottom: var(--stroke) solid var(--text); z-index: 3000;
             padding: 0 0 0 25px; justify-content: space-between; align-items: center;
         }
-        @supports (padding-top: env(safe-area-inset-top)) { header { padding-top: env(safe-area-inset-top); } }
-
-        .mobile-logo { font-size: 3rem !important; }
-        .header-controls { display: flex; align-items: center; gap: 20px; height: 100%; }
 
         #info-btn { 
             background: var(--orange); color: white; border: none; height: 100%; width: 100px; 
             font-family: 'Space Mono', monospace; font-weight: 700; font-size: 0.8rem; 
             border-left: var(--stroke) solid var(--text); cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
         }
-        #mobile-popup { display: none; position: fixed; top: var(--header-h-mobile); left: 0; width: 100%; height: calc(100vh - var(--header-h-mobile)); background: white; z-index: 2000; padding: 40px 25px; overflow-y: auto; padding-bottom: calc(40px + env(safe-area-inset-bottom)); }
+        #mobile-popup { display: none; position: fixed; top: var(--header-h-mobile); left: 0; width: 100%; height: calc(100vh - var(--header-h-mobile)); background: white; z-index: 2000; padding: 40px 25px; overflow-y: auto; }
 
-        main { margin-left: var(--sidebar-w); width: calc(100% - var(--sidebar-w)); position: relative; z-index: 5; margin-top: 0; }
+        main { margin-left: var(--sidebar-w); width: calc(100% - var(--sidebar-w)); position: relative; z-index: 5; }
 
         .meta-strip {
             height: 80px; padding: 0 var(--grid-size); border-bottom: var(--stroke) solid var(--text); 
@@ -98,20 +90,16 @@
             font-family: 'Space Mono', monospace; font-size: 0.7rem; position: sticky; top: 0; z-index: 50;
         }
 
-        #header-log-tag { color: var(--text); font-weight: 400; letter-spacing: 0; }
+        #header-log-tag { color: var(--text); font-weight: 400; }
 
-        /* GAME LAYER & ANIMATION */
         #game-layer { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
         .game-token { 
             position: absolute; width: var(--grid-size); height: var(--grid-size); 
             display: flex; align-items: center; justify-content: center; 
             font-family: 'Space Mono', monospace; font-weight: 700; font-size: 1.2rem; 
-            animation: tokenIn 0.3s forwards; 
         }
-        @keyframes tokenIn { from { transform: scale(0); } to { transform: scale(1); } }
         @keyframes winPulse { from { transform: scale(1); } to { transform: scale(1.3); color: var(--orange) !important; } }
 
-        /* VIDEOS */
         .updates-container { display: flex; height: 400px; border-bottom: var(--stroke) solid var(--text); background: black; }
         .video-box { position: relative; width: 50%; height: 100%; overflow: hidden; }
         .video-box:first-child { border-right: var(--stroke) solid var(--text); }
@@ -119,50 +107,35 @@
         .video-box:hover video { filter: grayscale(0); opacity: 1; transform: scale(1.05); }
         .tag { position: absolute; bottom: 20px; left: 20px; background: var(--orange); color: white; padding: 4px 12px; font-family: 'Space Mono'; font-size: 0.6rem; z-index: 10; }
 
-        .hero { padding: 120px var(--grid-size); border-bottom: var(--stroke) solid var(--text); background: transparent; }
+        .hero { padding: 120px var(--grid-size); border-bottom: var(--stroke) solid var(--text); }
         .hero h1 { font-size: 11vw; font-weight: 500; line-height: 0.85; letter-spacing: -0.05em; pointer-events: none; }
 
-        .project-row { display: flex; width: 100%; height: var(--row-h-desktop); border-bottom: var(--stroke) solid var(--text); background: transparent; align-items: stretch; }
+        #project-feed { min-height: 500px; }
+        .project-row { display: flex; width: 100%; height: var(--row-h-desktop); border-bottom: var(--stroke) solid var(--text); align-items: stretch; }
         .project-row:nth-of-type(even) { flex-direction: row-reverse; }
-        .project-text, .slider-container { width: 50%; flex-shrink: 0; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
-        .project-text { padding: var(--grid-size); background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(2px); }
+        .project-text, .slider-container { width: 50%; display: flex; flex-direction: column; justify-content: center; }
+        .project-text { padding: var(--grid-size); }
         .project-row:nth-of-type(odd) .project-text { border-right: var(--stroke) solid var(--text); }
         .project-row:nth-of-type(even) .project-text { border-left: var(--stroke) solid var(--text); }
-
-        .project-meta { color: var(--orange); font-family: 'Space Mono', monospace; font-size: 0.7rem; font-weight: 700; }
-
-        .med { font-weight: 500; }
-        .light { font-weight: 300; }
-
-        .project-text h2 { font-size: 4.5vw; font-weight: 500; line-height: 0.9; margin-bottom: 25px; }
-        .project-desc { font-size: 1.1rem; line-height: 1.5; max-width: 450px; font-weight: 300; margin-bottom: 30px;}
-        .project-specs { font-family: 'Space Mono', monospace; font-size: 0.65rem; opacity: 0.5; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 15px; }
+        .project-meta { color: var(--orange); font-family: 'Space Mono'; font-weight: 700; font-size: 0.7rem; margin-bottom: 15px; }
 
         .slider-container { position: relative; background: #eee; overflow: hidden; }
         .slider-track { display: flex; height: 100%; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
         .slide-img { min-width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: 0.6s; }
-        .slider-container:hover .slide-img { filter: grayscale(0); }
         .slider-nav { position: absolute; inset: 0; display: flex; z-index: 10; }
-        .nav-zone { width: 50%; height: 100%; display: flex; align-items: center; opacity: 0; transition: 0.3s; padding: 30px; cursor: pointer; }
+        .nav-zone { width: 50%; height: 100%; display: flex; align-items: center; opacity: 0; transition: 0.3s; cursor: pointer; padding: 20px;}
         .nav-zone:hover { opacity: 1; }
-        .nav-label { background: var(--orange); color: white; font-family: 'Space Mono'; padding: 12px 18px; font-weight: 700; font-size: 0.8rem; }
+        .nav-label { background: var(--orange); color: white; font-family: 'Space Mono'; padding: 10px; font-weight: 700; font-size: 0.8rem; }
         .nav-zone.right { justify-content: flex-end; }
 
-        footer { padding: var(--grid-size); background: white; display: flex; justify-content: space-between; font-family: 'Space Mono'; font-size: 0.7rem; z-index: 100; position: relative; padding-bottom: calc(var(--grid-size) + env(safe-area-inset-bottom)); border-top: var(--stroke) solid var(--text); }
-
-        .lang-en { display: block !important; } .lang-tr { display: none !important; }
-        body.tr-active .lang-en { display: none !important; } body.tr-active .lang-tr { display: block !important; }
+        footer { padding: var(--grid-size); display: flex; justify-content: space-between; font-family: 'Space Mono'; font-size: 0.7rem; border-top: var(--stroke) solid var(--text); }
 
         @media (max-width: 1100px) {
             aside { display: none; } header { display: flex; }
-            main { margin-left: 0; width: 100%; margin-top: var(--header-h-mobile); }
-            .updates-container { flex-direction: column; height: auto; }
-            .video-box { width: 100%; height: 300px; border-right: none; border-bottom: var(--stroke) solid var(--text); }
-            .project-row { flex-direction: column !important; height: auto; margin-bottom: 0; border-bottom: none;}
-            .project-text, .slider-container { width: 100%; height: auto; border: none !important; }
-            .project-text { order: 1; padding: 40px 25px; border-bottom: var(--stroke) solid var(--text) !important; min-height: 350px; }
-            .slider-container { order: 2; height: 450px; border-bottom: var(--stroke) solid var(--text) !important; }
-            .meta-strip { display: none; } .hero h1 { font-size: 16vw; } .hero { border-bottom: var(--stroke) solid var(--text); }
+            main { margin-left: 0; margin-top: var(--header-h-mobile); }
+            .project-row { flex-direction: column !important; height: auto; }
+            .project-text, .slider-container { width: 100%; }
+            .slider-container { height: 400px; border-top: var(--stroke) solid var(--text); }
         }
     </style>
 </head>
@@ -191,7 +164,7 @@
 
     <main>
         <div class="meta-strip">
-            <div id="header-log-tag"></div>
+            <div id="header-log-tag" class="mono"></div>
             <div class="lang-switch" onclick="toggleLang()">
                 <span class="lang-btn active en-toggle">en</span><span class="slash">/</span><span class="lang-btn tr-toggle">tr</span>
             </div>
@@ -225,17 +198,21 @@
     <script>
         let globalContent = { info: null, header: null, footer: null };
         let currentLang = 'en';
+        let gameActive = true;
 
         async function loadDynamicContent() {
             try {
+                // We use cache-busting to ensure we always get latest json
                 const [info, header, footer] = await Promise.all([
-                    fetch('content_info.json').then(r => r.json()),
-                    fetch('content_header.json').then(r => r.json()),
-                    fetch('content_footer.json').then(r => r.json())
+                    fetch('content_info.json?v=' + Date.now()).then(r => r.json()),
+                    fetch('content_header.json?v=' + Date.now()).then(r => r.json()),
+                    fetch('content_footer.json?v=' + Date.now()).then(r => r.json())
                 ]);
                 globalContent = { info, header, footer };
                 updateUI();
-            } catch (e) { console.error("Error loading JSON", e); }
+            } catch (e) { 
+                console.error("JSON Error: Make sure you are running a local server and files exist.", e); 
+            }
         }
 
         function updateUI() {
@@ -276,9 +253,7 @@
             `;
             document.querySelectorAll('.sidebar-info-container').forEach(el => el.innerHTML = html);
 
-            if (globalContent.header) {
-                // If the game is won, this will be overridden by the game alert
-                if (!gameActive) return; 
+            if (globalContent.header && gameActive) {
                 document.getElementById('header-log-tag').innerText = globalContent.header.log_version[lang];
                 const infoBtn = document.getElementById('info-btn');
                 const isVisible = document.getElementById('mobile-popup').style.display === 'block';
@@ -290,151 +265,10 @@
             }
         }
 
+        // SLIDER / FEED Logic
         const EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
         async function probeImage(folder, index) {
             for (const ext of EXTENSIONS) {
                 const url = `images/${folder}/${index}.${ext}`;
                 const exists = await new Promise(res => {
-                    const img = new Image();
-                    img.onload = () => res(true);
-                    img.onerror = () => res(false);
-                    img.src = url;
-                });
-                if (exists) return url;
-            }
-            return null;
-        }
-
-        async function initFeed() {
-            const feed = document.getElementById('project-feed');
-            let pNum = 1;
-            while (pNum < 25) { 
-                const folder = `project${pNum}`;
-                const firstImg = await probeImage(folder, 1);
-                if (firstImg) {
-                    let meta = { tag: `[log_0${pNum} // research]`, title: `project_log_${pNum}`, en: `Investigation.`, tr: `İnceleme.`, specs: `Loc: Istanbul // 2025` };
-                    try {
-                        const response = await fetch(`images/${folder}/meta.json`);
-                        if (response.ok) meta = await response.json();
-                    } catch (e) {}
-
-                    let imgs = [firstImg];
-                    let iNum = 2;
-                    while (iNum < 15) {
-                        const path = await probeImage(folder, iNum);
-                        if (path) { imgs.push(path); iNum++; } else break;
-                    }
-
-                    const row = document.createElement('section');
-                    row.className = 'project-row';
-                    row.innerHTML = `
-                        <div class="project-text">
-                            <div class="project-meta">${meta.tag}</div>
-                            <h2 class="med">${meta.title}</h2>
-                            <p class="light project-desc">${currentLang === 'en' ? meta.en : meta.tr}</p>
-                            <div class="project-specs">${meta.specs}</div>
-                        </div>
-                        <div class="slider-container">
-                            <div class="slider-track">${imgs.map(s => `<img src="${s}" class="slide-img">`).join('')}</div>
-                            <div class="slider-nav">
-                                <div class="nav-zone left"><span class="nav-label">< prev</span></div>
-                                <div class="nav-zone right"><span class="nav-label">next ></span></div>
-                            </div>
-                        </div>`;
-                    feed.appendChild(row);
-                    setupSlider(row);
-                    pNum++;
-                } else break;
-            }
-        }
-
-        function setupSlider(row) {
-            const track = row.querySelector('.slider-track');
-            const slides = row.querySelectorAll('.slide-img');
-            let cur = 0;
-            if (slides.length <= 1) row.querySelector('.slider-nav').style.display = 'none';
-            row.querySelector('.nav-zone.left').onclick = (e) => { e.stopPropagation(); cur = (cur - 1 + slides.length) % slides.length; track.style.transform = `translateX(-${cur * 100}%)`; };
-            row.querySelector('.nav-zone.right').onclick = (e) => { e.stopPropagation(); cur = (cur + 1) % slides.length; track.style.transform = `translateX(-${cur * 100}%)`; };
-        }
-
-        function toggleLang() {
-            currentLang = (currentLang === 'en') ? 'tr' : 'en';
-            const isTr = currentLang === 'tr';
-            document.querySelectorAll('.en-toggle').forEach(el => el.classList.toggle('active', !isTr));
-            document.querySelectorAll('.tr-toggle').forEach(el => el.classList.toggle('active', isTr));
-            updateUI();
-        }
-
-        function togglePopup() { 
-            const p = document.getElementById('mobile-popup'); 
-            p.style.display = (p.style.display === 'block') ? 'none' : 'block'; 
-            updateUI();
-        }
-
-        setInterval(() => { document.getElementById('clock').innerText = new Date().toTimeString().split(' ')[0]; }, 1000);
-        window.addEventListener('mousemove', (e) => { 
-            const coords = document.getElementById('coords');
-            if(coords) coords.innerText = `x: ${String(e.clientX).padStart(3, '0')} y: ${String(e.clientY).padStart(3, '0')}`; 
-        });
-
-        loadDynamicContent();
-        initFeed();
-
-        // XOX GAME LOGIC FROM !best.html
-        let currentPlayer = 'x'; 
-        let board = {}; 
-        let gameActive = true;
-
-        function checkWin(col, row, p) {
-            const directions = [[1,0], [0,1], [1,1], [1,-1]];
-            for (let [dx, dy] of directions) {
-                let path = [[col, row]];
-                // Check in both directions from the placed token
-                for (let i = 1; i < 3; i++) { if (board[`${col+(dx*i)},${row+(dy*i)}`] === p) path.push([col+(dx*i), row+(dy*i)]); else break; }
-                for (let i = 1; i < 3; i++) { if (board[`${col-(dx*i)},${row-(dy*i)}`] === p) path.push([col-(dx*i), row-(dy*i)]); else break; }
-                
-                if (path.length >= 3) { 
-                    // Highlight winners
-                    path.forEach(coords => { 
-                        const el = document.querySelector(`[data-coord="${coords[0]},${coords[1]}"]`); 
-                        if (el) el.style.animation = 'winPulse 0.4s infinite alternate'; 
-                    }); 
-                    return true; 
-                }
-            } 
-            return false;
-        }
-
-        window.addEventListener('mousedown', (e) => {
-            // Check if game is active and click is not on UI
-            if (!gameActive || e.target.closest('aside') || e.target.closest('header') || e.target.closest('button') || e.target.closest('.meta-strip') || e.target.closest('.nav-zone')) return;
-            
-            const col = Math.floor(e.clientX / 40); 
-            const row = Math.floor(e.clientY / 40);
-            const key = `${col},${row}`;
-
-            if (!board[key]) {
-                board[key] = currentPlayer;
-                const t = document.createElement('div'); 
-                t.className = 'game-token'; 
-                t.innerText = currentPlayer;
-                t.style.left = (col * 40) + 'px'; 
-                t.style.top = (row * 40) + 'px';
-                t.style.color = currentPlayer === 'x' ? 'var(--orange)' : 'black';
-                t.dataset.coord = key;
-                document.getElementById('game-layer').appendChild(t);
-                
-                if (checkWin(col, row, currentPlayer)) {
-                    gameActive = false; 
-                    const logTag = document.getElementById('header-log-tag');
-                    logTag.innerText = `[alert: winner_${currentPlayer}_detected]`;
-                    logTag.style.color = 'var(--orange)';
-                    logTag.style.fontWeight = '700'; // Set to bold for alert as per !best behavior
-                } else {
-                    currentPlayer = (currentPlayer === 'x') ? 'o' : 'x';
-                }
-            }
-        });
-    </script>
-</body>
-</html>
+                    const img = new Image
