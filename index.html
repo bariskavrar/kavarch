@@ -270,7 +270,6 @@
                     `).join('')}
                 </div>
                 <div class="sidebar-section">
-                    <h3 class="mono">04_socials</h3>
                     ${info.socials.map(soc => `
                         <a href="${soc.url}" target="_blank" class="contact-link med">${soc.label}</a>
                     `).join('')}
@@ -412,14 +411,4 @@
             updateUI();
         }
 
-        setInterval(() => { document.getElementById('clock').innerText = new Date().toTimeString().split(' ')[0]; }, 1000);
-        window.addEventListener('mousemove', (e) => { 
-            const coords = document.getElementById('coords');
-            if(coords) coords.innerText = `x: ${String(e.clientX).padStart(3, '0')} y: ${String(e.clientY).padStart(3, '0')}`; 
-        });
-
-        loadDynamicContent();
-        initFeed();
-    </script>
-</body>
-</html>
+        setInte
