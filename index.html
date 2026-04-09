@@ -23,7 +23,7 @@
 
         /* RESET */
         * { margin: 0; padding: 0; box-sizing: border-box; text-transform: lowercase !important; -webkit-font-smoothing: antialiased; }
-        html, body { width: 100%; overflow-x: hidden; background-color: var(--bg); margin: 0; padding: 0; }
+        html, body { width: 100%; background-color: var(--bg); margin: 0; padding: 0; }
 
         body { 
             font-family: 'Jost', sans-serif; color: var(--text); cursor: crosshair;
@@ -95,12 +95,16 @@
             font-family: 'Space Mono', monospace; font-size: 0.7rem; position: sticky; top: 0; z-index: 50;
         }
 
-        /* HEADER TAG: LIGHT, NOT BOLD */
-        #header-log-tag { color: var(--text); font-weight: 400; }
+        /* HEADER TAG: LIGHT WEIGHT */
+        #header-log-tag { color: var(--text); font-weight: 400; font-family: 'Space Mono', monospace; }
 
         /* GAME LAYER */
         #game-layer { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
-        .game-token { position: absolute; width: var(--grid-size); height: var(--grid-size); display: flex; align-items: center; justify-content: center; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 1.2rem; }
+        .game-token { 
+            position: absolute; width: var(--grid-size); height: var(--grid-size); 
+            display: flex; align-items: center; justify-content: center; 
+            font-family: 'Space Mono', monospace; font-weight: 700; font-size: 1.2rem; 
+        }
         @keyframes winPulse { from { transform: scale(1); } to { transform: scale(1.3); color: var(--orange) !important; } }
 
         /* CONTENT */
@@ -205,22 +209,14 @@
 
         async function loadDynamicContent() {
             try {
-                // Ensure files are fetched from the same directory
-                const responses = await Promise.all([
-                    fetch('./content_info.json'),
-                    fetch('./content_header.json'),
-                    fetch('./content_footer.json')
+                const [info, header, footer] = await Promise.all([
+                    fetch('content_info.json').then(r => r.json()),
+                    fetch('content_header.json').then(r => r.json()),
+                    fetch('content_footer.json').then(r => r.json())
                 ]);
-
-                globalContent.info = await responses[0].json();
-                globalContent.header = await responses[1].json();
-                globalContent.footer = await responses[2].json();
-
-                console.log("JSON Data Loaded Successfully");
+                globalContent = { info, header, footer };
                 updateUI();
-            } catch (e) {
-                console.error("Critical JSON error. Ensure you are using a local server (Live Server).", e);
-            }
+            } catch (e) { console.error("Critical JSON error. Ensure local server is running.", e); }
         }
 
         function updateUI() {
@@ -228,8 +224,7 @@
             const info = globalContent.info;
             if (!info) return;
 
-            // Update Info Section (Sidebar & Mobile Popup)
-            const html = `
+            let html = `
                 <div class="sidebar-section">
                     <h3>01_about</h3>
                     <p class="light">${info.about[lang]}</p>
@@ -262,22 +257,19 @@
             `;
             document.querySelectorAll('.sidebar-info-container').forEach(el => el.innerHTML = html);
 
-            // Update Header
             if (globalContent.header && gameActive) {
                 document.getElementById('header-log-tag').innerText = globalContent.header.log_version[lang];
                 const infoBtn = document.getElementById('info-btn');
                 const isVisible = document.getElementById('mobile-popup').style.display === 'block';
                 infoBtn.innerText = isVisible ? globalContent.header.close_label : globalContent.header.info_label;
             }
-
-            // Update Footer
             if (globalContent.footer) {
                 document.getElementById('footer-status').innerText = globalContent.footer.system_status;
                 document.getElementById('footer-copy').innerText = globalContent.footer.copyright;
             }
         }
 
-        // FEED LOGIC
+        // Project Feed Logic
         const EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
         async function probeImage(folder, index) {
             for (const ext of EXTENSIONS) {
@@ -300,7 +292,7 @@
                 const folder = `project${pNum}`;
                 const firstImg = await probeImage(folder, 1);
                 if (firstImg) {
-                    let meta = { tag: `[log_0${pNum} // research]`, title: `project_log_${pNum}`, en: `Investigation into spatial logic.`, tr: `Mekansal mantık incelemesi.`, specs: `Loc: Istanbul // 2025` };
+                    let meta = { tag: `[log_0${pNum} // research]`, title: `project_log_${pNum}`, en: `Investigation.`, tr: `İnceleme.`, specs: `Loc: Istanbul // 2025` };
                     try {
                         const response = await fetch(`images/${folder}/meta.json`);
                         if (response.ok) meta = await response.json();
@@ -317,7 +309,7 @@
                     row.className = 'project-row';
                     row.innerHTML = `
                         <div class="project-text">
-                            <div class="project-meta mono">${meta.tag}</div>
+                            <div class="project-meta">${meta.tag}</div>
                             <h2 class="med">${meta.title}</h2>
                             <p class="light project-desc">${currentLang === 'en' ? meta.en : meta.tr}</p>
                             <div class="project-specs">${meta.specs}</div>
@@ -367,7 +359,7 @@
             if(coords) coords.innerText = `x: ${String(e.clientX).padStart(3, '0')} y: ${String(e.clientY).padStart(3, '0')}`; 
         });
 
-        // XOX GAME LOGIC
+        // XOX GAME
         let currentPlayer = 'x'; let board = {};
         function checkWin(col, row, p) {
             const directions = [[1,0], [0,1], [1,1], [1,-1]];
@@ -392,8 +384,7 @@
             const key = `${col},${row}`;
             if (!board[key]) {
                 board[key] = currentPlayer;
-                const t = document.createElement('div');
-                t.className = 'game-token'; t.innerText = currentPlayer;
+                const t = document.createElement('div'); t.className = 'game-token'; t.innerText = currentPlayer;
                 t.style.left = (col * 40) + 'px'; t.style.top = (row * 40) + 'px';
                 t.style.color = currentPlayer === 'x' ? 'var(--orange)' : 'black';
                 t.dataset.coord = key;
