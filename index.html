@@ -157,7 +157,7 @@
     <div id="game-layer"></div>
 
     <header>
-        <div class="mobile-logo logo-text"><span class="kav">kav</span><span class="arch">arch</span></div>
+        <div class="mobile-logo logo-text" onclick="window.scrollTo(0,0)"><span class="kav">kav</span><span class="arch">arch</span></div>
         <div class="header-controls">
             <div class="lang-switch" onclick="toggleLang()">
                 <span class="lang-btn active en-toggle">en</span><span class="slash">/</span><span class="lang-btn tr-toggle">tr</span>
@@ -211,6 +211,7 @@
     <script>
         let globalContent = { info: null, header: null, footer: null };
         let currentLang = 'en';
+        let projectData = []; // Store project meta for lang switching
 
         async function loadDynamicContent() {
             try {
@@ -221,6 +222,7 @@
                 ]);
                 globalContent = { info, header, footer };
                 updateUI();
+                initFeed(); // Build projects after content is ready
             } catch (e) { console.error("Error loading JSON", e); }
         }
 
@@ -229,7 +231,8 @@
             const info = globalContent.info;
             if (!info) return;
 
-            let html = `
+            // Update Sidebar / Mobile Popup Content
+            let sidebarHtml = `
                 <div class="sidebar-section">
                     <h3 class="mono">01_about</h3>
                     <p class="light">${info.about[lang]}</p>
@@ -260,18 +263,28 @@
                     `).join('')}
                 </div>
             `;
-            document.querySelectorAll('.sidebar-info-container').forEach(el => el.innerHTML = html);
+            document.querySelectorAll('.sidebar-info-container').forEach(el => el.innerHTML = sidebarHtml);
 
+            // Update Header labels
             if (globalContent.header) {
                 document.getElementById('header-log-tag').innerText = globalContent.header.log_version[lang];
                 const infoBtn = document.getElementById('info-btn');
-                const isVisible = document.getElementById('mobile-popup').style.display === 'block';
-                infoBtn.innerText = isVisible ? globalContent.header.close_label : globalContent.header.info_label;
+                const isPopupVisible = document.getElementById('mobile-popup').style.display === 'block';
+                infoBtn.innerText = isPopupVisible ? globalContent.header.close_label[lang] : globalContent.header.info_label[lang];
             }
+
+            // Update Footer
             if (globalContent.footer) {
                 document.getElementById('footer-status').innerText = globalContent.footer.system_status;
                 document.getElementById('footer-copy').innerText = globalContent.footer.copyright;
             }
+
+            // Update existing Project Text
+            document.querySelectorAll('.project-row').forEach((row, idx) => {
+                if (projectData[idx]) {
+                    row.querySelector('.project-desc').innerText = projectData[idx][lang];
+                }
+            });
         }
 
         const EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
@@ -291,10 +304,14 @@
 
         async function initFeed() {
             const feed = document.getElementById('project-feed');
+            feed.innerHTML = '';
+            projectData = [];
+            
             let pNum = 1;
-            while (pNum < 25) { 
+            while (pNum < 15) { 
                 const folder = `project${pNum}`;
                 const firstImg = await probeImage(folder, 1);
+                
                 if (firstImg) {
                     let meta = { tag: `[log_0${pNum} // research]`, title: `project_log_${pNum}`, en: `Investigation.`, tr: `İnceleme.`, specs: `Loc: Istanbul // 2025` };
                     try {
@@ -302,9 +319,11 @@
                         if (response.ok) meta = await response.json();
                     } catch (e) {}
 
+                    projectData.push(meta);
+
                     let imgs = [firstImg];
                     let iNum = 2;
-                    while (iNum < 15) {
+                    while (iNum < 10) {
                         const path = await probeImage(folder, iNum);
                         if (path) { imgs.push(path); iNum++; } else break;
                     }
@@ -315,11 +334,11 @@
                         <div class="project-text">
                             <div class="project-meta mono">${meta.tag}</div>
                             <h2 class="med">${meta.title}</h2>
-                            <p class="light project-desc">${currentLang === 'en' ? meta.en : meta.tr}</p>
+                            <p class="light project-desc">${meta[currentLang]}</p>
                             <div class="project-specs">${meta.specs}</div>
                         </div>
                         <div class="slider-container">
-                            <div class="slider-track">${imgs.map(s => `<img src="${s}" class="slide-img">`).join('')}</div>
+                            <div class="slider-track">${imgs.map(s => `<img src="${s}" class="slide-img" loading="lazy">`).join('')}</div>
                             <div class="slider-nav">
                                 <div class="nav-zone left"><span class="nav-label">< prev</span></div>
                                 <div class="nav-zone right"><span class="nav-label">next ></span></div>
@@ -336,9 +355,15 @@
             const track = row.querySelector('.slider-track');
             const slides = row.querySelectorAll('.slide-img');
             let cur = 0;
-            if (slides.length <= 1) row.querySelector('.slider-nav').style.display = 'none';
-            row.querySelector('.nav-zone.left').onclick = (e) => { e.stopPropagation(); cur = (cur - 1 + slides.length) % slides.length; track.style.transform = `translateX(-${cur * 100}%)`; };
-            row.querySelector('.nav-zone.right').onclick = (e) => { e.stopPropagation(); cur = (cur + 1) % slides.length; track.style.transform = `translateX(-${cur * 100}%)`; };
+            if (slides.length <= 1) {
+                const nav = row.querySelector('.slider-nav');
+                if(nav) nav.style.display = 'none';
+            }
+            const leftBtn = row.querySelector('.nav-zone.left');
+            const rightBtn = row.querySelector('.nav-zone.right');
+            
+            if(leftBtn) leftBtn.onclick = (e) => { e.stopPropagation(); cur = (cur - 1 + slides.length) % slides.length; track.style.transform = `translateX(-${cur * 100}%)`; };
+            if(rightBtn) rightBtn.onclick = (e) => { e.stopPropagation(); cur = (cur + 1) % slides.length; track.style.transform = `translateX(-${cur * 100}%)`; };
         }
 
         function toggleLang() {
@@ -355,29 +380,40 @@
             updateUI();
         }
 
-        setInterval(() => { document.getElementById('clock').innerText = new Date().toTimeString().split(' ')[0]; }, 1000);
+        // System Utils
+        setInterval(() => { 
+            const clock = document.getElementById('clock');
+            if(clock) clock.innerText = new Date().toTimeString().split(' ')[0]; 
+        }, 1000);
+
         window.addEventListener('mousemove', (e) => { 
             const coords = document.getElementById('coords');
             if(coords) coords.innerText = `x: ${String(e.clientX).padStart(3, '0')} y: ${String(e.clientY).padStart(3, '0')}`; 
         });
 
-        loadDynamicContent();
-        initFeed();
-
-        let currentPlayer = 'x'; let board = {};
+        // Interactive Grid Layer
+        let currentPlayer = 'x'; 
+        let board = {};
         window.addEventListener('mousedown', (e) => {
             if (e.target.closest('aside') || e.target.closest('header') || e.target.closest('button') || e.target.closest('.meta-strip') || e.target.closest('.nav-zone')) return;
-            const col = Math.floor(e.clientX / 40); const row = Math.floor(e.clientY / 40);
+            const col = Math.floor(e.clientX / 40); 
+            const row = Math.floor(e.clientY / 40);
             const key = `${col},${row}`;
             if (!board[key]) {
                 board[key] = currentPlayer;
-                const t = document.createElement('div'); t.className = 'game-token'; t.innerText = currentPlayer;
-                t.style.left = (col * 40) + 'px'; t.style.top = (row * 40) + 'px';
+                const t = document.createElement('div'); 
+                t.className = 'game-token'; 
+                t.innerText = currentPlayer;
+                t.style.left = (col * 40) + 'px'; 
+                t.style.top = (row * 40 + window.scrollY) + 'px'; // Fix for scrolling
                 t.style.color = currentPlayer === 'x' ? 'var(--orange)' : 'black';
                 document.getElementById('game-layer').appendChild(t);
                 currentPlayer = (currentPlayer === 'x') ? 'o' : 'x';
             }
         });
+
+        // Initialization
+        loadDynamicContent();
     </script>
 </body>
 </html>
