@@ -21,10 +21,10 @@
       }
     }
   ],
- "contact": [
+  "contact": [
     {
-      "title": { "en": "istanbul office", "tr": "istanbul ofis" },
-      "address": "kadıköy, istanbul / turkey"
+      "title": { "en": "istanbul laboratory", "tr": "istanbul laboratuvarı" },
+      "address": "abbasağa mah. salnameci sk. kaya apt. no:11/4 beşiktaş/istanbul"
     }
   ],
   "socials": [
