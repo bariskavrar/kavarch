@@ -21,7 +21,7 @@
         }
         @font-face {
             font-family: 'FuturaLTPro';
-            src: url('FuturaLTPro-Book.woff2') format('woff2');
+            src: url('FuturaLTPro-Book.woff2') format('woff22');
             font-weight: 400;
         }
         @font-face {
@@ -82,7 +82,7 @@
         .med { font-weight: 500; }
         .light { font-weight: 300; }
 
-        /* SIDEBAR & MOBILE INFO BOX */
+        /* SIDEBAR (Desktop) */
         aside {
             width: var(--sidebar-w); height: 100vh; position: fixed; left: 0; top: 0;
             border-right: var(--stroke) solid var(--text); 
@@ -97,6 +97,7 @@
         .desktop-logo-frame:hover { background: var(--orange); }
         .desktop-logo-frame:hover .logo-text, .desktop-logo-frame:hover .logo-text span { color: white !important; }
 
+        /* HIDE SCROLLBARS */
         .sidebar-content, #mobile-popup { 
             padding: var(--grid-size); flex-grow: 1; overflow-y: auto; 
             scrollbar-width: none; -ms-overflow-style: none;
@@ -106,7 +107,7 @@
         .sidebar-section { margin-bottom: 40px; }
         .sidebar-section h3 { margin-bottom: 12px; }
 
-        /* JUSTIFIED TEXT WITH LEFT ALIGNED LAST LINE */
+        /* JUSTIFIED TEXT */
         .sidebar-section p { 
             text-align: justify; 
             text-justify: inter-word; 
@@ -114,7 +115,7 @@
         }
 
         .name-style { font-size: 1.1rem; display: block; font-weight: 500; margin-bottom: 4px; }
-        .profession { font-size: 0.8rem; display: block; margin-bottom: 6px; opacity: 0.6; }
+        .profession { font-size: 0.8rem; display: block; margin-bottom: 6px; opacity: 0.6; font-weight: 300; }
         .contact-link { display: block; margin-top: 5px; text-decoration: underline !important; color: black !important; font-weight: 500; }
 
         /* MOBILE HEADER */
@@ -142,7 +143,7 @@
 
         .meta-strip {
             height: 80px; padding: 0 var(--grid-size); border-bottom: var(--stroke) solid var(--text); 
-            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(5px);
             display: flex; justify-content: space-between; align-items: center;
             font-family: 'Space Mono', monospace; font-size: 0.7rem; position: sticky; top: 0; z-index: 50;
         }
@@ -159,11 +160,17 @@
         .hero { padding: 120px var(--grid-size); border-bottom: var(--stroke) solid var(--text); background: transparent; }
         .hero h1 { font-size: 11vw; font-weight: 500; line-height: 0.85; letter-spacing: -0.05em; pointer-events: none; }
 
-        /* PROJECTS */
+        /* PROJECTS - TRANSPARENT WHITE */
         .project-row { display: flex; width: 100%; height: var(--row-h-desktop); border-bottom: var(--stroke) solid var(--text); background: transparent; align-items: stretch; }
         .project-row:nth-of-type(even) { flex-direction: row-reverse; }
         .project-text, .slider-container { width: 50%; flex-shrink: 0; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
-        .project-text { padding: var(--grid-size); background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(2px); }
+        
+        .project-text { 
+            padding: var(--grid-size); 
+            background: rgba(255, 255, 255, 0.45); /* Increased Transparency for Grid Visibility */
+            backdrop-filter: blur(2px); 
+        }
+        
         .project-row:nth-of-type(odd) .project-text { border-right: var(--stroke) solid var(--text); }
         .project-row:nth-of-type(even) .project-text { border-left: var(--stroke) solid var(--text); }
 
@@ -244,6 +251,7 @@
             .lb-modal { max-width: 90vw; }
             .lb-close { right: 20px; top: 20px; font-size: 1.2rem; }
             .lb-controls { opacity: 1; }
+            .lb-triangle { font-size: 1rem; }
         }
     </style>
 </head>
@@ -409,141 +417,4 @@
                     let imgs = [firstImg];
                     for (let iNum = 2; iNum <= 15; iNum++) {
                         const path = await probeImage(folder, iNum);
-                        if (path) imgs.push(path); else break;
-                    }
-
-                    const pObj = { id: pNum, meta, imgs, cur: 0 };
-                    projectList.push(pObj);
-
-                    const row = document.createElement('section');
-                    row.className = 'project-row';
-                    row.innerHTML = `
-                        <div class="project-text">
-                            <div class="project-meta mono" style="margin-bottom:10px;">${meta.tag}</div>
-                            <h2 class="med">${meta.title}</h2>
-                            <p class="light project-desc" style="font-size: 1.1rem; line-height: 1.5; max-width: 450px; font-weight: 300; margin-bottom: 30px;">${currentLang === 'en' ? meta.en : meta.tr}</p>
-                            <div class="project-specs" style="font-family: 'Space Mono', monospace; font-size: 0.65rem; opacity: 0.5; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 15px;">${meta.specs}</div>
-                        </div>
-                        <div class="slider-container" id="slider-${pNum}">
-                            <div class="slider-track" onclick="openLightbox(${pNum})">${imgs.map(s => `<img src="${s}" class="slide-img">`).join('')}</div>
-                            ${imgs.length > 1 ? `
-                            <div class="slider-nav">
-                                <div class="nav-zone" style="left:0" onclick="moveSlide(${pNum}, -1, event)">
-                                    <div class="nav-triangle">◀</div>
-                                </div>
-                                <div class="nav-zone" style="right:0" onclick="moveSlide(${pNum}, 1, event)">
-                                    <div class="nav-triangle">▶</div>
-                                </div>
-                            </div>` : ''}
-                        </div>`;
-                    feed.appendChild(row);
-                    setupSwipe(row.querySelector('.slider-container'), pNum);
-                }
-            }
-        }
-
-        function moveSlide(id, dir, e) {
-            if(e) e.stopPropagation();
-            const p = projectList.find(x => x.id === id);
-            const container = document.getElementById(`slider-${id}`);
-            const track = container.querySelector('.slider-track');
-            p.cur = (p.cur + dir + p.imgs.length) % p.imgs.length;
-            track.style.transform = `translateX(-${p.cur * 100}%)`;
-        }
-
-        function setupSwipe(el, id) {
-            let startX = 0;
-            el.addEventListener('touchstart', e => startX = e.touches[0].clientX, {passive: true});
-            el.addEventListener('touchend', e => {
-                const diff = startX - e.changedTouches[0].clientX;
-                if (Math.abs(diff) > 50) moveSlide(id, diff > 0 ? 1 : -1);
-            }, {passive: true});
-        }
-
-        function openLightbox(id) {
-            if (window.innerWidth < 1100) return; // Only desktop
-            const p = projectList.find(x => x.id === id);
-            lbState = { project: p, index: p.cur };
-            updateLightbox();
-            document.getElementById('lightbox').style.display = 'flex';
-        }
-
-        function updateLightbox() {
-            const p = lbState.project;
-            document.getElementById('lightbox-img').src = p.imgs[lbState.index];
-            const dotsCont = document.getElementById('lb-dots');
-            dotsCont.innerHTML = p.imgs.length > 1 ? p.imgs.map((_, i) => `<div class="dot ${i === lbState.index ? 'active' : ''}"></div>`).join('') : '';
-            const ctrls = document.querySelector('.lb-controls');
-            ctrls.style.display = p.imgs.length > 1 ? 'block' : 'none';
-        }
-
-        function changeLightbox(dir) {
-            const p = lbState.project;
-            lbState.index = (lbState.index + dir + p.imgs.length) % p.imgs.length;
-            updateLightbox();
-        }
-
-        function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
-
-        // XOX GAME (Restored Sync with Stationary Grid)
-        window.addEventListener('mousedown', (e) => {
-            if (!gameActive || e.button === 1 || e.target.closest('aside, header, button, .nav-zone, #lightbox')) return;
-            const col = Math.floor(e.clientX / 40); const row = Math.floor(e.clientY / 40);
-            const key = `${col},${row}`;
-            if (!board[key]) {
-                board[key] = currentPlayer;
-                const t = document.createElement('div'); t.className = 'game-token'; t.innerText = currentPlayer;
-                t.style.position = 'fixed'; 
-                t.style.left = (col * 40) + 'px'; t.style.top = (row * 40) + 'px';
-                t.style.color = currentPlayer === 'x' ? 'var(--orange)' : 'black';
-                t.dataset.coord = key;
-                document.getElementById('game-layer').appendChild(t);
-                
-                const winPath = checkWin(col, row, currentPlayer);
-                if (winPath) {
-                    gameActive = false;
-                    winPath.forEach(coords => {
-                        const el = document.querySelector(`[data-coord="${coords[0]},${coords[1]}"]`);
-                        if (el) el.style.animation = 'winPulse 0.4s infinite alternate';
-                    });
-                    if (globalContent.header) document.getElementById('header-log-tag').innerText = `[alert: winner_${currentPlayer}_detected]`;
-                    document.getElementById('header-log-tag').style.color = 'var(--orange)';
-                } else currentPlayer = (currentPlayer === 'x') ? 'o' : 'x';
-            }
-        });
-        function checkWin(c, r, p) {
-            const dirs = [[1,0], [0,1], [1,1], [1,-1]];
-            for (let [dx, dy] of dirs) {
-                let path = [[c, r]];
-                for (let i = 1; i < 3; i++) { if (board[`${c+(dx*i)},${r+(dy*i)}`] === p) path.push([c+(dx*i), r+(dy*i)]); else break; }
-                for (let i = 1; i < 3; i++) { if (board[`${c-(dx*i)},${r-(dy*i)}`] === p) path.push([c-(dx*i), r-(dy*i)]); else break; }
-                if (path.length >= 3) return path;
-            } return null;
-        }
-
-        function toggleLang() {
-            currentLang = currentLang === 'en' ? 'tr' : 'en';
-            document.querySelectorAll('.en-toggle').forEach(el => el.classList.toggle('active', currentLang === 'en'));
-            document.querySelectorAll('.tr-toggle').forEach(el => el.classList.toggle('active', currentLang === 'tr'));
-            updateUI();
-            projectList.forEach(p => {
-                const row = document.getElementById(`slider-${p.id}`).closest('.project-row');
-                const desc = row.querySelector('.project-desc');
-                if (desc) desc.innerText = currentLang === 'en' ? p.meta.en : p.meta.tr;
-            });
-        }
-        function togglePopup() { 
-            const p = document.getElementById('mobile-popup'); 
-            p.style.display = (p.style.display === 'block') ? 'none' : 'block'; 
-            updateUI();
-        }
-
-        setInterval(() => { document.getElementById('clock').innerText = new Date().toTimeString().split(' ')[0]; }, 1000);
-        window.addEventListener('mousemove', (e) => { 
-            document.getElementById('coords').innerText = `x: ${String(e.clientX).padStart(3, '0')} y: ${String(e.clientY).padStart(3, '0')}`; 
-        });
-
-        loadSiteData();
-    </script>
-</body>
-</html>
+                        if (path) imgs.push(pat
