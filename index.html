@@ -50,10 +50,10 @@
 
         /* RESET */
         * { margin: 0; padding: 0; box-sizing: border-box; text-transform: lowercase !important; -webkit-font-smoothing: antialiased; }
-        html { background-color: var(--bg); height: 100%; }
+        html { background-color: var(--bg); }
         body { width: 100%; min-height: 100%; margin: 0; padding: 0; }
 
-        /* FIXED INFINITE GRID - STAYS STATIC ON SCROLL */
+        /* FIXED INFINITE GRID - STAYS STATIC ON ALL DEVICES */
         body::before {
             content: "";
             position: fixed;
@@ -82,7 +82,7 @@
         .med { font-weight: 500; }
         .light { font-weight: 300; }
 
-        /* SIDEBAR */
+        /* SIDEBAR & MOBILE INFO BOX */
         aside {
             width: var(--sidebar-w); height: 100vh; position: fixed; left: 0; top: 0;
             border-right: var(--stroke) solid var(--text); 
@@ -97,7 +97,6 @@
         .desktop-logo-frame:hover { background: var(--orange); }
         .desktop-logo-frame:hover .logo-text, .desktop-logo-frame:hover .logo-text span { color: white !important; }
 
-        /* HIDE SCROLLBARS */
         .sidebar-content, #mobile-popup { 
             padding: var(--grid-size); flex-grow: 1; overflow-y: auto; 
             scrollbar-width: none; -ms-overflow-style: none;
@@ -105,13 +104,17 @@
         .sidebar-content::-webkit-scrollbar, #mobile-popup::-webkit-scrollbar { display: none; }
 
         .sidebar-section { margin-bottom: 40px; }
-        .sidebar-section h3 { margin-bottom: 10px; } /* Reduced space under title */
+        .sidebar-section h3 { margin-bottom: 12px; }
+
+        /* JUSTIFIED TEXT WITH LEFT ALIGNED LAST LINE */
+        .sidebar-section p { 
+            text-align: justify; 
+            text-justify: inter-word; 
+            line-height: 1.5;
+        }
 
         .name-style { font-size: 1.1rem; display: block; font-weight: 500; margin-bottom: 4px; }
-        .profession { font-size: 0.8rem; display: block; margin-bottom: 6px; opacity: 0.6; font-weight: 300; }
-        .bio { font-size: 0.9rem; opacity: 0.8; line-height: 1.4; font-weight: 300; }
-        .office-title { font-size: 1.1rem; display: block; font-weight: 500; margin-bottom: 4px; }
-        .address-text { font-size: 1rem; line-height: 1.5; font-weight: 300; }
+        .profession { font-size: 0.8rem; display: block; margin-bottom: 6px; opacity: 0.6; }
         .contact-link { display: block; margin-top: 5px; text-decoration: underline !important; color: black !important; font-weight: 500; }
 
         /* MOBILE HEADER */
@@ -135,7 +138,6 @@
             padding: 40px 25px; padding-bottom: calc(140px + env(safe-area-inset-bottom));
         }
 
-        /* MAIN CONTENT - TRANSPARENT */
         main { margin-left: var(--sidebar-w); width: calc(100% - var(--sidebar-w)); position: relative; z-index: 5; background: transparent; }
 
         .meta-strip {
@@ -145,7 +147,7 @@
             font-family: 'Space Mono', monospace; font-size: 0.7rem; position: sticky; top: 0; z-index: 50;
         }
 
-        /* UPDATES & HERO */
+        /* UPDATES CONTAINER (Videos) */
         .updates-container { display: flex; height: 400px; border-bottom: var(--stroke) solid var(--text); background: black; }
         .video-box { position: relative; width: 50%; height: 100%; overflow: hidden; border-right: var(--stroke) solid var(--text); }
         .video-box:last-child { border-right: none; }
@@ -153,6 +155,7 @@
         .video-box:hover video { filter: grayscale(0); opacity: 1; transform: scale(1.05); }
         .tag { position: absolute; bottom: 20px; left: 20px; background: var(--orange); color: white; padding: 4px 12px; font-family: 'Space Mono'; font-size: 0.6rem; z-index: 10; }
 
+        /* HERO - MEDIUM */
         .hero { padding: 120px var(--grid-size); border-bottom: var(--stroke) solid var(--text); background: transparent; }
         .hero h1 { font-size: 11vw; font-weight: 500; line-height: 0.85; letter-spacing: -0.05em; pointer-events: none; }
 
@@ -172,9 +175,9 @@
         .slide-img { min-width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: 0.6s; pointer-events: none; }
         .slider-container:hover .slide-img { filter: grayscale(0); }
 
-        /* COMPACT NAVIGATION BUTTONS (Feed) */
+        /* COMPACT SLIDER NAV (Feed) */
         .slider-nav { position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center; z-index: 10; pointer-events: none; }
-        .nav-zone { width: 60px; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.2s; cursor: pointer; pointer-events: auto; }
+        .nav-zone { width: 60px; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; cursor: pointer; pointer-events: auto; }
         .slider-container:hover .nav-zone { opacity: 1; }
         .nav-triangle { color: var(--orange); font-size: 1.5rem; transition: 0.2s; }
         .nav-zone:hover .nav-triangle { transform: scale(1.3); }
@@ -204,10 +207,10 @@
         .lb-close { position: fixed; top: 30px; right: 30px; font-size: 1.2rem; color: var(--orange); cursor: pointer; font-family: 'FuturaLTPro', sans-serif; font-weight: 400; line-height: 1; transition: 0.2s; border: none; background: none; z-index: 5010; }
         .lb-close:hover { transform: scale(1.3); }
         
-        /* LIGHTBOX NAVIGATION (Hover Only) */
         .lb-controls { position: fixed; inset: 0; opacity: 0; transition: 0.3s; pointer-events: none; }
         #lightbox:hover .lb-controls { opacity: 1; }
 
+        /* Full Screen Navigation Zones */
         .lb-nav-zone { position: fixed; top: 0; height: 100%; width: 50%; display: flex; align-items: center; cursor: pointer; pointer-events: auto; }
         .lb-prev-zone { left: 0; justify-content: flex-start; padding-left: 30px; }
         .lb-next-zone { right: 0; justify-content: flex-end; padding-right: 30px; } 
@@ -241,7 +244,6 @@
             .lb-modal { max-width: 90vw; }
             .lb-close { right: 20px; top: 20px; font-size: 1.2rem; }
             .lb-controls { opacity: 1; }
-            .lb-triangle { font-size: 1rem; }
         }
     </style>
 </head>
@@ -351,7 +353,7 @@
                 <div class="sidebar-section"><h3 class="mono">02_team</h3>
                     ${info.team.map(m => `
                         <div style="margin-bottom:25px">
-                            <span class="name-style med">${m.name}</span>
+                            <span class="med name-style">${m.name}</span>
                             <span class="profession light">${m.profession[lang]}</span>
                             <p class="bio light">${m.bio[lang]}</p>
                         </div>`).join('')}
@@ -359,7 +361,7 @@
                 <div class="sidebar-section"><h3 class="mono">03_contact</h3>
                     ${info.contact.map(office => `
                         <div style="margin-bottom:25px">
-                            <span class="office-title med">${office.title[lang]}</span>
+                            <span class="med name-style">${office.title[lang]}</span>
                             <p class="address-text light">${office.address}</p>
                         </div>`).join('')}
                 </div>
@@ -381,7 +383,6 @@
             }
         }
 
-        // 2. PROJECT ENGINE
         const EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp'];
         async function probeImage(folder, index) {
             for (const ext of EXTENSIONS) {
@@ -460,7 +461,7 @@
         }
 
         function openLightbox(id) {
-            if (window.innerWidth < 1100) return; // Disabled on mobile
+            if (window.innerWidth < 1100) return; // Only desktop
             const p = projectList.find(x => x.id === id);
             lbState = { project: p, index: p.cur };
             updateLightbox();
@@ -484,65 +485,9 @@
 
         function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
 
-        // XOX GAME (Restored Sync)
+        // XOX GAME (Restored Sync with Stationary Grid)
         window.addEventListener('mousedown', (e) => {
             if (!gameActive || e.button === 1 || e.target.closest('aside, header, button, .nav-zone, #lightbox')) return;
             const col = Math.floor(e.clientX / 40); const row = Math.floor(e.clientY / 40);
             const key = `${col},${row}`;
-            if (!board[key]) {
-                board[key] = currentPlayer;
-                const t = document.createElement('div'); t.className = 'game-token'; t.innerText = currentPlayer;
-                t.style.position = 'fixed'; 
-                t.style.left = (col * 40) + 'px'; t.style.top = (row * 40) + 'px';
-                t.style.color = currentPlayer === 'x' ? 'var(--orange)' : 'black';
-                t.dataset.coord = key;
-                document.getElementById('game-layer').appendChild(t);
-                
-                const winPath = checkWin(col, row, currentPlayer);
-                if (winPath) {
-                    gameActive = false;
-                    winPath.forEach(coords => {
-                        const el = document.querySelector(`[data-coord="${coords[0]},${coords[1]}"]`);
-                        if (el) el.style.animation = 'winPulse 0.4s infinite alternate';
-                    });
-                    if (globalContent.header) document.getElementById('header-log-tag').innerText = `[alert: winner_${currentPlayer}_detected]`;
-                    document.getElementById('header-log-tag').style.color = 'var(--orange)';
-                } else currentPlayer = (currentPlayer === 'x') ? 'o' : 'x';
-            }
-        });
-        function checkWin(c, r, p) {
-            const dirs = [[1,0], [0,1], [1,1], [1,-1]];
-            for (let [dx, dy] of dirs) {
-                let path = [[c, r]];
-                for (let i = 1; i < 3; i++) { if (board[`${c+(dx*i)},${r+(dy*i)}`] === p) path.push([c+(dx*i), r+(dy*i)]); else break; }
-                for (let i = 1; i < 3; i++) { if (board[`${c-(dx*i)},${r-(dy*i)}`] === p) path.push([c-(dx*i), r-(dy*i)]); else break; }
-                if (path.length >= 3) return path;
-            } return null;
-        }
-
-        function toggleLang() {
-            currentLang = currentLang === 'en' ? 'tr' : 'en';
-            document.querySelectorAll('.en-toggle').forEach(el => el.classList.toggle('active', currentLang === 'en'));
-            document.querySelectorAll('.tr-toggle').forEach(el => el.classList.toggle('active', currentLang === 'tr'));
-            updateUI();
-            projectList.forEach(p => {
-                const row = document.getElementById(`slider-${p.id}`).closest('.project-row');
-                const desc = row.querySelector('.project-desc');
-                if (desc) desc.innerText = currentLang === 'en' ? p.meta.en : p.meta.tr;
-            });
-        }
-        function togglePopup() { 
-            const p = document.getElementById('mobile-popup'); 
-            p.style.display = (p.style.display === 'block') ? 'none' : 'block'; 
-            updateUI();
-        }
-
-        setInterval(() => { document.getElementById('clock').innerText = new Date().toTimeString().split(' ')[0]; }, 1000);
-        window.addEventListener('mousemove', (e) => { 
-            document.getElementById('coords').innerText = `x: ${String(e.clientX).padStart(3, '0')} y: ${String(e.clientY).padStart(3, '0')}`; 
-        });
-
-        loadSiteData();
-    </script>
-</body>
-</html>
+            if (!boa
