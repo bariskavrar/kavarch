@@ -8,35 +8,16 @@
     <!-- FAVICON -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     
-    <!-- ADOBE TYPEKIT (Futura PT) -->
-    <link rel="stylesheet" href="https://use.typekit.net/jit6sab.css">
-    
     <!-- SPACE MONO FOR TECHNICAL DATA -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
         /* 1. SELF-HOSTED FUTURA LT PRO SETUP */
-        @font-face {
-            font-family: 'FuturaLTPro';
-            src: url('FuturaLTPro-Light.woff2') format('woff2');
-            font-weight: 300;
-        }
-        @font-face {
-            font-family: 'FuturaLTPro';
-            src: url('FuturaLTPro-Book.woff2') format('woff2');
-            font-weight: 400;
-        }
-        @font-face {
-            font-family: 'FuturaLTPro';
-            src: url('FuturaLTPro-Medium.woff2') format('woff2');
-            font-weight: 500;
-        }
-        @font-face {
-            font-family: 'FuturaLTPro';
-            src: url('FuturaLTPro-SemiBold.woff2') format('woff2');
-            font-weight: 600;
-        }
+        @font-face { font-family: 'FuturaLTPro'; src: url('FuturaLTPro-Light.woff2') format('woff2'); font-weight: 300; }
+        @font-face { font-family: 'FuturaLTPro'; src: url('FuturaLTPro-Book.woff2') format('woff2'); font-weight: 400; }
+        @font-face { font-family: 'FuturaLTPro'; src: url('FuturaLTPro-Medium.woff2') format('woff2'); font-weight: 500; }
+        @font-face { font-family: 'FuturaLTPro'; src: url('FuturaLTPro-SemiBold.woff2') format('woff2'); font-weight: 600; }
 
         :root {
             --bg: #ffffff;
@@ -56,22 +37,19 @@
         html { background-color: var(--bg); }
         body { width: 100%; min-height: 100%; margin: 0; padding: 0; }
 
-        /* FIXED INFINITE GRID */
+        /* FIXED INFINITE GRID - STAYS STATIC ON SCROLL */
         body::before {
             content: "";
             position: fixed;
             inset: 0;
-            background-image: 
-                linear-gradient(var(--grid-line) 1px, transparent 1px), 
-                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
             background-size: var(--grid-size) var(--grid-size);
             z-index: -1;
             pointer-events: none;
         }
 
-        body { font-family: "futura-pt", 'FuturaLTPro', Arial, sans-serif; color: var(--text); cursor: crosshair; display: block; overflow-x: hidden; }
+        body { font-family: 'FuturaLTPro', Arial, sans-serif; color: var(--text); cursor: crosshair; display: block; overflow-x: hidden; }
 
-        /* LOGO WEIGHTS */
         .logo-text { letter-spacing: -2px; line-height: 1; color: black !important; text-decoration: none !important; display: inline-block; }
         .logo-text .kav { font-weight: 500; } 
         .logo-text .arch { font-weight: 300; }
@@ -105,15 +83,9 @@
             scrollbar-width: none; -ms-overflow-style: none;
         }
         .sidebar-content::-webkit-scrollbar, #mobile-popup::-webkit-scrollbar { display: none; }
-
         .sidebar-section { margin-bottom: 40px; }
         .sidebar-section h3 { margin-bottom: 12px; }
-
-        /* JUSTIFIED TEXT */
         .sidebar-section p { text-align: justify; text-justify: inter-word; line-height: 1.5; }
-
-        .name-style { font-size: 1.1rem; display: block; font-weight: 500; margin-bottom: 4px; }
-        .profession { font-size: 0.8rem; display: block; margin-bottom: 6px; opacity: 0.6; font-weight: 300; }
         .contact-link { display: block; margin-top: 5px; text-decoration: underline !important; color: black !important; font-weight: 500; }
 
         /* MOBILE HEADER */
@@ -157,20 +129,15 @@
         .hero { padding: 120px var(--grid-size); border-bottom: var(--stroke) solid var(--text); background: transparent; }
         .hero h1 { font-size: 11vw; font-weight: 500; line-height: 0.85; letter-spacing: -0.05em; pointer-events: none; }
 
-        /* PROJECT ROWS - BORDER LOGIC */
+        /* PROJECT ROWS */
         .project-row { 
             display: flex; width: 100%; height: var(--row-h-desktop); 
             border-bottom: var(--stroke) solid var(--text); 
             background: transparent; align-items: stretch;
             margin-top: 80px; 
         }
-        #project-feed .project-row:first-child { 
-            margin-top: 0; 
-            border-top: none; 
-        }
-        #project-feed .project-row:not(:first-child) {
-            border-top: var(--stroke) solid var(--text);
-        }
+        #project-feed .project-row:first-child { margin-top: 0; border-top: none; }
+        #project-feed .project-row:not(:first-child) { border-top: var(--stroke) solid var(--text); }
 
         .project-row:nth-of-type(even) { flex-direction: row-reverse; }
         .project-text, .slider-container { width: 50%; flex-shrink: 0; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
@@ -191,14 +158,13 @@
         .slide-img { min-width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: 0.6s; pointer-events: none; }
         .slider-container:hover .slide-img { filter: grayscale(0); }
 
-        /* MINIMALISTIC FEED NAVIGATION */
         .slider-nav { position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center; z-index: 10; pointer-events: none; }
         .nav-zone { width: 60px; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; cursor: pointer; pointer-events: auto; }
         .slider-container:hover .nav-zone { opacity: 1; }
         .nav-triangle { color: var(--orange); font-size: 1.5rem; transition: 0.2s; }
         .nav-zone:hover .nav-triangle { transform: scale(1.3); }
 
-        /* FOOTER DIVIDER RESTORED */
+        /* FOOTER */
         footer { 
             padding: var(--grid-size); background: white; display: flex; justify-content: space-between; 
             font-family: 'Space Mono'; font-size: 0.7rem; z-index: 100; position: relative; 
@@ -213,32 +179,21 @@
         }
         .lb-grid-overlay {
             position: absolute; inset: 0;
-            background-image: 
-                linear-gradient(var(--grid-line-white) 1px, transparent 1px), 
-                linear-gradient(90deg, var(--grid-line-white) 1px, transparent 1px);
+            background-image: linear-gradient(var(--grid-line-white) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line-white) 1px, transparent 1px);
             background-size: var(--grid-size) var(--grid-size);
             pointer-events: none; z-index: -1;
         }
-        .lb-modal {
-            position: relative; width: fit-content; max-width: 70vw; height: fit-content; max-height: 85vh;
-            display: flex; align-items: center; justify-content: center;
-        }
+        .lb-modal { position: relative; width: fit-content; max-width: 70vw; height: fit-content; max-height: 85vh; display: flex; align-items: center; justify-content: center; }
         .lb-modal img { max-width: 100%; max-height: 85vh; object-fit: contain; border: var(--stroke) solid black; background: white; }
-        
-        /* CLOSE X & NEXT TRIANGLE ALIGNED (30px from right) */
-        .lb-close { position: fixed; top: 30px; right: 30px; font-size: 2.5rem; color: var(--orange); cursor: pointer; font-family: "futura-pt", sans-serif; font-weight: 400; line-height: 1; transition: 0.2s; border: none; background: none; z-index: 5010; }
-        .lb-close:hover { transform: scale(1.2); }
-        
+        .lb-close { position: fixed; top: 30px; right: 30px; font-size: 1.2rem; color: var(--orange); cursor: pointer; font-family: 'FuturaLTPro', sans-serif; font-weight: 400; line-height: 1; transition: 0.2s; border: none; background: none; z-index: 5010; }
+        .lb-close:hover { transform: scale(1.3); }
         .lb-controls { position: fixed; inset: 0; opacity: 0; transition: 0.3s; pointer-events: none; }
         #lightbox:hover .lb-controls { opacity: 1; }
-
         .lb-nav-zone { position: fixed; top: 0; height: 100%; width: 50%; display: flex; align-items: center; cursor: pointer; pointer-events: auto; }
         .lb-prev-zone { left: 0; justify-content: flex-start; padding-left: 30px; }
         .lb-next-zone { right: 0; justify-content: flex-end; padding-right: 30px; } 
-
         .lb-triangle { color: var(--orange); font-size: 1rem; transition: 0.2s; }
         .lb-nav-zone:hover .lb-triangle { transform: scale(1.3); }
-
         .lb-dots { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; pointer-events: none; }
         .dot { width: 6px; height: 6px; background: white; border-radius: 50%; opacity: 0.3; transition: 0.3s; }
         .dot.active { opacity: 1; background: var(--orange); transform: scale(1.6); }
@@ -255,15 +210,16 @@
             .updates-container { flex-direction: column; height: auto; border-bottom: var(--stroke) solid var(--text); }
             .video-box { width: 100%; height: 300px; border-right: none; border-bottom: var(--stroke) solid var(--text); }
             .video-box:last-child { border-bottom: none; }
-            /* Mobile project unification */
-            .project-row { flex-direction: column !important; height: auto; border-bottom: var(--stroke) solid var(--text) !important; border-top: var(--stroke) solid var(--text) !important; margin-top: 40px; margin-bottom: 0; }
-            #project-feed .project-row:first-child { margin-top: 0; border-top: none !important; }
+            /* Mobile Standardized Gaps */
+            .project-row { flex-direction: column !important; height: auto; border-bottom: var(--stroke) solid var(--text) !important; margin-top: 80px !important; margin-bottom: 0; border-top: var(--stroke) solid var(--text) !important; }
+            #project-feed .project-row:first-child { margin-top: 0 !important; border-top: none !important; }
             .project-text, .slider-container { width: 100%; height: auto; border: none !important; }
-            .project-text { order: 1; padding: 40px 25px; border-bottom: var(--stroke) solid var(--text) !important; border-top: none !important; min-height: 350px; }
-            .slider-container { order: 2; height: 450px; border-bottom: none !important; }
+            .project-text { order: 1; padding: 40px 25px; border-bottom: var(--stroke) solid var(--text) !important; min-height: 350px; }
+            .slider-container { order: 2; height: 450px; }
             .nav-zone { display: none; } 
             .meta-strip { display: none; } .hero h1 { font-size: 16vw; font-weight: 500; } .hero { border-bottom: var(--stroke) solid var(--text); }
-            footer { justify-content: center; margin-top: 80px; border-top: var(--stroke) solid var(--text) !important; }
+            /* Mobile Footer Gap */
+            footer { justify-content: center; margin-top: 80px !important; border-top: var(--stroke) solid var(--text) !important; }
             #footer-status, #coords { display: none; }
             .lb-modal { max-width: 90vw; } .lb-close { right: 20px; top: 20px; font-size: 1.2rem; }
             .lb-controls { opacity: 1; }
@@ -345,9 +301,7 @@
 
     <script>
         // Force scroll to top on refresh
-        if (history.scrollRestoration) {
-            history.scrollRestoration = 'manual';
-        }
+        if (history.scrollRestoration) { history.scrollRestoration = 'manual'; }
         window.scrollTo(0, 0);
 
         let globalContent = { info: null, header: null, footer: null };
@@ -358,7 +312,6 @@
         let projectList = [];
         let lbState = { project: null, index: 0 };
 
-        // 1. DATA LOADING (JSON)
         async function loadSiteData() {
             try {
                 const [info, header, footer] = await Promise.all([
@@ -489,7 +442,7 @@
         }
 
         function openLightbox(id) {
-            if (window.innerWidth < 1100) return; // Only desktop
+            if (window.innerWidth < 1100) return; 
             const p = projectList.find(x => x.id === id);
             lbState = { project: p, index: p.cur };
             updateLightbox();
