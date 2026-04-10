@@ -442,4 +442,27 @@
 
         function toggleLang() {
             currentLang = currentLang === 'en' ? 'tr' : 'en';
-            document.querySelectorAll('.en-toggle').forEach(el => el.classLis
+            document.querySelectorAll('.en-toggle').forEach(el => el.classList.toggle('active', currentLang === 'en'));
+            document.querySelectorAll('.tr-toggle').forEach(el => el.classList.toggle('active', currentLang === 'tr'));
+            updateUI();
+            projectList.forEach(p => {
+                const row = document.getElementById(`slider-${p.id}`).closest('.project-row');
+                const desc = row.querySelector('.project-desc');
+                if (desc) desc.innerText = currentLang === 'en' ? p.meta.en : p.meta.tr;
+            });
+        }
+        function togglePopup() { 
+            const p = document.getElementById('mobile-popup'); 
+            p.style.display = (p.style.display === 'block') ? 'none' : 'block'; 
+            updateUI();
+        }
+
+        setInterval(() => { document.getElementById('clock').innerText = new Date().toTimeString().split(' ')[0]; }, 1000);
+        window.addEventListener('mousemove', (e) => { 
+            document.getElementById('coords').innerText = `x: ${String(e.clientX).padStart(3, '0')} y: ${String(e.clientY).padStart(3, '0')}`; 
+        });
+
+        loadSiteData();
+    </script>
+</body>
+</html>
