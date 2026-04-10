@@ -21,11 +21,11 @@
             --row-h-desktop: 550px;
         }
 
-        /* RESET & BASE */
+        /* RESET */
         * { margin: 0; padding: 0; box-sizing: border-box; text-transform: lowercase !important; -webkit-font-smoothing: antialiased; }
         html, body { width: 100%; min-height: 100%; background-color: var(--bg); margin: 0; padding: 0; }
 
-        /* INFINITE BACKGROUND GRID - EXACTLY FROM index (4).html */
+        /* INFINITE BACKGROUND GRID - FROM index (4).html */
         body { 
             font-family: 'Jost', sans-serif; color: var(--text); cursor: crosshair;
             background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
@@ -35,19 +35,20 @@
 
         .logo-text { letter-spacing: -2px; line-height: 1; color: black !important; text-decoration: none !important; display: inline-block; }
         .logo-text .kav { font-weight: 600; } .logo-text .arch { font-weight: 300; }
-
-        /* TYPOGRAPHY */
-        .mono { font-family: 'Space Mono', monospace; font-size: 0.7rem; font-weight: 700; color: var(--orange); letter-spacing: 2px; }
-        .med { font-weight: 500; }
-        .light { font-weight: 300; }
-
-        /* LANG SWITCH COLOR STATES */
+        
+        /* LANG SWITCH COLORS */
         .lang-switch { font-family: 'Space Mono', monospace; font-size: 0.7rem; display: inline-flex; align-items: baseline; cursor: pointer; user-select: none; padding: 10px 0; }
         .lang-btn { opacity: 0.2; transition: 0.3s; pointer-events: none; }
         .lang-btn.active { opacity: 1; color: var(--orange); font-weight: 700; }
         .lang-switch .slash { opacity: 0.2; margin: 0 1px; pointer-events: none; }
 
-        /* SIDEBAR & HEADER */
+        .mono { font-family: 'Space Mono', monospace; font-size: 0.7rem; font-weight: 700; color: var(--orange); letter-spacing: 2px; }
+        .med { font-weight: 500; }
+        .light { font-weight: 300; }
+
+        #header-log-tag { font-family: 'Space Mono', monospace; font-size: 0.7rem; font-weight: 400; color: var(--text); transition: color 0.3s; }
+
+        /* SIDEBAR */
         aside {
             width: var(--sidebar-w); height: 100vh; position: fixed; left: 0; top: 0;
             border-right: var(--stroke) solid var(--text); 
@@ -61,11 +62,12 @@
         }
         .desktop-logo-frame:hover { background: var(--orange); }
         .desktop-logo-frame:hover .logo-text, .desktop-logo-frame:hover .logo-text span { color: white !important; }
-
         .sidebar-content { padding: var(--grid-size); flex-grow: 1; overflow-y: auto; }
         .sidebar-section { margin-bottom: 40px; }
 
-        /* MOBILE HEADER - CORRECT LOGO SIZE */
+        .contact-link { display: block; margin-top: 5px; text-decoration: underline !important; color: black !important; font-weight: 500; }
+
+        /* MOBILE HEADER */
         header {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: var(--header-h-mobile);
             background: white; border-bottom: var(--stroke) solid var(--text); z-index: 3000;
@@ -91,7 +93,15 @@
             font-family: 'Space Mono', monospace; font-size: 0.7rem; position: sticky; top: 0; z-index: 50;
         }
 
-        /* HERO & PROJECTS */
+        /* UPDATES (VIDEOS) */
+        .updates-container { display: flex; height: 400px; border-bottom: var(--stroke) solid var(--text); background: black; }
+        .video-box { position: relative; width: 50%; height: 100%; overflow: hidden; border-right: var(--stroke) solid var(--text); }
+        .video-box:last-child { border-right: none; }
+        .video-box video { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: 0.6s; opacity: 0.8; }
+        .video-box:hover video { filter: grayscale(0); opacity: 1; transform: scale(1.05); }
+        .tag { position: absolute; bottom: 20px; left: 20px; background: var(--orange); color: white; padding: 4px 12px; font-family: 'Space Mono'; font-size: 0.6rem; z-index: 10; }
+
+        /* HERO & ROWS */
         .hero { padding: 120px var(--grid-size); border-bottom: var(--stroke) solid var(--text); background: transparent; }
         .hero h1 { font-size: 11vw; font-weight: 500; line-height: 0.85; letter-spacing: -0.05em; pointer-events: none; }
 
@@ -105,16 +115,16 @@
         .project-text h2 { font-size: 4.5vw; font-weight: 500; line-height: 0.9; margin-bottom: 25px; }
         .project-desc { font-size: 1.1rem; line-height: 1.5; max-width: 450px; font-weight: 300; margin-bottom: 30px;}
 
-        /* SLIDER COMPACT SIDE BUTTONS */
         .slider-container { position: relative; background: #eee; overflow: hidden; touch-action: pan-y; }
         .slider-track { display: flex; height: 100%; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); will-change: transform; cursor: zoom-in; }
         .slide-img { min-width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: 0.6s; pointer-events: none; }
         .slider-container:hover .slide-img { filter: grayscale(0); }
 
+        /* COMPACT NAVIGATION BUTTONS */
         .slider-nav { position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center; z-index: 10; pointer-events: none; }
-        .nav-zone { width: 60px; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; cursor: pointer; pointer-events: auto; }
+        .nav-zone { width: 60px; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.2s; cursor: pointer; pointer-events: auto; }
         .slider-container:hover .nav-zone { opacity: 1; }
-        .nav-label { background: var(--orange); color: white; font-family: 'Space Mono'; padding: 12px 10px; font-weight: 700; font-size: 1.2rem; }
+        .nav-label { background: var(--orange); color: white; font-family: 'Space Mono'; padding: 10px 12px; font-weight: 700; font-size: 1.2rem; }
 
         footer { padding: var(--grid-size); background: white; display: flex; justify-content: space-between; font-family: 'Space Mono'; font-size: 0.7rem; z-index: 100; position: relative; }
 
@@ -127,7 +137,7 @@
         .lightbox-close { position: absolute; top: 40px; right: 40px; font-family: 'Space Mono'; cursor: pointer; font-weight: 700; background: var(--orange); color: white; padding: 10px 20px; z-index: 5001; }
         .lightbox-nav { position: absolute; bottom: 40px; display: flex; gap: 40px; font-family: 'Space Mono'; font-weight: 700; font-size: 1.2rem; cursor: pointer; }
 
-        /* GAME LAYER & WINNING - RESTORED index (4).html logic */
+        /* GAME LAYER & WINNING Logic */
         #game-layer { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
         .game-token { position: absolute; width: var(--grid-size); height: var(--grid-size); display: flex; align-items: center; justify-content: center; font-family: 'Space Mono'; font-weight: 700; font-size: 1.2rem; animation: tokenIn 0.3s forwards; }
         @keyframes tokenIn { from { transform: scale(0); } to { transform: scale(1); } }
@@ -136,11 +146,13 @@
         @media (max-width: 1100px) {
             aside { display: none; } header { display: flex; }
             main { margin-left: 0; width: 100%; margin-top: var(--header-h-mobile); }
+            .updates-container { flex-direction: column; height: auto; }
+            .video-box { width: 100%; height: 300px; border-right: none; border-bottom: var(--stroke) solid var(--text); }
             .project-row { flex-direction: column !important; height: auto; border-bottom: none; }
             .project-text, .slider-container { width: 100%; height: auto; border: none !important; }
-            .project-text { padding: 40px 25px; border-bottom: var(--stroke) solid var(--text) !important; min-height: 350px; }
-            .slider-container { height: 450px; border-bottom: var(--stroke) solid var(--text) !important; }
-            .nav-zone { display: none; } /* Mobile uses swipe */
+            .project-text { order: 1; padding: 40px 25px; border-bottom: var(--stroke) solid var(--text) !important; min-height: 350px; }
+            .slider-container { order: 2; height: 450px; border-bottom: var(--stroke) solid var(--text) !important; }
+            .nav-zone { display: none; } 
             .meta-strip { display: none; } .hero h1 { font-size: 16vw; } .hero { border-bottom: var(--stroke) solid var(--text); }
         }
     </style>
@@ -177,13 +189,13 @@
             <span id="clock" style="font-family: 'Space Mono'; font-size: 0.7rem;">00:00:00</span>
         </div>
 
-        <section class="updates-container" style="display: flex; height: 400px; border-bottom: var(--stroke) solid var(--text); background: black;">
-            <div class="video-box" style="position: relative; width: 50%; height: 100%; overflow: hidden; border-right: var(--stroke) solid var(--text);">
-                <video autoplay muted loop playsinline poster="images/poster1.jpg" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); opacity: 0.8;"><source src="videos/video1.mp4" type="video/mp4"></video>
+        <section class="updates-container">
+            <div class="video-box">
+                <video autoplay muted loop playsinline><source src="videos/video1.mp4" type="video/mp4"></video>
                 <div class="tag"><span>log_01: site_friction</span></div>
             </div>
-            <div class="video-box" style="position: relative; width: 50%; height: 100%; overflow: hidden;">
-                <video autoplay muted loop playsinline poster="images/poster2.jpg" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); opacity: 0.8;"><source src="videos/video2.mp4" type="video/mp4"></video>
+            <div class="video-box">
+                <video autoplay muted loop playsinline><source src="videos/video2.mp4" type="video/mp4"></video>
                 <div class="tag"><span>log_02: structural_void</span></div>
             </div>
         </section>
@@ -219,7 +231,6 @@
         let projectList = [];
         let lbState = { project: null, index: 0 };
 
-        // 1. DATA LOADING (JSON)
         async function loadSiteData() {
             try {
                 const [info, header, footer] = await Promise.all([
@@ -230,7 +241,7 @@
                 globalContent = { info, header, footer };
                 updateUI();
                 initFeed();
-            } catch (e) { console.error("Error loading JSON", e); }
+            } catch (e) { console.error("Data Load Error", e); }
         }
 
         function updateUI() {
@@ -242,199 +253,12 @@
                 <div class="sidebar-section"><h3 class="mono">01_about</h3><p class="light">${info.about[lang]}</p></div>
                 <div class="sidebar-section"><h3 class="mono">02_team</h3>
                     ${info.team.map(m => `
-                        <div class="team-member-block">
-                            <span class="name-style med" style="font-size: 1.1rem; display: block; font-weight: 500; margin-bottom: 4px;">${m.name}</span>
+                        <div style="margin-bottom:25px">
+                            <span class="med" style="font-size: 1.1rem; display: block; font-weight: 500; margin-bottom: 4px;">${m.name}</span>
                             <span class="profession light" style="font-size: 0.8rem; display: block; margin-bottom: 6px; opacity: 0.6;">${m.profession[lang]}</span>
                             <p class="bio light" style="font-size: 0.9rem; opacity: 0.8; line-height: 1.4; font-weight: 300;">${m.bio[lang]}</p>
                         </div>`).join('')}
                 </div>
                 <div class="sidebar-section"><h3 class="mono">03_contact</h3>
-                    ${info.contact.map(office => `<div class="office-block"><span class="name-style med" style="font-size: 1.1rem; display: block; font-weight: 500; margin-bottom: 4px;">${office.title[lang]}</span><p class="light">${office.address}</p></div>`).join('')}
-                </div>
-                <div class="sidebar-section">
-                    ${info.socials.map(soc => `<a href="${soc.url}" target="_blank" class="med" style="display: block; margin-top: 5px; text-decoration: underline !important; color: black; font-weight: 500;">${soc.label}</a>`).join('')}
-                </div>
-            `;
-            document.querySelectorAll('.sidebar-info-container').forEach(el => el.innerHTML = html);
-
-            if (globalContent.header) {
-                document.getElementById('header-log-tag').innerText = globalContent.header.log_version[lang];
-                const infoBtn = document.getElementById('info-btn');
-                const isVisible = document.getElementById('mobile-popup').style.display === 'block';
-                infoBtn.innerText = isVisible ? globalContent.header.close_label : globalContent.header.info_label;
-            }
-            if (globalContent.footer) {
-                document.getElementById('footer-status').innerText = globalContent.footer.system_status;
-                document.getElementById('footer-copy').innerText = globalContent.footer.copyright;
-            }
-        }
-
-        // 2. PROJECT ENGINE
-        const EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp'];
-        async function probeImage(folder, index) {
-            for (const ext of EXTENSIONS) {
-                const url = `images/${folder}/${index}.${ext}`;
-                const exists = await new Promise(res => {
-                    const img = new Image();
-                    img.onload = () => res(true);
-                    img.onerror = () => res(false);
-                    img.src = url;
-                });
-                if (exists) return url;
-            } return null;
-        }
-
-        async function initFeed() {
-            const feed = document.getElementById('project-feed');
-            for (let pNum = 1; pNum <= 20; pNum++) {
-                const folder = `project${pNum}`;
-                const firstImg = await probeImage(folder, 1);
-                if (firstImg) {
-                    let meta = { tag: `[log_0${pNum}]`, title: `project_log_${pNum}`, en: `Case study.`, tr: `Vaka çalışması.`, specs: `Loc: TR // 2025` };
-                    try { const res = await fetch(`images/${folder}/meta.json`); if (res.ok) meta = await res.json(); } catch (e) {}
-
-                    let imgs = [firstImg];
-                    for (let iNum = 2; iNum <= 8; iNum++) {
-                        const path = await probeImage(folder, iNum);
-                        if (path) imgs.push(path); else break;
-                    }
-
-                    const pObj = { id: pNum, meta, imgs, cur: 0 };
-                    projectList.push(pObj);
-
-                    const row = document.createElement('section');
-                    row.className = 'project-row';
-                    row.innerHTML = `
-                        <div class="project-text">
-                            <div class="project-meta mono" style="font-family: 'Space Mono', monospace; font-size: 0.7rem; font-weight: 700; color: var(--orange); letter-spacing: 2px; margin-bottom:10px;">${meta.tag}</div>
-                            <h2 class="med">${meta.title}</h2>
-                            <p class="light project-desc" style="font-size: 1.1rem; line-height: 1.5; max-width: 450px; font-weight: 300; margin-bottom: 30px;">${currentLang === 'en' ? meta.en : meta.tr}</p>
-                            <div class="project-specs" style="font-family: 'Space Mono', monospace; font-size: 0.65rem; opacity: 0.5; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 15px;">${meta.specs}</div>
-                        </div>
-                        <div class="slider-container" id="slider-${pNum}">
-                            <div class="slider-track">${imgs.map(s => `<img data-src="${s}" class="slide-img lazy">`).join('')}</div>
-                            <div class="slider-nav">
-                                <div class="nav-zone" style="left:0" onclick="moveSlide(${pNum}, -1)"><span class="nav-label">&lt;</span></div>
-                                <div class="nav-zone" style="right:0" onclick="moveSlide(${pNum}, 1)"><span class="nav-label">&gt;</span></div>
-                            </div>
-                        </div>`;
-                    feed.appendChild(row);
-                    setupLazyLoad(row);
-                    setupSwipe(row.querySelector('.slider-container'), pNum);
-                    
-                    // Middle Click Detection (Desktop)
-                    const track = row.querySelector('.slider-track');
-                    track.addEventListener('mousedown', (e) => {
-                        if (e.button === 1) { e.preventDefault(); openLightbox(pNum); }
-                    });
-                }
-            }
-        }
-
-        function setupLazyLoad(row) {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.querySelectorAll('.lazy').forEach(img => { img.src = img.dataset.src; img.classList.remove('lazy'); });
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { rootMargin: '200px' });
-            observer.observe(row);
-        }
-
-        function moveSlide(id, dir) {
-            const p = projectList.find(x => x.id === id);
-            const container = document.getElementById(`slider-${id}`);
-            const track = container.querySelector('.slider-track');
-            p.cur = (p.cur + dir + p.imgs.length) % p.imgs.length;
-            track.style.transform = `translateX(-${p.cur * 100}%)`;
-        }
-
-        function setupSwipe(el, id) {
-            let startX = 0;
-            el.addEventListener('touchstart', e => startX = e.touches[0].clientX, {passive: true});
-            el.addEventListener('touchend', e => {
-                const diff = startX - e.changedTouches[0].clientX;
-                if (Math.abs(diff) > 50) moveSlide(id, diff > 0 ? 1 : -1);
-            }, {passive: true});
-        }
-
-        // 3. LIGHTBOX
-        function openLightbox(id) {
-            const p = projectList.find(x => x.id === id);
-            lbState = { project: p, index: p.cur };
-            updateLightbox();
-            document.getElementById('lightbox').style.display = 'flex';
-        }
-        function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
-        function updateLightbox() { document.getElementById('lightbox-img').src = lbState.project.imgs[lbState.index]; }
-        function changeLightbox(dir) {
-            lbState.index = (lbState.index + dir + lbState.project.imgs.length) % lbState.project.imgs.length;
-            updateLightbox();
-        }
-
-        // 4. XOX GAME (Restored Sync)
-        window.addEventListener('mousedown', (e) => {
-            if (!gameActive || e.button === 1 || e.target.closest('aside, header, button, .nav-zone, #lightbox')) return;
-            const col = Math.floor(e.clientX / 40); const row = Math.floor(e.clientY / 40);
-            const key = `${col},${row}`;
-            if (!board[key]) {
-                board[key] = currentPlayer;
-                const t = document.createElement('div'); t.className = 'game-token'; t.innerText = currentPlayer;
-                t.style.position = 'fixed'; 
-                t.style.left = (col * 40) + 'px'; t.style.top = (row * 40) + 'px';
-                t.style.color = currentPlayer === 'x' ? 'var(--orange)' : 'black';
-                t.dataset.coord = key;
-                document.getElementById('game-layer').appendChild(t);
-                
-                const winPath = checkWin(col, row, currentPlayer);
-                if (winPath) {
-                    gameActive = false;
-                    winPath.forEach(coords => {
-                        const el = document.querySelector(`[data-coord="${coords[0]},${coords[1]}"]`);
-                        if (el) el.style.animation = 'winPulse 0.4s infinite alternate';
-                    });
-                    const logEl = document.getElementById('header-log-tag');
-                    logEl.innerText = `[alert: winner_${currentPlayer}_detected]`;
-                    logEl.style.color = 'var(--orange)';
-                } else currentPlayer = (currentPlayer === 'x') ? 'o' : 'x';
-            }
-        });
-        function checkWin(c, r, p) {
-            const dirs = [[1,0], [0,1], [1,1], [1,-1]];
-            for (let [dx, dy] of dirs) {
-                let path = [[c, r]];
-                for (let i = 1; i < 3; i++) { if (board[`${c+(dx*i)},${r+(dy*i)}`] === p) path.push([c+(dx*i), r+(dy*i)]); else break; }
-                for (let i = 1; i < 3; i++) { if (board[`${c-(dx*i)},${r-(dy*i)}`] === p) path.push([c-(dx*i), r-(dy*i)]); else break; }
-                if (path.length >= 3) return path;
-            } return null;
-        }
-
-        // 5. GLOBAL UI HELPERS
-        function toggleLang() {
-            currentLang = currentLang === 'en' ? 'tr' : 'en';
-            document.querySelectorAll('.en-toggle').forEach(el => el.classList.toggle('active', currentLang === 'en'));
-            document.querySelectorAll('.tr-toggle').forEach(el => el.classList.toggle('active', currentLang === 'tr'));
-            updateUI();
-            projectList.forEach(p => {
-                const row = document.getElementById(`slider-${p.id}`).closest('.project-row');
-                const desc = row.querySelector('.project-desc');
-                if (desc) desc.innerText = currentLang === 'en' ? p.meta.en : p.meta.tr;
-            });
-        }
-        function togglePopup() { 
-            const p = document.getElementById('mobile-popup'); 
-            p.style.display = (p.style.display === 'block') ? 'none' : 'block'; 
-            updateUI();
-        }
-
-        setInterval(() => { document.getElementById('clock').innerText = new Date().toTimeString().split(' ')[0]; }, 1000);
-        window.addEventListener('mousemove', (e) => { 
-            document.getElementById('coords').innerText = `x: ${String(e.clientX).padStart(3, '0')} y: ${String(e.clientY).padStart(3, '0')}`; 
-        });
-
-        loadSiteData();
-    </script>
-</body>
-</html>
+                    ${info.contact.map(office => `<div style="margin-bottom:25px"><span class="med" style="font-size: 1.1rem; display: block; font-weight: 500; margin-bottom: 4px;">${office.title[lang]}</span><p class="light">${office.address}</p></div>`).join('')}
+                <
