@@ -8,7 +8,7 @@
     <!-- FAVICON -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     
-    <!-- ADOBE TYPEKIT (Futura PT) -->
+    <!-- ADOBE TYPEKIT -->
     <link rel="stylesheet" href="https://use.typekit.net/jit6sab.css">
     
     <!-- SPACE MONO FOR TECHNICAL DATA -->
@@ -56,7 +56,7 @@
         html { background-color: var(--bg); }
         body { width: 100%; min-height: 100%; margin: 0; padding: 0; }
 
-        /* FIXED INFINITE GRID */
+        /* FIXED INFINITE GRID - WORKS ON ALL DEVICES */
         body::before {
             content: "";
             position: fixed;
@@ -69,8 +69,9 @@
             pointer-events: none;
         }
 
-        body { font-family: 'FuturaLTPro', Arial, sans-serif; color: var(--text); cursor: crosshair; display: block; overflow-x: hidden; }
+        body { font-family: "futura-pt", 'FuturaLTPro', Arial, sans-serif; color: var(--text); cursor: crosshair; display: block; overflow-x: hidden; }
 
+        /* LOGO WEIGHTS */
         .logo-text { letter-spacing: -2px; line-height: 1; color: black !important; text-decoration: none !important; display: inline-block; }
         .logo-text .kav { font-weight: 500; } 
         .logo-text .arch { font-weight: 300; }
@@ -106,12 +107,13 @@
         .sidebar-content::-webkit-scrollbar, #mobile-popup::-webkit-scrollbar { display: none; }
 
         .sidebar-section { margin-bottom: 40px; }
-        .sidebar-section h3 { margin-bottom: 12px; }
+        .sidebar-section h3 { margin-bottom: 10px; }
 
-        /* JUSTIFIED SIDEBAR TEXT */
+        /* JUSTIFIED TEXT */
         .sidebar-section p { text-align: justify; text-justify: inter-word; line-height: 1.5; }
 
         .name-style { font-size: 1.1rem; display: block; font-weight: 500; margin-bottom: 4px; }
+        .profession { font-size: 0.8rem; display: block; margin-bottom: 6px; opacity: 0.6; font-weight: 300; }
         .contact-link { display: block; margin-top: 5px; text-decoration: underline !important; color: black !important; font-weight: 500; }
 
         /* MOBILE HEADER */
@@ -155,18 +157,22 @@
         .hero { padding: 120px var(--grid-size); border-bottom: var(--stroke) solid var(--text); background: transparent; }
         .hero h1 { font-size: 11vw; font-weight: 500; line-height: 0.85; letter-spacing: -0.05em; pointer-events: none; }
 
-        /* PROJECT ROWS - BORDER LOGIC UNIFICATION */
+        /* PROJECT ROWS - UNIFIED DIVIDERS */
         .project-row { 
             display: flex; width: 100%; height: var(--row-h-desktop); 
             border-bottom: var(--stroke) solid var(--text); 
             background: transparent; align-items: stretch;
             margin-top: 80px; 
         }
-        /* First project row flush with Hero section */
-        #project-feed .project-row:first-child { margin-top: 0; }
-        /* Standardize border top for rows with gaps */
-        .project-row { border-top: var(--stroke) solid var(--text); }
-        #project-feed .project-row:first-child { border-top: none; }
+        /* Fix transition between hero and first project (avoid double line) */
+        #project-feed .project-row:first-child { 
+            margin-top: 0; 
+            border-top: none; 
+        }
+        /* All other projects need a top border to frame the gap */
+        #project-feed .project-row:not(:first-child) {
+            border-top: var(--stroke) solid var(--text);
+        }
 
         .project-row:nth-of-type(even) { flex-direction: row-reverse; }
         .project-text, .slider-container { width: 50%; flex-shrink: 0; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
@@ -187,7 +193,7 @@
         .slide-img { min-width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: 0.6s; pointer-events: none; }
         .slider-container:hover .slide-img { filter: grayscale(0); }
 
-        /* COMPACT FEED NAVIGATION */
+        /* MINIMALISTIC FEED NAVIGATION */
         .slider-nav { position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center; z-index: 10; pointer-events: none; }
         .nav-zone { width: 60px; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; cursor: pointer; pointer-events: auto; }
         .slider-container:hover .nav-zone { opacity: 1; }
@@ -199,6 +205,7 @@
             padding: var(--grid-size); background: white; display: flex; justify-content: space-between; 
             font-family: 'Space Mono'; font-size: 0.7rem; z-index: 100; position: relative; 
             border-top: var(--stroke) solid var(--text); 
+            margin-top: 80px; 
         }
 
         /* LIGHTBOX POPUP */
@@ -250,7 +257,7 @@
             .video-box { width: 100%; height: 300px; border-right: none; border-bottom: var(--stroke) solid var(--text); }
             .video-box:last-child { border-bottom: none; }
             /* Mobile project unification */
-            .project-row { flex-direction: column !important; height: auto; border: none !important; margin-top: 40px; margin-bottom: 0; }
+            .project-row { flex-direction: column !important; height: auto; border-bottom: none; margin-top: 40px; margin-bottom: 0; }
             #project-feed .project-row:first-child { margin-top: 0; }
             .project-text, .slider-container { width: 100%; height: auto; border: none !important; }
             .project-text { order: 1; padding: 40px 25px; border-bottom: var(--stroke) solid var(--text) !important; border-top: var(--stroke) solid var(--text) !important; min-height: 350px; }
@@ -346,7 +353,7 @@
         let projectList = [];
         let lbState = { project: null, index: 0 };
 
-        // 1. DATA LOADING
+        // 1. DATA LOADING (JSON)
         async function loadSiteData() {
             try {
                 const [info, header, footer] = await Promise.all([
@@ -370,19 +377,19 @@
                 <div class="sidebar-section"><h3 class="mono">02_team</h3>
                     ${info.team.map(m => `
                         <div style="margin-bottom:25px">
-                            <span class="med name-style">${m.name}</span>
-                            <span class="profession light">${m.profession[lang]}</span>
-                            <p class="bio light">${m.bio[lang]}</p>
+                            <span class="med name-style" style="font-size: 1.1rem; display: block; font-weight: 500; margin-bottom: 4px;">${m.name}</span>
+                            <span class="profession light" style="font-size: 0.8rem; display: block; margin-bottom: 6px; opacity: 0.6;">${m.profession[lang]}</span>
+                            <p class="bio light" style="font-size: 0.9rem; opacity: 0.8; line-height: 1.4; font-weight: 300;">${m.bio[lang]}</p>
                         </div>`).join('')}
                 </div>
                 <div class="sidebar-section"><h3 class="mono">03_contact</h3>
                     ${info.contact.map(office => `<div style="margin-bottom:25px">
-                            <span class="med name-style">${office.title[lang]}</span>
+                            <span class="med name-style" style="font-size: 1.1rem; display: block; font-weight: 500; margin-bottom: 4px;">${office.title[lang]}</span>
                             <p class="address-text light">${office.address}</p>
                         </div>`).join('')}
                 </div>
                 <div class="sidebar-section">
-                    ${info.socials.map(soc => `<a href="${soc.url}" target="_blank" class="contact-link med">${soc.label}</a>`).join('')}
+                    ${info.socials.map(soc => `<a href="${soc.url}" target="_blank" class="contact-link med" style="font-weight: 500;">${soc.label}</a>`).join('')}
                 </div>
             `;
             document.querySelectorAll('.sidebar-info-container').forEach(el => el.innerHTML = html);
@@ -477,7 +484,7 @@
         }
 
         function openLightbox(id) {
-            if (window.innerWidth < 1100) return; // Disable on mobile
+            if (window.innerWidth < 1100) return; // Only desktop
             const p = projectList.find(x => x.id === id);
             lbState = { project: p, index: p.cur };
             updateLightbox();
