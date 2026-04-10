@@ -437,3 +437,13 @@
             p.style.display = (p.style.display === 'block') ? 'none' : 'block'; 
             updateUI();
         }
+
+        setInterval(() => { document.getElementById('clock').innerText = new Date().toTimeString().split(' ')[0]; }, 1000);
+        window.addEventListener('mousemove', (e) => { 
+            document.getElementById('coords').innerText = `x: ${String(e.clientX).padStart(3, '0')} y: ${String(e.clientY).padStart(3, '0')}`; 
+        });
+
+        loadDynamicContent();
+    </script>
+</body>
+</html>
