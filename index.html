@@ -23,42 +23,27 @@
 
         /* RESET */
         * { margin: 0; padding: 0; box-sizing: border-box; text-transform: lowercase !important; -webkit-font-smoothing: antialiased; }
-        html, body { width: 100%; height: 100%; background-color: var(--bg); margin: 0; padding: 0; overflow-x: hidden; }
+        html, body { width: 100%; height: 100%; background-color: var(--bg); margin: 0; padding: 0; }
 
-        /* FIXED GRID FIX FOR IPHONE */
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
+        /* GRID SYSTEM (Same as Base) */
+        body { 
+            font-family: 'Jost', sans-serif; color: var(--text); cursor: crosshair;
             background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-            background-size: var(--grid-size) var(--grid-size);
-            z-index: -1;
-            pointer-events: none;
+            background-size: var(--grid-size) var(--grid-size); background-attachment: fixed;
+            overflow-x: hidden;
         }
-
-        body { font-family: 'Jost', sans-serif; color: var(--text); cursor: crosshair; display: block; }
 
         .logo-text { letter-spacing: -2px; line-height: 1; color: black !important; text-decoration: none !important; display: inline-block; }
         .logo-text .kav { font-weight: 600; } .logo-text .arch { font-weight: 300; }
         a { text-decoration: none !important; }
 
-        /* COMPACT TOGGLE */
-        .lang-switch { 
-            font-family: 'Space Mono', monospace; font-size: 0.7rem; 
-            display: inline-flex; align-items: baseline; cursor: pointer; user-select: none;
-            padding: 10px 0; 
-        }
-        .lang-btn { opacity: 0.2; transition: 0.3s; pointer-events: none; }
-        .lang-btn.active { opacity: 1; color: var(--orange); font-weight: 700; }
-        .lang-switch .slash { opacity: 0.2; margin: 0 1px; pointer-events: none; }
-
-        /* TYPOGRAPHY */
         .mono { font-family: 'Space Mono', monospace; font-size: 0.7rem; font-weight: 700; color: var(--orange); letter-spacing: 2px; }
         .med { font-weight: 500; }
         .light { font-weight: 300; }
 
         #header-log-tag { font-family: 'Space Mono', monospace; font-size: 0.7rem; font-weight: 400; color: var(--text); transition: color 0.3s; }
 
+        /* SIDEBAR & HEADER */
         aside {
             width: var(--sidebar-w); height: 100vh; position: fixed; left: 0; top: 0;
             border-right: var(--stroke) solid var(--text); 
@@ -75,24 +60,12 @@
 
         .sidebar-content { padding: var(--grid-size); flex-grow: 1; overflow-y: auto; }
         .sidebar-section { margin-bottom: 40px; }
-        .sidebar-section h3 { margin-bottom: 15px; }
         
-        .name-style { font-size: 1.1rem; display: block; font-weight: 500; margin-bottom: 4px; }
-        .team-member-block { margin-bottom: 25px; }
-        .team-member-block .profession { font-size: 0.8rem; display: block; margin-bottom: 6px; opacity: 0.6; }
-        .team-member-block .bio { font-size: 0.9rem; opacity: 0.8; line-height: 1.4; font-weight: 300; }
-        .contact-link { display: block; margin-top: 5px; text-decoration: underline !important; color: black; font-weight: 500; }
-        .office-block { margin-bottom: 25px; }
-
         header {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: var(--header-h-mobile);
             background: white; border-bottom: var(--stroke) solid var(--text); z-index: 3000;
             padding: 0 0 0 25px; justify-content: space-between; align-items: center;
         }
-        @supports (padding-top: env(safe-area-inset-top)) { header { padding-top: env(safe-area-inset-top); } }
-
-        .mobile-logo { font-size: 3rem !important; }
-        .header-controls { display: flex; align-items: center; gap: 20px; height: 100%; }
 
         #info-btn { 
             background: var(--orange); color: white; border: none; height: 100%; width: 100px; 
@@ -100,10 +73,10 @@
             border-left: var(--stroke) solid var(--text); cursor: pointer;
             display: flex; align-items: center; justify-content: center;
         }
-        #mobile-popup { display: none; position: fixed; top: var(--header-h-mobile); left: 0; width: 100%; height: calc(100vh - var(--header-h-mobile)); background: white; z-index: 2000; padding: 40px 25px; overflow-y: auto; padding-bottom: calc(40px + env(safe-area-inset-bottom)); }
+        #mobile-popup { display: none; position: fixed; top: var(--header-h-mobile); left: 0; width: 100%; height: calc(100vh - var(--header-h-mobile)); background: white; z-index: 2000; padding: 40px 25px; overflow-y: auto; }
 
-        main { margin-left: var(--sidebar-w); width: calc(100% - var(--sidebar-w)); position: relative; z-index: 5; margin-top: 0; }
-
+        main { margin-left: var(--sidebar-w); width: calc(100% - var(--sidebar-w)); position: relative; z-index: 5; }
+        
         .meta-strip {
             height: 80px; padding: 0 var(--grid-size); border-bottom: var(--stroke) solid var(--text); 
             background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(5px);
@@ -118,31 +91,32 @@
         .video-box:hover video { filter: grayscale(0); opacity: 1; transform: scale(1.05); }
         .tag { position: absolute; bottom: 20px; left: 20px; background: var(--orange); color: white; padding: 4px 12px; font-family: 'Space Mono'; font-size: 0.6rem; z-index: 10; }
 
-        .hero { padding: 120px var(--grid-size); border-bottom: var(--stroke) solid var(--text); background: transparent; }
+        .hero { padding: 120px var(--grid-size); border-bottom: var(--stroke) solid var(--text); }
         .hero h1 { font-size: 11vw; font-weight: 500; line-height: 0.85; letter-spacing: -0.05em; pointer-events: none; }
 
-        .project-row { display: flex; width: 100%; height: var(--row-h-desktop); border-bottom: var(--stroke) solid var(--text); background: transparent; align-items: stretch; }
+        /* PROJECT SLIDER */
+        .project-row { display: flex; width: 100%; height: var(--row-h-desktop); border-bottom: var(--stroke) solid var(--text); align-items: stretch; }
         .project-row:nth-of-type(even) { flex-direction: row-reverse; }
-        .project-text, .slider-container { width: 50%; flex-shrink: 0; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
-        .project-text { padding: var(--grid-size); background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(2px); }
+        .project-text, .slider-container { width: 50%; flex-shrink: 0; display: flex; flex-direction: column; justify-content: center; }
+        .project-text { padding: var(--grid-size); background: rgba(255, 255, 255, 0.75); }
         .project-row:nth-of-type(odd) .project-text { border-right: var(--stroke) solid var(--text); }
         .project-row:nth-of-type(even) .project-text { border-left: var(--stroke) solid var(--text); }
 
         .project-text h2 { font-size: 4.5vw; font-weight: 500; line-height: 0.9; margin-bottom: 25px; }
         .project-desc { font-size: 1.1rem; line-height: 1.5; max-width: 450px; font-weight: 300; margin-bottom: 30px;}
-        .project-specs { font-family: 'Space Mono', monospace; font-size: 0.65rem; opacity: 0.5; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 15px; }
 
         .slider-container { position: relative; background: #eee; overflow: hidden; touch-action: pan-y; }
-        .slider-track { display: flex; height: 100%; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); will-change: transform; }
+        .slider-track { display: flex; height: 100%; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); will-change: transform; cursor: zoom-in; }
         .slide-img { min-width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: 0.6s; pointer-events: none; }
         .slider-container:hover .slide-img { filter: grayscale(0); }
-        
-        .slider-nav { position: absolute; inset: 0; display: flex; z-index: 10; pointer-events: none; }
-        .nav-zone { width: 60px; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; cursor: pointer; pointer-events: auto; }
-        .slider-container:hover .nav-zone { opacity: 1; }
-        .nav-label { background: var(--orange); color: white; font-family: 'Space Mono'; padding: 10px 15px; font-weight: 700; font-size: 1.2rem; }
 
-        footer { padding: var(--grid-size); background: white; display: flex; justify-content: space-between; font-family: 'Space Mono'; font-size: 0.7rem; z-index: 100; position: relative; padding-bottom: calc(var(--grid-size) + env(safe-area-inset-bottom)); border-top: var(--stroke) solid var(--text); }
+        /* Compact Navigation Buttons */
+        .slider-nav { position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center; z-index: 10; pointer-events: none; }
+        .nav-zone { width: 50px; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.2s; cursor: pointer; pointer-events: auto; }
+        .slider-container:hover .nav-zone { opacity: 1; }
+        .nav-label { background: var(--orange); color: white; font-family: 'Space Mono'; padding: 10px 12px; font-weight: 700; font-size: 1rem; line-height: 1; }
+
+        footer { padding: var(--grid-size); background: white; display: flex; justify-content: space-between; font-family: 'Space Mono'; font-size: 0.7rem; border-top: var(--stroke) solid var(--text); z-index: 100; position: relative; }
 
         /* LIGHTBOX */
         #lightbox {
@@ -153,21 +127,22 @@
         .lightbox-close { position: absolute; top: 40px; right: 40px; font-family: 'Space Mono'; cursor: pointer; font-weight: 700; background: var(--orange); color: white; padding: 10px 20px; z-index: 5001; }
         .lightbox-nav { position: absolute; bottom: 40px; display: flex; gap: 40px; font-family: 'Space Mono'; font-weight: 700; font-size: 1.2rem; cursor: pointer; }
 
-        /* GAME LAYER */
+        /* XOX GAME (Synced Layer) */
         #game-layer { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
-        .game-token { position: absolute; width: var(--grid-size); height: var(--grid-size); display: flex; align-items: center; justify-content: center; font-family: 'Space Mono'; font-weight: 700; font-size: 1.2rem; }
+        .game-token { position: absolute; width: var(--grid-size); height: var(--grid-size); display: flex; align-items: center; justify-content: center; font-family: 'Space Mono'; font-weight: 700; font-size: 1.2rem; animation: tokenIn 0.3s forwards; }
+        @keyframes tokenIn { from { transform: scale(0); } to { transform: scale(1); } }
 
         @media (max-width: 1100px) {
             aside { display: none; } header { display: flex; }
             main { margin-left: 0; width: 100%; margin-top: var(--header-h-mobile); }
             .updates-container { flex-direction: column; height: auto; }
             .video-box { width: 100%; height: 300px; border-right: none; border-bottom: var(--stroke) solid var(--text); }
-            .project-row { flex-direction: column !important; height: auto; border-bottom: none;}
+            .project-row { flex-direction: column !important; height: auto; border-bottom: none; }
             .project-text, .slider-container { width: 100%; height: auto; border: none !important; }
             .project-text { order: 1; padding: 40px 25px; border-bottom: var(--stroke) solid var(--text) !important; min-height: 350px; }
             .slider-container { order: 2; height: 450px; border-bottom: var(--stroke) solid var(--text) !important; }
-            .meta-strip { display: none; } .hero h1 { font-size: 16vw; } .hero { border-bottom: var(--stroke) solid var(--text); }
             .nav-zone { display: none; } /* Mobile uses swipe */
+            .meta-strip { display: none; }
         }
     </style>
 </head>
@@ -188,7 +163,7 @@
     <div id="mobile-popup"><div class="sidebar-info-container"></div></div>
 
     <aside>
-        <div class="desktop-logo-frame" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+        <div class="desktop-logo-frame" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
             <div class="logo-text"><span class="kav">kav</span><span class="arch">arch</span></div>
         </div>
         <div class="sidebar-content"><div class="sidebar-info-container"></div></div>
@@ -243,7 +218,7 @@
         let board = {}; 
         let gameActive = true;
         let projectList = [];
-        let lightboxState = { project: null, index: 0 };
+        let lbState = { project: null, index: 0 };
 
         async function loadDynamicContent() {
             try {
@@ -292,7 +267,7 @@
             }
         }
 
-        // IMAGE PROBING & FEED
+        // IMAGE LOADING & FEED
         const EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp'];
         async function probeImage(folder, index) {
             for (const ext of EXTENSIONS) {
@@ -332,32 +307,32 @@
                             <div class="project-meta mono">${meta.tag}</div>
                             <h2 class="med">${meta.title}</h2>
                             <p class="light project-desc">${currentLang === 'en' ? meta.en : meta.tr}</p>
-                            <div class="project-specs">${meta.specs}</div>
+                            <div class="mono" style="opacity:0.4; font-size:0.6rem; border-top:1px solid rgba(0,0,0,0.1); padding-top:15px;">${meta.specs}</div>
                         </div>
                         <div class="slider-container" id="slider-${pNum}">
                             <div class="slider-track">${imgs.map(s => `<img data-src="${s}" class="slide-img lazy">`).join('')}</div>
                             <div class="slider-nav">
-                                <div class="nav-zone" onclick="moveSlide(${pNum}, -1)"><span class="nav-label">&lt;</span></div>
-                                <div class="nav-zone" onclick="moveSlide(${pNum}, 1)"><span class="nav-label">&gt;</span></div>
+                                <div class="nav-zone" style="left:0" onclick="moveSlide(${pNum}, -1)"><span class="nav-label">&lt;</span></div>
+                                <div class="nav-zone" style="right:0" onclick="moveSlide(${pNum}, 1)"><span class="nav-label">&gt;</span></div>
                             </div>
                         </div>`;
                     feed.appendChild(row);
-                    setupObserver(row);
+                    setupLazyLoad(row);
                     setupSwipe(row.querySelector('.slider-container'), pNum);
-                    setupMiddleClick(row.querySelector('.slider-container'), pNum);
+                    
+                    // Middle Click Detection (Desktop)
+                    row.querySelector('.slider-track').addEventListener('auxclick', (e) => {
+                        if (e.button === 1) openLightbox(pNum);
+                    });
                 }
             }
         }
 
-        // LAZY LOADING
-        function setupObserver(row) {
+        function setupLazyLoad(row) {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.querySelectorAll('.lazy').forEach(img => {
-                            img.src = img.dataset.src;
-                            img.classList.remove('lazy');
-                        });
+                        entry.target.querySelectorAll('.lazy').forEach(img => { img.src = img.dataset.src; img.classList.remove('lazy'); });
                         observer.unobserve(entry.target);
                     }
                 });
@@ -365,7 +340,6 @@
             observer.observe(row);
         }
 
-        // SLIDER LOGIC
         function moveSlide(id, dir) {
             const p = projectList.find(x => x.id === id);
             const container = document.getElementById(`slider-${id}`);
@@ -383,37 +357,21 @@
             }, {passive: true});
         }
 
-        // MIDDLE CLICK & LIGHTBOX
-        function setupMiddleClick(el, id) {
-            el.addEventListener('mousedown', (e) => {
-                if (e.button === 1) { // Middle click
-                    e.preventDefault();
-                    openLightbox(id);
-                }
-            });
-        }
-
+        // LIGHTBOX
         function openLightbox(id) {
-            if (window.innerWidth <= 1100) return;
             const p = projectList.find(x => x.id === id);
-            lightboxState = { project: p, index: p.cur };
+            lbState = { project: p, index: p.cur };
             updateLightbox();
             document.getElementById('lightbox').style.display = 'flex';
         }
-
         function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
-
-        function updateLightbox() {
-            document.getElementById('lightbox-img').src = lightboxState.project.imgs[lightboxState.index];
-        }
-
+        function updateLightbox() { document.getElementById('lightbox-img').src = lbState.project.imgs[lbState.index]; }
         function changeLightbox(dir) {
-            const p = lightboxState.project;
-            lightboxState.index = (lightboxState.index + dir + p.imgs.length) % p.imgs.length;
+            lbState.index = (lbState.index + dir + lbState.project.imgs.length) % lbState.project.imgs.length;
             updateLightbox();
         }
 
-        // XOX GAME (Fixed Logic)
+        // XOX GAME (Synced with Grid)
         window.addEventListener('mousedown', (e) => {
             if (!gameActive || e.button === 1 || e.target.closest('aside, header, button, .nav-zone, #lightbox')) return;
             const col = Math.floor(e.clientX / 40); const row = Math.floor(e.clientY / 40);
@@ -431,7 +389,6 @@
                 } else currentPlayer = (currentPlayer === 'x') ? 'o' : 'x';
             }
         });
-
         function checkWin(c, r, p) {
             const dirs = [[1,0], [0,1], [1,1], [1,-1]];
             for (let [dx, dy] of dirs) {
@@ -444,16 +401,15 @@
 
         // UI HELPERS
         function toggleLang() {
-            currentLang = (currentLang === 'en') ? 'tr' : 'en';
+            currentLang = currentLang === 'en' ? 'tr' : 'en';
             document.querySelectorAll('.en-toggle').forEach(el => el.classList.toggle('active', currentLang === 'en'));
             document.querySelectorAll('.tr-toggle').forEach(el => el.classList.toggle('active', currentLang === 'tr'));
             updateUI();
             projectList.forEach(p => {
-                const row = document.getElementById(`slider-${p.id}`).closest('.project-row');
-                row.querySelector('.project-desc').innerText = currentLang === 'en' ? p.meta.en : p.meta.tr;
+                const desc = document.querySelector(`#slider-${p.id}`).previousElementSibling.querySelector('.project-desc');
+                if (desc) desc.innerText = currentLang === 'en' ? p.meta.en : p.meta.tr;
             });
         }
-
         function togglePopup() { 
             const p = document.getElementById('mobile-popup'); 
             p.style.display = (p.style.display === 'block') ? 'none' : 'block'; 
