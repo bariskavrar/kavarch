@@ -398,4 +398,76 @@
             const dotsCont = document.getElementById('lb-dots');
             dotsCont.innerHTML = p.imgs.length > 1 ? p.imgs.map((_, i) => `<div class="dot ${i === lbState.index ? 'active' : ''}"></div>`).join('') : '';
             const ctrls = document.querySelector('.lb-controls');
-            ctrls.style.display = p.imgs.length > 1 ? 'block' :
+            ctrls.style.display = p.imgs.length > 1 ? 'block' : 'none';
+        }
+
+        function changeLightbox(dir) {
+            const p = lbState.project;
+            lbState.index = (lbState.index + dir + p.imgs.length) % p.imgs.length;
+            updateLightbox();
+        }
+
+        function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
+
+        // XOX GAME (STATIONARY LAYER)
+        window.addEventListener('mousedown', (e) => {
+            if (!gameActive || e.button === 1 || e.target.closest('aside, header, button, .nav-zone, #lightbox')) return;
+            const col = Math.floor(e.clientX / 40); const row = Math.floor(e.clientY / 40);
+            const key = `${col},${row}`;
+            if (!board[key]) {
+                board[key] = currentPlayer;
+                const t = document.createElement('div'); t.className = 'game-token'; t.innerText = currentPlayer;
+                t.style.position = 'fixed'; 
+                t.style.left = (col * 40) + 'px'; t.style.top = (row * 40) + 'px';
+                t.style.color = currentPlayer === 'x' ? 'var(--orange)' : 'black';
+                t.dataset.coord = key;
+                document.getElementById('game-layer').appendChild(t);
+                
+                const winPath = checkWin(col, row, currentPlayer);
+                if (winPath) {
+                    gameActive = false;
+                    winPath.forEach(coords => {
+                        const el = document.querySelector(`[data-coord="${coords[0]},${coords[1]}"]`);
+                        if (el) el.style.animation = 'winPulse 0.4s infinite alternate';
+                    });
+                    if (globalContent.header) document.getElementById('header-log-tag').innerText = `[alert: winner_${currentPlayer}_detected]`;
+                    document.getElementById('header-log-tag').style.color = 'var(--orange)';
+                } else currentPlayer = (currentPlayer === 'x') ? 'o' : 'x';
+            }
+        });
+        function checkWin(c, r, p) {
+            const dirs = [[1,0], [0,1], [1,1], [1,-1]];
+            for (let [dx, dy] of dirs) {
+                let path = [[c, r]];
+                for (let i = 1; i < 3; i++) { if (board[`${c+(dx*i)},${r+(dy*i)}`] === p) path.push([c+(dx*i), r+(dy*i)]); else break; }
+                for (let i = 1; i < 3; i++) { if (board[`${c-(dx*i)},${r-(dy*i)}`] === p) path.push([c-(dx*i), r-(dy*i)]); else break; }
+                if (path.length >= 3) return path;
+            } return null;
+        }
+
+        function toggleLang() {
+            currentLang = currentLang === 'en' ? 'tr' : 'en';
+            document.querySelectorAll('.en-toggle').forEach(el => el.classList.toggle('active', currentLang === 'en'));
+            document.querySelectorAll('.tr-toggle').forEach(el => el.classList.toggle('active', currentLang === 'tr'));
+            updateUI();
+            projectList.forEach(p => {
+                const row = document.getElementById(`slider-${p.id}`).closest('.project-row');
+                const desc = row.querySelector('.project-desc');
+                if (desc) desc.innerText = currentLang === 'en' ? p.meta.en : p.meta.tr;
+            });
+        }
+        function togglePopup() { 
+            const p = document.getElementById('mobile-popup'); 
+            p.style.display = (p.style.display === 'block') ? 'none' : 'block'; 
+            updateUI();
+        }
+
+        setInterval(() => { document.getElementById('clock').innerText = new Date().toTimeString().split(' ')[0]; }, 1000);
+        window.addEventListener('mousemove', (e) => { 
+            document.getElementById('coords').innerText = `x: ${String(e.clientX).padStart(3, '0')} y: ${String(e.clientY).padStart(3, '0')}`; 
+        });
+
+        loadSiteData();
+    </script>
+</body>
+</html>
