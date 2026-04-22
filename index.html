@@ -55,10 +55,10 @@
 
         body { font-family: 'FuturaLTPro', Arial, sans-serif; color: var(--text); cursor: crosshair; display: block; overflow-x: hidden; }
 
-        /* LOGO BRANDING: SOFRA */
+        /* LOGO BRANDING: SOFRA (ITC Avant Garde Medium) */
         .logo-text { 
             font-family: "itc-avant-garde-gothic-pro", sans-serif;
-            font-weight: 600; /* Demi */
+            font-weight: 500; /* Medium */
             letter-spacing: -0.025em; /* Interpretation of -25 tracking */
             line-height: 1; 
             color: black !important; 
@@ -150,7 +150,7 @@
         .hero { padding: 120px var(--grid-size); border-bottom: var(--stroke) solid var(--text); background: transparent; }
         .hero h1 { font-size: 11vw; font-weight: 500; line-height: 0.85; letter-spacing: -0.05em; pointer-events: none; }
 
-        /* PROJECT ROWS - DIVIDER LOGIC */
+        /* PROJECT ROWS */
         .project-row { 
             display: flex; width: 100%; height: var(--row-h-desktop); 
             border-bottom: var(--stroke) solid var(--text); 
@@ -179,7 +179,7 @@
         .slide-img { min-width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: 0.6s; pointer-events: none; }
         .slider-container:hover .slide-img { filter: grayscale(0); }
 
-        /* MINIMALISTIC SLIDER NAV */
+        /* MINIMALISTIC FEED NAVIGATION */
         .slider-nav { position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center; z-index: 10; pointer-events: none; }
         .nav-zone { width: 60px; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; cursor: pointer; pointer-events: auto; }
         .slider-container:hover .nav-zone { opacity: 1; }
@@ -201,16 +201,14 @@
         }
         .lb-grid-overlay {
             position: absolute; inset: 0;
-            background-image: 
-                linear-gradient(var(--grid-line-white) 1px, transparent 1px), 
-                linear-gradient(90deg, var(--grid-line-white) 1px, transparent 1px);
+            background-image: linear-gradient(var(--grid-line-white) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line-white) 1px, transparent 1px);
             background-size: var(--grid-size) var(--grid-size);
             pointer-events: none; z-index: -1;
         }
         .lb-modal { position: relative; width: fit-content; max-width: 70vw; height: fit-content; max-height: 85vh; display: flex; align-items: center; justify-content: center; }
         .lb-modal img { max-width: 100%; max-height: 85vh; object-fit: contain; border: var(--stroke) solid black; background: white; }
-        .lb-close { position: fixed; top: 30px; right: 30px; font-size: 2.5rem; color: var(--orange); cursor: pointer; font-family: sans-serif; font-weight: 400; line-height: 1; transition: 0.2s; border: none; background: none; z-index: 5010; }
-        .lb-close:hover { transform: scale(1.2); }
+        .lb-close { position: fixed; top: 30px; right: 30px; font-size: 1.2rem; color: var(--orange); cursor: pointer; font-family: 'FuturaLTPro', sans-serif; font-weight: 400; line-height: 1; transition: 0.2s; border: none; background: none; z-index: 5010; }
+        .lb-close:hover { transform: scale(1.3); }
         .lb-controls { position: fixed; inset: 0; opacity: 0; transition: 0.3s; pointer-events: none; }
         #lightbox:hover .lb-controls { opacity: 1; }
         .lb-nav-zone { position: fixed; top: 0; height: 100%; width: 50%; display: flex; align-items: center; cursor: pointer; pointer-events: auto; }
@@ -231,10 +229,11 @@
         @media (max-width: 1100px) {
             aside { display: none; } header { display: flex; }
             main { margin-left: 0; width: 100%; margin-top: var(--header-h-mobile); }
-            .updates-container { display: flex; flex-direction: column; height: auto; border-bottom: var(--stroke) solid var(--text); }
+            .updates-container { flex-direction: column; height: auto; border-bottom: var(--stroke) solid var(--text); }
             .video-box { width: 100%; height: 300px; border-right: none; border-bottom: var(--stroke) solid var(--text); }
             .video-box:last-child { border-bottom: none; }
-            .project-row { flex-direction: column !important; height: auto; border-bottom: var(--stroke) solid var(--text) !important; margin-top: 80px !important; border-top: var(--stroke) solid var(--text) !important; }
+            /* Mobile project gaps and unified thickness */
+            .project-row { flex-direction: column !important; height: auto; border-bottom: var(--stroke) solid var(--text) !important; margin-top: 80px !important; margin-bottom: 0; border-top: var(--stroke) solid var(--text) !important; }
             #project-feed .project-row:first-child { margin-top: 0 !important; border-top: none !important; }
             .project-text, .slider-container { width: 100%; height: auto; border: none !important; }
             .project-text { order: 1; padding: 40px 25px; border-bottom: var(--stroke) solid var(--text) !important; border-top: none !important; min-height: 350px; }
@@ -243,7 +242,7 @@
             .meta-strip { display: none; } .hero h1 { font-size: 16vw; font-weight: 500; } .hero { border-bottom: var(--stroke) solid var(--text); }
             footer { justify-content: center; margin-top: 80px !important; border-top: var(--stroke) solid var(--text) !important; }
             #footer-status, #coords { display: none; }
-            .lb-modal { max-width: 90vw; } .lb-close { right: 20px; top: 20px; font-size: 2rem; }
+            .lb-modal { max-width: 90vw; } .lb-close { right: 20px; top: 20px; font-size: 1.2rem; }
             .lb-controls { opacity: 1; }
         }
     </style>
@@ -463,7 +462,7 @@
         }
 
         function openLightbox(id) {
-            if (window.innerWidth < 1100) return; 
+            if (window.innerWidth < 1100) return; // Only desktop
             const p = projectList.find(x => x.id === id);
             lbState = { project: p, index: p.cur };
             updateLightbox();
@@ -487,7 +486,7 @@
 
         function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
 
-        // XOX GAME (Restored Sync with Fixed Grid)
+        // XOX GAME (Restored Sync)
         window.addEventListener('mousedown', (e) => {
             if (!gameActive || e.button === 1 || e.target.closest('aside, header, button, .nav-zone, #lightbox')) return;
             const col = Math.floor(e.clientX / 40); const row = Math.floor(e.clientY / 40);
