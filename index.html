@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>kavarch — built different.</title>
+    <title>sofra — built different.</title>
     
     <!-- FAVICON -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- ADOBE TYPEKIT (ITC Avant Garde Gothic Pro) -->
+    <link rel="stylesheet" href="https://use.typekit.net/jit6sab.css">
     
     <!-- SPACE MONO FOR TECHNICAL DATA -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        /* 1. SELF-HOSTED FUTURA LT PRO SETUP */
+        /* 1. SELF-HOSTED FUTURA LT PRO SETUP (Body Text) */
         @font-face { font-family: 'FuturaLTPro'; src: url('FuturaLTPro-Light.woff2') format('woff2'); font-weight: 300; }
         @font-face { font-family: 'FuturaLTPro'; src: url('FuturaLTPro-Book.woff2') format('woff2'); font-weight: 400; }
         @font-face { font-family: 'FuturaLTPro'; src: url('FuturaLTPro-Medium.woff2') format('woff2'); font-weight: 500; }
@@ -37,7 +40,7 @@
         html { background-color: var(--bg); }
         body { width: 100%; min-height: 100%; margin: 0; padding: 0; }
 
-        /* FIXED INFINITE GRID - STAYS STATIC ON SCROLL */
+        /* FIXED INFINITE GRID - STAYS STATIC ON ALL DEVICES */
         body::before {
             content: "";
             position: fixed;
@@ -52,9 +55,17 @@
 
         body { font-family: 'FuturaLTPro', Arial, sans-serif; color: var(--text); cursor: crosshair; display: block; overflow-x: hidden; }
 
-        .logo-text { letter-spacing: -2px; line-height: 1; color: black !important; text-decoration: none !important; display: inline-block; }
-        .logo-text .kav { font-weight: 500; } 
-        .logo-text .arch { font-weight: 300; }
+        /* LOGO BRANDING: SOFRA */
+        .logo-text { 
+            font-family: "itc-avant-garde-gothic-pro", sans-serif;
+            font-weight: 600; /* Demi */
+            letter-spacing: -0.025em; /* Interpretation of -25 tracking */
+            line-height: 1; 
+            color: black !important; 
+            text-decoration: none !important; 
+            display: inline-block; 
+            text-transform: lowercase !important;
+        }
         
         .lang-switch { font-family: 'Space Mono', monospace; font-size: 0.7rem; display: inline-flex; align-items: baseline; cursor: pointer; user-select: none; padding: 10px 0; }
         .lang-btn { opacity: 0.2; transition: 0.3s; pointer-events: none; }
@@ -74,14 +85,14 @@
         }
         .desktop-logo-frame {
             width: 100%; 
-            height: 200px !important; /* Forced exact height */
+            height: 200px !important; 
             min-height: 200px;
             border-bottom: var(--stroke) solid var(--text);
-            display: flex; align-items: center; justify-content: center; font-size: 3.8rem;
+            display: flex; align-items: center; justify-content: center; font-size: 4.2rem;
             transition: 0.2s; cursor: pointer; background: white;
         }
         .desktop-logo-frame:hover { background: var(--orange); }
-        .desktop-logo-frame:hover .logo-text, .desktop-logo-frame:hover .logo-text span { color: white !important; }
+        .desktop-logo-frame:hover .logo-text { color: white !important; }
 
         .sidebar-content, #mobile-popup { 
             padding: var(--grid-size); flex-grow: 1; overflow-y: auto; 
@@ -90,11 +101,11 @@
         .sidebar-content::-webkit-scrollbar, #mobile-popup::-webkit-scrollbar { display: none; }
 
         .sidebar-section { margin-bottom: 40px; }
-        .sidebar-section h3 { margin-bottom: 10px; }
-        .sidebar-section p { text-align: left; line-height: 1.5; font-size: 1rem; }
+        .sidebar-section h3 { margin-bottom: 12px; }
+        .sidebar-section p { text-align: left; line-height: 1.5; font-size: 1rem; font-weight: 300; }
 
         .name-style { font-size: 1rem; display: block; font-weight: 500; margin-bottom: 4px; }
-        .profession { font-size: 0.8rem; display: block; margin-bottom: 6px; opacity: 0.6; font-weight: 400; }
+        .profession { font-size: 0.8rem; display: block; margin-bottom: 6px; opacity: 0.6; font-weight: 300; }
         .bio { font-size: 1rem; opacity: 0.8; line-height: 1.4; font-weight: 300; }
         .contact-link { display: block; margin-top: 5px; text-decoration: underline !important; color: black !important; font-weight: 500; font-size: 1rem; }
 
@@ -104,7 +115,7 @@
             background: white; border-bottom: var(--stroke) solid var(--text); z-index: 3000;
             padding: 0 0 0 25px; justify-content: space-between; align-items: center;
         }
-        .mobile-logo { font-size: 3rem !important; }
+        .mobile-logo { font-size: 3.5rem !important; }
         .header-controls { display: flex; align-items: center; gap: 20px; height: 100%; }
 
         #info-btn { 
@@ -139,7 +150,7 @@
         .hero { padding: 120px var(--grid-size); border-bottom: var(--stroke) solid var(--text); background: transparent; }
         .hero h1 { font-size: 11vw; font-weight: 500; line-height: 0.85; letter-spacing: -0.05em; pointer-events: none; }
 
-        /* PROJECT ROWS */
+        /* PROJECT ROWS - DIVIDER LOGIC */
         .project-row { 
             display: flex; width: 100%; height: var(--row-h-desktop); 
             border-bottom: var(--stroke) solid var(--text); 
@@ -168,7 +179,7 @@
         .slide-img { min-width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: 0.6s; pointer-events: none; }
         .slider-container:hover .slide-img { filter: grayscale(0); }
 
-        /* SLIDER NAVIGATION BUTTONS (Feed) */
+        /* MINIMALISTIC SLIDER NAV */
         .slider-nav { position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center; z-index: 10; pointer-events: none; }
         .nav-zone { width: 60px; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; cursor: pointer; pointer-events: auto; }
         .slider-container:hover .nav-zone { opacity: 1; }
@@ -190,14 +201,16 @@
         }
         .lb-grid-overlay {
             position: absolute; inset: 0;
-            background-image: linear-gradient(var(--grid-line-white) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line-white) 1px, transparent 1px);
+            background-image: 
+                linear-gradient(var(--grid-line-white) 1px, transparent 1px), 
+                linear-gradient(90deg, var(--grid-line-white) 1px, transparent 1px);
             background-size: var(--grid-size) var(--grid-size);
             pointer-events: none; z-index: -1;
         }
         .lb-modal { position: relative; width: fit-content; max-width: 70vw; height: fit-content; max-height: 85vh; display: flex; align-items: center; justify-content: center; }
         .lb-modal img { max-width: 100%; max-height: 85vh; object-fit: contain; border: var(--stroke) solid black; background: white; }
-        .lb-close { position: fixed; top: 30px; right: 30px; font-size: 1.2rem; color: var(--orange); cursor: pointer; font-family: 'FuturaLTPro', sans-serif; font-weight: 400; line-height: 1; transition: 0.2s; border: none; background: none; z-index: 5010; }
-        .lb-close:hover { transform: scale(1.3); }
+        .lb-close { position: fixed; top: 30px; right: 30px; font-size: 2.5rem; color: var(--orange); cursor: pointer; font-family: sans-serif; font-weight: 400; line-height: 1; transition: 0.2s; border: none; background: none; z-index: 5010; }
+        .lb-close:hover { transform: scale(1.2); }
         .lb-controls { position: fixed; inset: 0; opacity: 0; transition: 0.3s; pointer-events: none; }
         #lightbox:hover .lb-controls { opacity: 1; }
         .lb-nav-zone { position: fixed; top: 0; height: 100%; width: 50%; display: flex; align-items: center; cursor: pointer; pointer-events: auto; }
@@ -218,11 +231,10 @@
         @media (max-width: 1100px) {
             aside { display: none; } header { display: flex; }
             main { margin-left: 0; width: 100%; margin-top: var(--header-h-mobile); }
-            .updates-container { flex-direction: column; height: auto; border-bottom: var(--stroke) solid var(--text); }
+            .updates-container { display: flex; flex-direction: column; height: auto; border-bottom: var(--stroke) solid var(--text); }
             .video-box { width: 100%; height: 300px; border-right: none; border-bottom: var(--stroke) solid var(--text); }
             .video-box:last-child { border-bottom: none; }
-            /* Mobile project gaps and unified thickness */
-            .project-row { flex-direction: column !important; height: auto; border-bottom: var(--stroke) solid var(--text) !important; margin-top: 80px !important; margin-bottom: 0; border-top: var(--stroke) solid var(--text) !important; }
+            .project-row { flex-direction: column !important; height: auto; border-bottom: var(--stroke) solid var(--text) !important; margin-top: 80px !important; border-top: var(--stroke) solid var(--text) !important; }
             #project-feed .project-row:first-child { margin-top: 0 !important; border-top: none !important; }
             .project-text, .slider-container { width: 100%; height: auto; border: none !important; }
             .project-text { order: 1; padding: 40px 25px; border-bottom: var(--stroke) solid var(--text) !important; border-top: none !important; min-height: 350px; }
@@ -231,7 +243,7 @@
             .meta-strip { display: none; } .hero h1 { font-size: 16vw; font-weight: 500; } .hero { border-bottom: var(--stroke) solid var(--text); }
             footer { justify-content: center; margin-top: 80px !important; border-top: var(--stroke) solid var(--text) !important; }
             #footer-status, #coords { display: none; }
-            .lb-modal { max-width: 90vw; } .lb-close { right: 20px; top: 20px; font-size: 1.2rem; }
+            .lb-modal { max-width: 90vw; } .lb-close { right: 20px; top: 20px; font-size: 2rem; }
             .lb-controls { opacity: 1; }
         }
     </style>
@@ -241,7 +253,7 @@
     <div id="game-layer"></div>
 
     <header>
-        <div class="mobile-logo logo-text"><span class="kav">kav</span><span class="arch">arch</span></div>
+        <div class="mobile-logo logo-text">sofra</div>
         <div class="header-controls">
             <div class="lang-switch" onclick="toggleLang()">
                 <span class="lang-btn active en-toggle">en</span><span class="slash">/</span><span class="lang-btn tr-toggle">tr</span>
@@ -254,7 +266,7 @@
 
     <aside>
         <div class="desktop-logo-frame" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-            <div class="logo-text"><span class="kav">kav</span><span class="arch">arch</span></div>
+            <div class="logo-text">sofra</div>
         </div>
         <div class="sidebar-content"><div class="sidebar-info-container"></div></div>
     </aside>
@@ -310,7 +322,6 @@
     </div>
 
     <script>
-        // Force scroll to top on refresh
         if (history.scrollRestoration) { history.scrollRestoration = 'manual'; }
         window.scrollTo(0, 0);
 
@@ -322,7 +333,6 @@
         let projectList = [];
         let lbState = { project: null, index: 0 };
 
-        // 1. DATA LOADING (JSON)
         async function loadSiteData() {
             try {
                 const [info, header, footer] = await Promise.all([
@@ -346,19 +356,19 @@
                 <div class="sidebar-section"><h3 class="mono">02_team</h3>
                     ${info.team.map(m => `
                         <div style="margin-bottom:25px">
-                            <span class="med name-style" style="font-size: 1rem; display: block; font-weight: 500; margin-bottom: 4px;">${m.name}</span>
-                            <span class="profession light" style="font-size: 0.8rem; display: block; margin-bottom: 6px; opacity: 0.6;">${m.profession[lang]}</span>
-                            <p class="bio light" style="font-size: 1rem; opacity: 0.8; line-height: 1.4; font-weight: 300;">${m.bio[lang]}</p>
+                            <span class="med name-style">${m.name}</span>
+                            <span class="profession light">${m.profession[lang]}</span>
+                            <p class="bio light">${m.bio[lang]}</p>
                         </div>`).join('')}
                 </div>
                 <div class="sidebar-section"><h3 class="mono">03_contact</h3>
                     ${info.contact.map(office => `<div style="margin-bottom:25px">
-                            <span class="med name-style" style="font-size: 1rem; display: block; font-weight: 500; margin-bottom: 4px;">${office.title[lang]}</span>
+                            <span class="med name-style">${office.title[lang]}</span>
                             <p class="address-text light">${office.address}</p>
                         </div>`).join('')}
                 </div>
                 <div class="sidebar-section">
-                    ${info.socials.map(soc => `<a href="${soc.url}" target="_blank" class="contact-link med" style="font-weight: 500; font-size: 1rem;">${soc.label}</a>`).join('')}
+                    ${info.socials.map(soc => `<a href="${soc.url}" target="_blank" class="contact-link med">${soc.label}</a>`).join('')}
                 </div>
             `;
             document.querySelectorAll('.sidebar-info-container').forEach(el => el.innerHTML = html);
@@ -453,7 +463,7 @@
         }
 
         function openLightbox(id) {
-            if (window.innerWidth < 1100) return; // Only desktop
+            if (window.innerWidth < 1100) return; 
             const p = projectList.find(x => x.id === id);
             lbState = { project: p, index: p.cur };
             updateLightbox();
@@ -477,7 +487,7 @@
 
         function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
 
-        // XOX GAME (Restored Sync)
+        // XOX GAME (Restored Sync with Fixed Grid)
         window.addEventListener('mousedown', (e) => {
             if (!gameActive || e.button === 1 || e.target.closest('aside, header, button, .nav-zone, #lightbox')) return;
             const col = Math.floor(e.clientX / 40); const row = Math.floor(e.clientY / 40);
