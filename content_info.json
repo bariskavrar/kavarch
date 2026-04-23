@@ -1,42 +1,61 @@
 {
-  "about": {
-    "en": "kavarch is an istanbul-based architectural practice focused on the friction between structural logic and digital craftsmanship. we believe in building different, not just building more.",
-    "tr": "kavarch, yapısal mantık ile dijital ustalık arasındaki sürtünmeye odaklanan istanbul merkezli bir mimarlık pratiğidir. sadece daha fazlasını değil, farklı olanı inşa etmeye inanıyoruz."
-  },
-  "team": [
+  "sections": [
     {
-      "name": "barış kavraroğlu",
-      "profession": { "en": "founding partner // architect", "tr": "kurucu partner // mimar" },
-      "bio": {
-        "en": "Barış Kavraroğlu is an architect and researcher whose work is shaped by a blend of academic inquiry and international experience. Following his studies at Mimar Sinan Fine Arts University, he completed his Master’s in Architecture and Urban Design at Politecnico di Milano. His professional path includes a research residency at AURA Istanbul and a range of international engagements in cities such as Milan, Delft, Shanghai, and Lodz. These experiences helped refine his approach to architecture, archetypes, and urban memory.",
-        "tr": "Barış Kavraroğlu, akademik araştırmalar ve uluslararası deneyimlerin birleşiminden şekillenen bir mimar ve araştırmacıdır. Mimar Sinan Güzel Sanatlar Üniversitesi'ndeki eğitiminin ardından Milano Politeknik Üniversitesi'nde Mimarlık ve Kentsel Tasarım alanında yüksek lisansını tamamladı. Profesyonel kariyerinde AURA Istanbul'da bir araştırma görevlisi olarak çalıştı ve Milano, Delft, Şanghay ve Lodz gibi şehirlerde çeşitli uluslararası projelerde yer aldı. Bu deneyimler, mimariye, arketiplere ve kentsel belleğe yaklaşımını geliştirmesine yardımcı oldu."
-      }
+      "id": "01_about",
+      "type": "text",
+      "title": { "en": "01_about", "tr": "01_hakkımızda" },
+      "paragraphs": [
+        {
+          "en": "sofra is a modular architectural laboratory navigating the friction between structural logic and digital craftsmanship.",
+          "tr": "sofra, yapısal mantık ile dijital ustalık arasındaki sürtünmeyi araştıran modüler bir mimari laboratuvardır."
+        },
+        {
+          "en": "we believe in building different, not just building more.",
+          "tr": "sadece daha fazlasını değil, farklı olanı inşa etmeye inanıyoruz."
+        }
+      ]
     },
     {
-      "name": "burak kavraroğlu",
-      "profession": { "en": "founding partner // architect", "tr": "kurucu partner // mimar" },
-      "bio": {
-        "en": "computational designer exploring the digital translation of physical rituals in space.",
-        "tr": "mekandaki fiziksel ritüellerin dijital çevirisini araştıran hesaplamalı tasarımcı."
-      }
+      "id": "02_team",
+      "type": "team",
+      "title": { "en": "02_team", "tr": "02_ekip" },
+      "members": [
+        {
+          "name": "barış kavraroğlu",
+          "profession": { "en": "founding partner // architect", "tr": "kurucu partner // mimar" },
+          "bio": {
+            "en": "Barış Kavraroğlu is an architect and researcher whose work is shaped by a blend of academic inquiry and international experience. Following his studies at Mimar Sinan Fine Arts University, he completed his Master’s in Architecture and Urban Design at Politecnico di Milano. His professional path includes a research residency at AURA Istanbul and a range of international engagements in cities such as Milan, Delft, Shanghai, and Lodz. These experiences helped refine his approach to architecture, archetypes, and urban memory.",
+            "tr": "Barış Kavraroğlu, akademik araştırmalar ve uluslararası deneyimlerin birleşiminden şekillenen bir mimar ve araştırmacıdır. Mimar Sinan Güzel Sanatlar Üniversitesi'ndeki eğitiminin ardından Milano Politeknik Üniversitesi'nde Mimarlık ve Kentsel Tasarım alanında yüksek lisansını tamamladı. Profesyonel kariyerinde AURA Istanbul'da bir araştırma görevlisi olarak çalıştı ve Milano, Delft, Şanghay ve Lodz gibi şehirlerde çeşitli uluslararası projelerde yer aldı. Bu deneyimler, mimariye, arketiplere ve kentsel belleğe yaklaşımını geliştirmesine yardımcı oldu."
+          }
+        },
+        {
+          "name": "burak kavraroğlu",
+          "profession": { "en": "founding partner // architect", "tr": "kurucu partner // mimar" },
+          "bio": {
+            "en": "computational designer exploring the digital translation of physical rituals in space.",
+            "tr": "mekandaki fiziksel ritüellerin dijital çevirisini araştıran hesaplamalı tasarımcı."
+          }
+        },
+        {
+          "name": "feyza aksamaz",
+          "profession": { "en": "founding partner // architect", "tr": "kurucu partner // mimar" },
+          "bio": {
+            "en": "computational designer exploring the digital translation of physical rituals in space.",
+            "tr": "mekandaki fiziksel ritüellerin dijital çevirisini araştıran hesaplamalı tasarımcı."
+          }
+        }
+      ]
     },
     {
-      "name": "feyza aksamaz",
-      "profession": { "en": "founding partner // architect", "tr": "kurucu partner // mimar" },
-      "bio": {
-        "en": "computational designer exploring the digital translation of physical rituals in space.",
-        "tr": "mekandaki fiziksel ritüellerin dijital çevirisini araştıran hesaplamalı tasarımcı."
-      }
+      "id": "03_contact",
+      "type": "links",
+      "title": { "en": "03_contact", "tr": "03_iletişim" },
+      "address_title": { "en": "istanbul laboratory", "tr": "istanbul laboratuvarı" },
+      "address": "abbasağa mah. salnameci sk. kaya apt. no:11/4 beşiktaş/istanbul",
+      "links": [
+        { "label": "info@kavarch.com", "url": "mailto:info@kavarch.com" },
+        { "label": "@kav.arch", "url": "https://instagram.com/kav.arch" }
+      ]
     }
-  ],
-  "contact": [
-    {
-      "title": { "en": "istanbul laboratory", "tr": "istanbul laboratuvarı" },
-      "address": "abbasağa mah. salnameci sk. kaya apt. no:11/4 beşiktaş/istanbul"
-    }
-  ],
-  "socials": [
-    { "label": "info@kavarch.com", "url": "mailto:info@kavarch.com" },
-    { "label": "@kav.arch", "url": "https://instagram.com/kav.arch" }
   ]
 }
