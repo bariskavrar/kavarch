@@ -13,10 +13,6 @@
         {
           "en": "sofra is an istanbul-based architectural practice focused on the friction between structural logic and digital craftsmanship.",
           "tr": "sofra, yapısal mantık ile dijital ustalık arasındaki sürtünmeye odaklanan istanbul merkezli bir mimarlık pratiğidir."
-        },
-        {
-          "en": "we believe in building different, not just building more.",
-          "tr": "sadece daha fazlasını değil, farklı olanı inşa etmeye inanıyoruz."
         }
       ]
     },
@@ -27,26 +23,12 @@
         {
           "name": "barış kavraroğlu",
           "profession": { "en": "founding partner // architect", "tr": "kurucu partner // mimar" },
-          "bio": {
-            "en": "Barış Kavraroğlu is an architect and researcher whose work is shaped by academic inquiry and international experience.",
-            "tr": "Barış Kavraroğlu, akademik araştırmalar ve uluslararası deneyimlerin birleşiminden şekillenen bir mimar ve araştırmacıdır."
-          }
+          "bio": { "en": "architect and researcher.", "tr": "mimar ve araştırmacı." }
         },
         {
           "name": "burak kavraroğlu",
           "profession": { "en": "founding partner // architect", "tr": "kurucu partner // mimar" },
-          "bio": {
-            "en": "computational designer exploring the digital translation of physical rituals in space.",
-            "tr": "mekandaki fiziksel ritüellerin dijital çevirisini araştıran hesaplamalı tasarımcı."
-          }
-        },
-        {
-          "name": "feyza aksamaz",
-          "profession": { "en": "founding partner // architect", "tr": "kurucu partner // mimar" },
-          "bio": {
-            "en": "computational designer exploring the digital translation of physical rituals in space.",
-            "tr": "mekandaki fiziksel ritüellerin dijital çevirisini araştıran hesaplamalı tasarımcı."
-          }
+          "bio": { "en": "computational designer.", "tr": "hesaplamalı tasarımcı." }
         }
       ]
     },
@@ -56,8 +38,8 @@
       "office_name": { "en": "istanbul laboratory", "tr": "istanbul laboratuvarı" },
       "address": "abbasağa mah. salnameci sk. kaya apt. no:11/4 beşiktaş/istanbul",
       "socials": [
-        { "label": "info@kavarch.com", "url": "mailto:info@kavarch.com" },
-        { "label": "@kav.arch", "url": "https://instagram.com/kav.arch" }
+        { "label": "info@sofrastudio.com", "url": "mailto:info@sofrastudio.com" },
+        { "label": "@sofra.arch", "url": "https://instagram.com/sofra.arch" }
       ]
     }
   ]
