@@ -5,41 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>sofra — built different.</title>
     
-    <!-- FAVICON -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     
     <style>
-        /* 1. SELF-HOSTED FONTS (V5 STANDARD) */
-        /* Futura LT Pro */
+        /* 1. V5 FULLY SELF-HOSTED FONTS */
         @font-face { font-family: 'FuturaLTPro'; src: url('FuturaLTPro-Light.woff2') format('woff2'); font-weight: 300; }
         @font-face { font-family: 'FuturaLTPro'; src: url('FuturaLTPro-Book.woff2') format('woff2'); font-weight: 400; }
-        @font-face { font-family: 'FuturaLTPro'; src: url('FuturaLTPro-Medium.woff2') format('woff2'); font-weight: 500; }
         @font-face { font-family: 'FuturaLTPro'; src: url('FuturaLTPro-SemiBold.woff2') format('woff2'); font-weight: 600; }
-        /* Space Mono */
         @font-face { font-family: 'SpaceMonoCustom'; src: url('SpaceMono-Regular.woff2') format('woff2'); font-weight: 400; }
         @font-face { font-family: 'SpaceMonoCustom'; src: url('SpaceMono-Bold.woff2') format('woff2'); font-weight: 700; }
 
         :root {
-            --bg: #ffffff;
-            --text: #000000;
-            --orange: #ff5500; 
-            --grid-size: 40px; 
-            --grid-line: rgba(0, 0, 0, 0.12);
-            --grid-line-white: rgba(255, 255, 255, 0.1);
-            --sidebar-w: 500px; 
-            --header-h-mobile: 120px;
-            --stroke: 2px;
-            --row-h-desktop: 550px;
+            --bg: #ffffff; --text: #000000; --orange: #ff5500; 
+            --grid-size: 40px; --grid-line: rgba(0, 0, 0, 0.12); --grid-line-white: rgba(255, 255, 255, 0.1);
+            --sidebar-w: 500px; --header-h-mobile: 120px; --stroke: 2px; --row-h-desktop: 550px;
         }
 
-        /* RESET & V5 NO LIGATURES */
+        /* RESET & V5 NO LIGATURES & LEFT ALIGN */
         * { 
             margin: 0; padding: 0; box-sizing: border-box; text-transform: lowercase !important; -webkit-font-smoothing: antialiased; 
-            font-variant-ligatures: none !important;
-            font-feature-settings: "liga" 0 !important;
+            font-variant-ligatures: none !important; font-feature-settings: "liga" 0 !important;
         }
-        html { background-color: var(--bg); }
-        body { width: 100%; min-height: 100%; margin: 0; padding: 0; }
+        body { font-family: 'FuturaLTPro', Arial, sans-serif; color: var(--text); background-color: var(--bg); cursor: crosshair; overflow-x: hidden; }
 
         /* FIXED INFINITE GRID */
         body::before {
@@ -48,41 +35,29 @@
             background-size: var(--grid-size) var(--grid-size);
         }
 
-        body { font-family: 'FuturaLTPro', Arial, sans-serif; color: var(--text); cursor: crosshair; display: block; overflow-x: hidden; }
-
-        /* SIDEBAR (Desktop) */
+        /* SIDEBAR & BRANDING */
         aside {
             width: var(--sidebar-w); height: 100vh; position: fixed; left: 0; top: 0;
-            border-right: var(--stroke) solid var(--text); 
-            background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(10px); 
+            border-right: var(--stroke) solid var(--text); background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(10px); 
             display: flex; flex-direction: column; z-index: 100;
         }
         .desktop-logo-frame {
-            width: 100%; height: 200px !important; min-height: 200px;
-            border-bottom: var(--stroke) solid var(--text);
-            display: flex; align-items: center; justify-content: center;
-            transition: 0.2s; cursor: pointer; background: white;
+            width: 100%; height: 200px !important; min-height: 200px; border-bottom: var(--stroke) solid var(--text);
+            display: flex; align-items: center; justify-content: center; transition: 0.2s; cursor: pointer; background: white;
         }
         .desktop-logo-frame:hover { background: var(--orange); }
         .desktop-logo-frame:hover .logo-img { filter: invert(1) brightness(10); }
-        .logo-img { height: 50px; width: auto; transition: 0.2s ease; }
+        .logo-img { height: 50px; width: auto; transition: 0.2s; }
 
-        .sidebar-content, #mobile-popup { 
-            padding: var(--grid-size); flex-grow: 1; overflow-y: auto; 
-            scrollbar-width: none; -ms-overflow-style: none;
-        }
+        .sidebar-content, #mobile-popup { padding: var(--grid-size); flex-grow: 1; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }
         .sidebar-content::-webkit-scrollbar, #mobile-popup::-webkit-scrollbar { display: none; }
-
         .sidebar-section { margin-bottom: 40px; }
-        .sidebar-section h3 { 
-            margin-bottom: 10px; font-family: "SpaceMonoCustom", monospace; font-size: 0.7rem; 
-            font-weight: 700 !important; color: var(--orange); letter-spacing: 2px; 
-        }
-
+        .sidebar-section h3 { margin-bottom: 12px; font-family: "SpaceMonoCustom", monospace; font-size: 0.7rem; font-weight: 700 !important; color: var(--orange); letter-spacing: 2px; }
+        
         .txt-medium { font-weight: 400; font-size: 1rem; text-align: left; }
         .txt-light { font-weight: 300; font-size: 1rem; line-height: 1.5; text-align: left; }
         .profession { font-size: 0.8rem; display: block; margin-bottom: 6px; opacity: 0.6; font-weight: 300; text-align: left; }
-        .contact-link { display: block; margin-top: 5px; text-decoration: underline !important; color: black !important; font-weight: 400; font-size: 1rem; }
+        .contact-link { display: block; margin-top: 5px; text-decoration: underline !important; color: black !important; font-weight: 400; }
 
         /* MOBILE HEADER */
         header {
@@ -102,16 +77,15 @@
             padding: 40px 25px; padding-bottom: calc(140px + env(safe-area-inset-bottom));
         }
 
+        /* MAIN CONTENT */
         main { margin-left: var(--sidebar-w); width: calc(100% - var(--sidebar-w)); position: relative; z-index: 5; background: transparent; }
-
-        .meta-strip {
+        .meta-strip { 
             height: 80px; padding: 0 var(--grid-size); border-bottom: var(--stroke) solid var(--text); 
-            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(5px);
-            display: flex; justify-content: space-between; align-items: center;
-            font-family: 'SpaceMonoCustom', monospace; font-size: 0.7rem; position: sticky; top: 0; z-index: 50;
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(5px); display: flex; justify-content: space-between; align-items: center; 
+            font-family: 'SpaceMonoCustom', monospace; font-size: 0.7rem; position: sticky; top: 0; z-index: 50; 
         }
 
-        /* V5 HERO SECTION (640PX) */
+        /* HERO BOXES (640PX) */
         .hero-modular {
             display: flex; width: 100%; height: 640px; border-bottom: var(--stroke) solid var(--text);
             padding: var(--grid-size); gap: var(--grid-size); align-items: flex-end;
@@ -122,58 +96,31 @@
             font-weight: 400; line-height: 1.1;
         }
 
-        /* PROJECTS */
+        /* PROJECT ROWS */
         .project-row { 
-            display: flex; width: 100%; height: var(--row-h-desktop); 
-            border-bottom: var(--stroke) solid var(--text); 
-            background: transparent; align-items: stretch;
-            margin-top: 80px; 
+            display: flex; width: 100%; height: var(--row-h-desktop); border-bottom: var(--stroke) solid var(--text); 
+            background: transparent; align-items: stretch; margin-top: 80px; 
         }
         #project-feed .project-row:first-child { margin-top: 0; border-top: none; }
         #project-feed .project-row:not(:first-child) { border-top: var(--stroke) solid var(--text); }
-
         .project-row:nth-of-type(even) { flex-direction: row-reverse; }
-        .project-text, .slider-container { width: 50%; flex-shrink: 0; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
-        
-        .project-text { 
-            padding: var(--grid-size); background: rgba(255, 255, 255, 0.45); 
-            backdrop-filter: blur(2px); 
-        }
+        .project-text { width: 50%; padding: var(--grid-size); background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(2px); display: flex; flex-direction: column; justify-content: center; }
         .project-row:nth-of-type(odd) .project-text { border-right: var(--stroke) solid var(--text); }
         .project-row:nth-of-type(even) .project-text { border-left: var(--stroke) solid var(--text); }
 
-        .project-text h2 { font-size: 4.5vw; font-weight: 400; line-height: 0.9; margin-bottom: 25px; }
-        .project-desc { font-size: 1rem; line-height: 1.5; max-width: 450px; font-weight: 300; margin-bottom: 30px; text-align: left;}
-
-        .slider-container { position: relative; background: #eee; overflow: hidden; touch-action: pan-y; }
+        .slider-container { width: 50%; position: relative; background: #eee; overflow: hidden; touch-action: pan-y; }
         .slider-track { display: flex; height: 100%; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); will-change: transform; cursor: pointer; }
         .slide-img { min-width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: 0.6s; pointer-events: none; }
         .slider-container:hover .slide-img { filter: grayscale(0); }
-
-        /* COMPACT NAVIGATION BUTTONS */
-        .slider-nav { position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center; z-index: 10; pointer-events: none; }
-        .nav-zone { width: 60px; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; cursor: pointer; pointer-events: auto; }
+        .nav-zone { width: 60px; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; cursor: pointer; pointer-events: auto; position: absolute; z-index: 10; top:0; }
         .slider-container:hover .nav-zone { opacity: 1; }
         .nav-triangle { color: var(--orange); font-size: 1.5rem; transition: 0.2s; }
-        .nav-zone:hover .nav-triangle { transform: scale(1.3); }
-
-        footer { 
-            padding: var(--grid-size); background: white; display: flex; justify-content: space-between; 
-            font-family: 'SpaceMonoCustom', monospace; font-size: 0.7rem; z-index: 100; position: relative; 
-            border-top: var(--stroke) solid var(--text); margin-top: 80px; 
-        }
+        
+        footer { padding: var(--grid-size); background: white; display: flex; justify-content: space-between; font-family: 'SpaceMonoCustom'; font-size: 0.7rem; z-index: 100; position: relative; border-top: var(--stroke) solid var(--text); margin-top: 80px; }
 
         /* LIGHTBOX POPUP */
-        #lightbox {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 5000;
-            display: none; align-items: center; justify-content: center; backdrop-filter: blur(8px);
-        }
-        .lb-grid-overlay {
-            position: absolute; inset: 0;
-            background-image: linear-gradient(var(--grid-line-white) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line-white) 1px, transparent 1px);
-            background-size: var(--grid-size) var(--grid-size);
-            pointer-events: none; z-index: -1;
-        }
+        #lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 5000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
+        .lb-grid-overlay { position: absolute; inset: 0; background-image: linear-gradient(var(--grid-line-white) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line-white) 1px, transparent 1px); background-size: var(--grid-size) var(--grid-size); pointer-events: none; z-index: -1; }
         .lb-modal { position: relative; width: fit-content; max-width: 70vw; height: fit-content; max-height: 85vh; display: flex; align-items: center; justify-content: center; }
         .lb-modal img { max-width: 100%; max-height: 85vh; object-fit: contain; border: var(--stroke) solid black; background: white; }
         .lb-close { position: fixed; top: 30px; right: 30px; font-size: 1.2rem; color: var(--orange); cursor: pointer; font-family: sans-serif; border: none; background: none; z-index: 5010; }
@@ -185,10 +132,8 @@
         .dot { width: 6px; height: 6px; background: white; border-radius: 50%; opacity: 0.3; transition: 0.3s; }
         .dot.active { opacity: 1; background: var(--orange); transform: scale(1.6); }
 
-        /* GAME LAYER & WINNING Logic */
         #game-layer { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
         .game-token { position: fixed; width: var(--grid-size); height: var(--grid-size); display: flex; align-items: center; justify-content: center; font-family: 'SpaceMonoCustom'; font-weight: 700; font-size: 1.2rem; animation: tokenIn 0.3s forwards; }
-        @keyframes tokenIn { from { transform: scale(0); } to { transform: scale(1); } }
         @keyframes winPulse { from { transform: scale(1); } to { transform: scale(1.3); color: var(--orange); } }
 
         @media (max-width: 1100px) {
@@ -201,71 +146,26 @@
             .project-text, .slider-container { width: 100%; height: auto; border: none !important; }
             .project-text { order: 1; padding: 40px 25px; border-bottom: var(--stroke) solid var(--text) !important; min-height: 350px; }
             .slider-container { order: 2; height: 450px; }
-            .nav-zone { display: none; } 
-            .meta-strip { display: none; }
+            .nav-zone, .meta-strip { display: none; }
             footer { justify-content: center; margin-top: 80px !important; border-top: var(--stroke) solid var(--text) !important; }
             #footer-status, #coords { display: none; }
         }
     </style>
 </head>
 <body>
-
     <div id="game-layer"></div>
-
-    <header>
-        <img src="logo.svg" alt="sofra" class="mobile-logo-img">
-        <div class="header-controls">
-            <div class="lang-switch" onclick="toggleLang()">
-                <span class="lang-btn active en-toggle">en</span><span class="slash">/</span><span class="lang-btn tr-toggle">tr</span>
-            </div>
-            <button id="info-btn" onclick="togglePopup()">[info]</button>
-        </div>
-    </header>
-
+    <header><img src="logo.svg" alt="sofra" class="mobile-logo-img"><div class="header-controls"><div class="lang-switch" onclick="toggleLang()"><span class="lang-btn active en-toggle">en</span><span class="slash">/</span><span class="lang-btn tr-toggle">tr</span></div><button id="info-btn" onclick="togglePopup()">[info]</button></div></header>
     <div id="mobile-popup"><div class="sidebar-info-container"></div></div>
-
-    <aside>
-        <div class="desktop-logo-frame" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-            <img src="logo.svg" alt="sofra" class="logo-img">
-        </div>
-        <div class="sidebar-content"><div class="sidebar-info-container"></div></div>
-    </aside>
-
+    <aside><div class="desktop-logo-frame" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><img src="logo.svg" alt="sofra" class="logo-img"></div><div class="sidebar-content"><div class="sidebar-info-container"></div></div></aside>
     <main>
-        <div class="meta-strip">
-            <div id="header-log-tag"></div>
-            <div class="lang-switch" onclick="toggleLang()">
-                <span class="lang-btn active en-toggle">en</span><span class="slash">/</span><span class="lang-btn tr-toggle">tr</span>
-            </div>
-            <span id="clock" style="font-family: 'SpaceMonoCustom'; font-size: 0.7rem;">00:00:00</span>
-        </div>
-
+        <div class="meta-strip"><div id="header-log-tag"></div><div class="lang-switch" onclick="toggleLang()"><span class="lang-btn active en-toggle">en</span><span class="slash">/</span><span class="lang-btn tr-toggle">tr</span></div><span id="clock" style="font-family: 'SpaceMonoCustom'; font-size: 0.7rem;">00:00:00</span></div>
         <section class="hero-modular" id="hero-boxes"></section>
-
         <div id="project-feed"></div>
-
-        <footer>
-            <span id="footer-status"></span>
-            <span id="footer-copy"></span>
-            <span id="coords">x: 000 y: 000</span>
-        </footer>
+        <footer><span id="footer-status"></span><span id="footer-copy"></span><span id="coords">x: 000 y: 000</span></footer>
     </main>
-
     <div id="lightbox" onclick="closeLightbox()">
         <div class="lb-grid-overlay"></div>
-        <div class="lb-modal" onclick="event.stopPropagation()">
-            <button class="lb-close" onclick="closeLightbox()">✕</button>
-            <img id="lightbox-img" src="">
-            <div class="lb-controls">
-                <div class="lb-nav-zone" style="left:0" onclick="changeLightbox(-1)">
-                    <div class="lb-triangle">◀</div>
-                </div>
-                <div class="lb-nav-zone" style="right:0" onclick="changeLightbox(1)">
-                    <div class="lb-triangle">▶</div>
-                </div>
-                <div class="lb-dots" id="lb-dots"></div>
-            </div>
-        </div>
+        <div class="lb-modal" onclick="event.stopPropagation()"><button class="lb-close" onclick="closeLightbox()">✕</button><img id="lightbox-img" src=""><div class="lb-controls"><div class="lb-nav-zone lb-prev-zone" onclick="event.stopPropagation(); changeLightbox(-1)"><div class="lb-triangle">◀</div></div><div class="lb-nav-zone lb-next-zone" onclick="event.stopPropagation(); changeLightbox(1)"><div class="lb-triangle">▶</div></div><div class="lb-dots" id="lb-dots"></div></div></div>
     </div>
 
     <script>
@@ -296,31 +196,18 @@
             if (!info) return;
 
             if(info.hero_boxes) {
-                const heroCont = document.getElementById('hero-boxes');
-                heroCont.innerHTML = info.hero_boxes.map(box => `<div class="hero-box"><span>${box[lang]}</span></div>`).join('');
+                document.getElementById('hero-boxes').innerHTML = info.hero_boxes.map(box => `<div class="hero-box"><span>${box[lang]}</span></div>`).join('');
             }
 
-            let sidebarHTML = info.sections.map(section => {
+            let html = info.sections.map(section => {
                 let content = '';
-                if (section.type === 'text') {
-                    content = section.content.map(p => `<p class="txt-light">${p[lang]}</p>`).join('');
-                } else if (section.type === 'team') {
-                    content = section.members.map(m => `
-                        <div style="margin-bottom:25px">
-                            <span class="txt-medium">${m.name}</span>
-                            <span class="profession light">${m.profession[lang]}</span>
-                            <p class="bio txt-light">${m.bio[lang]}</p>
-                        </div>`).join('')}
-                } else if (section.type === 'contact') {
-                    content = `
-                        <div style="margin-bottom:25px"><span class="txt-medium">${section.office_name[lang]}</span><p class="txt-light">${section.address}</p></div>
-                        ${section.socials.map(soc => `<a href="${soc.url}" target="_blank" class="contact-link">${soc.label}</a>`).join('')}
-                    `;
-                }
+                if (section.type === 'text') content = section.content.map(p => `<p class="txt-light">${p[lang]}</p>`).join('');
+                else if (section.type === 'team') content = section.members.map(m => `<div style="margin-bottom:25px"><span class="txt-medium">${m.name}</span><span class="profession">${m.profession[lang]}</span><p class="bio txt-light">${m.bio[lang]}</p></div>`).join('');
+                else if (section.type === 'contact') content = `<div style="margin-bottom:25px"><span class="txt-medium">${section.office_name[lang]}</span><p class="txt-light">${section.address}</p></div>${section.socials.map(s => `<a href="${s.url}" target="_blank" class="contact-link txt-medium">${s.label}</a>`).join('')}`;
                 return `<div class="sidebar-section"><h3>${section.title[lang]}</h3>${content}</div>`;
             }).join('');
 
-            document.querySelectorAll('.sidebar-info-container').forEach(el => el.innerHTML = sidebarHTML);
+            document.querySelectorAll('.sidebar-info-container').forEach(el => el.innerHTML = html);
 
             if (globalContent.header) {
                 document.getElementById('header-log-tag').innerText = globalContent.header.log_version[lang];
@@ -359,7 +246,7 @@
                     projectList.push({ id: pNum, meta, imgs, cur: 0 });
                     const row = document.createElement('section');
                     row.className = 'project-row';
-                    row.innerHTML = `<div class="project-text"><div class="project-meta mono" style="margin-bottom:10px; font-family:'SpaceMonoCustom'; font-size:0.7rem; font-weight:700; color:var(--orange); letter-spacing:2px;">${meta.tag}</div><h2 class="txt-medium" style="font-size:4.5vw; line-height:0.9; margin-bottom:25px; font-weight:400;">${meta.title}</h2><p class="txt-light" style="margin-bottom:30px;">${currentLang === 'en' ? meta.en : meta.tr}</p><div style="font-family:'SpaceMonoCustom'; font-size:0.65rem; opacity:0.5; border-top:1px solid rgba(0,0,0,0.1); padding-top:15px;">${meta.specs}</div></div><div class="slider-container" id="slider-${pNum}"><div class="slider-track" onclick="openLightbox(${pNum})">${imgs.map(s => `<img src="${s}" class="slide-img">`).join('')}</div>${imgs.length > 1 ? `<div class="slider-nav"><div class="nav-zone" style="left:0" onclick="moveSlide(${pNum}, -1, event)"><div class="nav-triangle">◀</div></div><div class="nav-zone" style="right:0" onclick="moveSlide(${pNum}, 1, event)"><div class="nav-triangle">▶</div></div></div>` : ''}</div>`;
+                    row.innerHTML = `<div class="project-text"><div class="mono" style="margin-bottom:10px; font-family:'SpaceMonoCustom'; font-size:0.7rem; font-weight:700; color:var(--orange); letter-spacing:2px;">${meta.tag}</div><h2 class="txt-medium" style="font-size:4.5vw; line-height:0.9; margin-bottom:25px; font-weight:400;">${meta.title}</h2><p class="txt-light" style="margin-bottom:30px;">${currentLang === 'en' ? meta.en : meta.tr}</p><div style="font-family:'SpaceMonoCustom'; font-size:0.65rem; opacity:0.5; border-top:1px solid rgba(0,0,0,0.1); padding-top:15px;">${meta.specs}</div></div><div class="slider-container" id="slider-${pNum}"><div class="slider-track" onclick="openLightbox(${pNum})">${imgs.map(s => `<img src="${s}" class="slide-img">`).join('')}</div>${imgs.length > 1 ? `<div class="slider-nav"><div class="nav-zone" style="left:0" onclick="moveSlide(${pNum}, -1, event)"><div class="nav-triangle">◀</div></div><div class="nav-zone" style="right:0" onclick="moveSlide(${pNum}, 1, event)"><div class="nav-triangle">▶</div></div></div>` : ''}</div>`;
                     feed.appendChild(row);
                 }
             }
@@ -367,31 +254,12 @@
 
         function moveSlide(id, dir, e) { if(e) e.stopPropagation(); const p = projectList.find(x => x.id === id); const container = document.getElementById(`slider-${id}`); const track = container.querySelector('.slider-track'); p.cur = (p.cur + dir + p.imgs.length) % p.imgs.length; track.style.transform = `translateX(-${p.cur * 100}%)`; }
         function openLightbox(id) { if (window.innerWidth < 1100) return; const p = projectList.find(x => x.id === id); lbState = { project: p, index: p.cur }; updateLightbox(); document.getElementById('lightbox').style.display = 'flex'; }
-        function updateLightbox() { const p = lbState.project; document.getElementById('lightbox-img').src = p.imgs[lbState.index]; document.getElementById('lb-dots').innerHTML = p.imgs.length > 1 ? p.imgs.map((_, i) => `<div class="dot ${i === lbState.index ? 'active' : ''}"></div>`).join('') : ''; }
+        function updateLightbox() { const p = lbState.project; document.getElementById('lightbox-img').src = p.imgs[lbState.index]; const dotsCont = document.getElementById('lb-dots'); dotsCont.innerHTML = p.imgs.length > 1 ? p.imgs.map((_, i) => `<div class="dot ${i === lbState.index ? 'active' : ''}"></div>`).join('') : ''; }
         function changeLightbox(dir) { lbState.index = (lbState.index + dir + lbState.project.imgs.length) % lbState.project.imgs.length; updateLightbox(); }
         function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
         function toggleLang() { currentLang = currentLang === 'en' ? 'tr' : 'en'; document.querySelectorAll('.en-toggle').forEach(el => el.classList.toggle('active', currentLang === 'en')); document.querySelectorAll('.tr-toggle').forEach(el => el.classList.toggle('active', currentLang === 'tr')); updateUI(); projectList.forEach(p => { const row = document.getElementById(`slider-${p.id}`).closest('.project-row'); const desc = row.querySelector('.txt-light'); if (desc) desc.innerText = currentLang === 'en' ? p.meta.en : p.meta.tr; }); }
         function togglePopup() { const p = document.getElementById('mobile-popup'); p.style.display = (p.style.display === 'block') ? 'none' : 'block'; updateUI(); }
-
-        window.addEventListener('mousedown', (e) => {
-            if (!gameActive || e.button === 1 || e.target.closest('aside, header, button, .nav-zone, #lightbox')) return;
-            const col = Math.floor(e.clientX / 40); const row = Math.floor(e.clientY / 40);
-            const key = `${col},${row}`;
-            if (!board[key]) {
-                board[key] = currentPlayer;
-                const t = document.createElement('div'); t.className = 'game-token'; t.innerText = currentPlayer;
-                t.style.position = 'fixed'; t.style.left = (col * 40) + 'px'; t.style.top = (row * 40) + 'px';
-                t.style.color = currentPlayer === 'x' ? 'var(--orange)' : 'black';
-                t.dataset.coord = key; document.getElementById('game-layer').appendChild(t);
-                const winPath = checkWin(col, row, currentPlayer);
-                if (winPath) {
-                    gameActive = false;
-                    winPath.forEach(coords => { const el = document.querySelector(`[data-coord="${coords[0]},${coords[1]}"]`); if (el) el.style.animation = 'winPulse 0.4s infinite alternate'; });
-                    if (globalContent.header) document.getElementById('header-log-tag').innerText = `[alert: winner_${currentPlayer}_detected]`;
-                    document.getElementById('header-log-tag').style.color = 'var(--orange)';
-                } else currentPlayer = (currentPlayer === 'x') ? 'o' : 'x';
-            }
-        });
+        window.addEventListener('mousedown', (e) => { if (!gameActive || e.button === 1 || e.target.closest('aside, header, button, .nav-zone, #lightbox')) return; const col = Math.floor(e.clientX / 40); const row = Math.floor(e.clientY / 40); const key = `${col},${row}`; if (!board[key]) { board[key] = currentPlayer; const t = document.createElement('div'); t.className = 'game-token'; t.innerText = currentPlayer; t.style.position = 'fixed'; t.style.left = (col * 40) + 'px'; t.style.top = (row * 40) + 'px'; t.style.color = currentPlayer === 'x' ? 'var(--orange)' : 'black'; t.dataset.coord = key; document.getElementById('game-layer').appendChild(t); const winPath = checkWin(col, row, currentPlayer); if (winPath) { gameActive = false; winPath.forEach(coords => { const el = document.querySelector(`[data-coord="${coords[0]},${coords[1]}"]`); if (el) el.style.animation = 'winPulse 0.4s infinite alternate'; }); } else currentPlayer = (currentPlayer === 'x') ? 'o' : 'x'; } });
         function checkWin(c, r, p) { const dirs = [[1,0], [0,1], [1,1], [1,-1]]; for (let [dx, dy] of dirs) { let path = [[c, r]]; for (let i = 1; i < 3; i++) { if (board[`${c+(dx*i)},${r+(dy*i)}`] === p) path.push([c+(dx*i), r+(dy*i)]); else break; } for (let i = 1; i < 3; i++) { if (board[`${c-(dx*i)},${r-(dy*i)}`] === p) path.push([c-(dx*i), r-(dy*i)]); else break; } if (path.length >= 3) return path; } return null; }
         setInterval(() => { document.getElementById('clock').innerText = new Date().toTimeString().split(' ')[0]; }, 1000);
         window.addEventListener('mousemove', (e) => { document.getElementById('coords').innerText = `x: ${String(e.clientX).padStart(3, '0')} y: ${String(e.clientY).padStart(3, '0')}`; });
