@@ -4,33 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>sofra — built different.</title>
-    
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    
     <style>
-        /* 1. V5 SELF-HOSTED FONTS (NO EXTERNAL CALLS) */
+        /* 1. V5 SELF-HOSTED FONTS */
         @font-face { font-family: 'FuturaLTPro'; src: url('FuturaLTPro-Light.woff2') format('woff2'); font-weight: 300; }
         @font-face { font-family: 'FuturaLTPro'; src: url('FuturaLTPro-Book.woff2') format('woff2'); font-weight: 400; }
         @font-face { font-family: 'FuturaLTPro'; src: url('FuturaLTPro-Medium.woff2') format('woff2'); font-weight: 500; }
         @font-face { font-family: 'FuturaLTPro'; src: url('FuturaLTPro-SemiBold.woff2') format('woff2'); font-weight: 600; }
-        @font-face { font-family: 'SpaceMonoCustom'; src: url('SpaceMono-Regular.woff2') format('woff2'); font-weight: 400; }
-        @font-face { font-family: 'SpaceMonoCustom'; src: url('SpaceMono-Bold.woff2') format('woff2'); font-weight: 700; }
+        @font-face { font-family: 'SpaceMonoV5'; src: url('SpaceMono-Regular.woff2') format('woff2'); font-weight: 400; }
+        @font-face { font-family: 'SpaceMonoV5'; src: url('SpaceMono-Bold.woff2') format('woff2'); font-weight: 700; }
 
         :root {
             --bg: #ffffff; --text: #000000; --orange: #ff5500; 
             --grid-size: 40px; --grid-line: rgba(0, 0, 0, 0.12); --grid-line-white: rgba(255, 255, 255, 0.1);
-            --sidebar-w: 480px; /* UPDATED WIDTH */
-            --header-h-mobile: 120px; --stroke: 2px;
+            --sidebar-w: 480px; --header-h-mobile: 120px; --stroke: 2px;
         }
 
-        /* RESET & V5 NO LIGATURES */
+        /* GLOBAL RESET & NO LIGATURES */
         * { 
             margin: 0; padding: 0; box-sizing: border-box; text-transform: lowercase !important; -webkit-font-smoothing: antialiased; 
             font-variant-ligatures: none !important; font-feature-settings: "liga" 0 !important;
         }
-
-        html { background-color: var(--bg); }
-        body { width: 100%; min-height: 100%; margin: 0; padding: 0; font-family: 'FuturaLTPro', Arial, sans-serif; color: var(--text); cursor: crosshair; overflow-x: hidden; }
+        body { font-family: 'FuturaLTPro', sans-serif; color: var(--text); background-color: var(--bg); cursor: crosshair; overflow-x: hidden; }
 
         /* FIXED INFINITE GRID */
         body::before {
@@ -39,7 +34,7 @@
             background-size: var(--grid-size) var(--grid-size);
         }
 
-        /* SIDEBAR */
+        /* SIDEBAR & BRAND AREA */
         aside {
             width: var(--sidebar-w); height: 100vh; position: fixed; left: 0; top: 0;
             border-right: var(--stroke) solid var(--text); background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(10px); 
@@ -56,15 +51,15 @@
         .sidebar-content, #mobile-popup { padding: var(--grid-size); flex-grow: 1; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }
         .sidebar-content::-webkit-scrollbar, #mobile-popup::-webkit-scrollbar { display: none; }
         .sidebar-section { margin-bottom: 40px; }
-        .sidebar-section h3 { margin-bottom: 10px; font-family: "SpaceMonoCustom", monospace; font-size: 0.7rem; font-weight: 700 !important; color: var(--orange); letter-spacing: 2px; }
+        .sidebar-section h3 { margin-bottom: 10px; font-family: "SpaceMonoV5", monospace; font-size: 0.7rem; font-weight: 700 !important; color: var(--orange); letter-spacing: 2px; }
         
         .txt-medium { font-weight: 400; font-size: 1rem; text-align: left; }
         .txt-light { font-weight: 300; font-size: 1rem; line-height: 1.5; text-align: left; }
         .profession { font-size: 0.8rem; display: block; margin-bottom: 6px; opacity: 0.6; font-weight: 300; text-align: left; }
-        .contact-link { display: block; margin-top: 5px; text-decoration: underline !important; color: black !important; font-weight: 400; font-size: 1rem; }
+        .contact-link { display: block; margin-top: 5px; text-decoration: underline !important; color: black !important; font-weight: 400; }
 
         /* V5 LANG SWITCH */
-        .lang-switch { font-family: 'SpaceMonoCustom', monospace; font-size: 0.7rem; display: inline-flex; align-items: baseline; cursor: pointer; user-select: none; padding: 10px 0; }
+        .lang-switch { font-family: 'SpaceMonoV5', monospace; font-size: 0.7rem; display: inline-flex; align-items: baseline; cursor: pointer; user-select: none; padding: 10px 0; }
         .lang-btn { opacity: 0.2; transition: 0.3s; pointer-events: none; }
         .lang-btn.active { opacity: 1; color: var(--orange); font-weight: 700; }
         .lang-switch .slash { opacity: 0.2; margin: 0 1px; }
@@ -77,34 +72,37 @@
         }
         .mobile-logo-img { height: 35px; width: auto; margin-left: 25px; }
         .header-controls { display: flex; align-items: center; gap: 20px; height: 100%; }
-        
         #info-btn { 
             background: var(--orange); color: white; border: none; height: 100%; width: 100px; 
-            font-family: 'SpaceMonoCustom', monospace; font-weight: 700; font-size: 0.8rem; 
-            border-left: var(--stroke) solid var(--text); cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
+            font-family: 'SpaceMonoV5', monospace; font-weight: 700; font-size: 0.8rem; 
+            border-left: var(--stroke) solid var(--text); cursor: pointer; display: flex; align-items: center; justify-content: center;
         }
-        #mobile-popup { display: none; position: fixed; top: var(--header-h-mobile); left: 0; width: 100%; height: calc(100vh - var(--header-h-mobile)); background: white; z-index: 2000; padding: 40px 25px; padding-bottom: calc(140px + env(safe-area-inset-bottom)); }
+        #mobile-popup { display: none; position: fixed; top: var(--header-h-mobile); left: 0; width: 100%; height: calc(100vh - var(--header-h-mobile)); background: white; z-index: 2000; padding: 40px 25px; padding-bottom: 120px; }
 
-        /* MAIN CONTENT AREA */
+        /* MAIN */
         main { margin-left: var(--sidebar-w); width: calc(100% - var(--sidebar-w)); position: relative; z-index: 5; background: transparent; }
-        .meta-strip { height: 80px; padding: 0 var(--grid-size); border-bottom: var(--stroke) solid var(--text); background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(5px); display: flex; justify-content: space-between; align-items: center; font-family: 'SpaceMonoCustom', monospace; font-size: 0.7rem; position: sticky; top: 0; z-index: 50; }
+        .meta-strip { height: 80px; padding: 0 var(--grid-size); border-bottom: var(--stroke) solid var(--text); background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(5px); display: flex; justify-content: space-between; align-items: center; font-family: 'SpaceMonoV5', monospace; font-size: 0.7rem; position: sticky; top: 0; z-index: 50; }
 
-        /* HERO BOXES (640PX) */
+        /* VIDEOS SECTION */
+        .updates-container { display: flex; height: 400px; border-bottom: var(--stroke) solid var(--text); background: black; width: 100%; }
+        .video-box { position: relative; width: 50%; height: 100%; overflow: hidden; border-right: var(--stroke) solid var(--text); }
+        .video-box:last-child { border-right: none; }
+        .video-box video { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: 0.6s; opacity: 0.8; }
+        .video-box:hover video { filter: grayscale(0); opacity: 1; }
+        .tag { position: absolute; bottom: 20px; left: 20px; background: var(--orange); color: white; padding: 4px 12px; font-family: 'SpaceMonoV5'; font-size: 0.6rem; z-index: 10; }
+
+        /* HERO SECTION (640PX) */
         .hero-modular {
             display: flex; width: 100%; height: 640px; border-bottom: var(--stroke) solid var(--text);
             padding: var(--grid-size); gap: var(--grid-size); align-items: flex-end;
         }
-        .hero-box {
-            flex: 1; height: 50%; display: flex; align-items: flex-end; padding-bottom: 20px;
-        }
+        .hero-box { flex: 1; height: 50%; display: flex; align-items: flex-end; padding-bottom: 20px; }
         .hero-box span {
-            font-family: "SpaceMonoCustom", monospace; font-size: 1.2rem; color: var(--orange);
-            font-weight: 400; line-height: 1.1; 
-            text-transform: uppercase !important; /* V5 UPPERCASE */
+            font-family: "SpaceMonoV5", monospace; font-size: 1.2rem; color: var(--orange);
+            font-weight: 400; line-height: 1.1; text-transform: uppercase !important;
         }
 
-        /* PROJECT ROWS */
+        /* PROJECTS */
         .project-row { display: flex; width: 100%; height: 550px; border-bottom: var(--stroke) solid var(--text); background: transparent; align-items: stretch; margin-top: 80px; }
         #project-feed .project-row:first-child { margin-top: 0; border-top: none; }
         #project-feed .project-row:not(:first-child) { border-top: var(--stroke) solid var(--text); }
@@ -120,7 +118,7 @@
         .slider-container:hover .nav-zone { opacity: 1; }
         .nav-triangle { color: var(--orange); font-size: 1.5rem; transition: 0.2s; }
         
-        footer { padding: var(--grid-size); background: white; display: flex; justify-content: space-between; font-family: 'SpaceMonoCustom'; font-size: 0.7rem; z-index: 100; position: relative; border-top: var(--stroke) solid var(--text); margin-top: 80px; }
+        footer { padding: var(--grid-size); background: white; display: flex; justify-content: space-between; font-family: 'SpaceMonoV5'; font-size: 0.7rem; z-index: 100; position: relative; border-top: var(--stroke) solid var(--text); margin-top: 80px; }
 
         /* LIGHTBOX */
         #lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 5000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
@@ -133,14 +131,16 @@
         .dot { width: 6px; height: 6px; background: white; border-radius: 50%; opacity: 0.3; transition: 0.3s; }
         .dot.active { opacity: 1; background: var(--orange); transform: scale(1.6); }
 
-        /* XOX GAME Sync */
         #game-layer { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
-        .game-token { position: fixed; width: var(--grid-size); height: var(--grid-size); display: flex; align-items: center; justify-content: center; font-family: 'SpaceMonoCustom'; font-weight: 700; font-size: 1.2rem; animation: tokenIn 0.3s forwards; }
+        .game-token { position: fixed; width: var(--grid-size); height: var(--grid-size); display: flex; align-items: center; justify-content: center; font-family: 'SpaceMonoV5'; font-weight: 700; font-size: 1.2rem; animation: tokenIn 0.3s forwards; }
         @keyframes winPulse { from { transform: scale(1); } to { transform: scale(1.3); color: var(--orange); } }
 
         @media (max-width: 1100px) {
             aside { display: none; } header { display: flex; }
             main { margin-left: 0; width: 100%; margin-top: var(--header-h-mobile); }
+            .updates-container { flex-direction: column; height: auto; }
+            .updates-container .video-box { width: 100%; height: 300px; border-right: none; border-bottom: var(--stroke) solid var(--text); }
+            .updates-container .video-box:last-child { border-bottom: none; }
             .hero-modular { flex-direction: column; height: auto; align-items: flex-start; }
             .hero-box { height: auto; padding: 20px 0; }
             .project-row { flex-direction: column !important; height: auto; border-bottom: var(--stroke) solid var(--text) !important; margin-top: 80px !important; border-top: var(--stroke) solid var(--text) !important; }
@@ -148,8 +148,7 @@
             .project-text { order: 1; padding: 40px 25px; border-bottom: var(--stroke) solid var(--text) !important; min-height: 350px; }
             .slider-container { order: 2; height: 450px; }
             .nav-zone, .meta-strip { display: none; }
-            footer { justify-content: center; margin-top: 80px !important; border-top: var(--stroke) solid var(--text) !important; }
-            #footer-status, #coords { display: none; }
+            footer { justify-content: center; margin-top: 80px !important; }
         }
     </style>
 </head>
@@ -157,9 +156,13 @@
     <div id="game-layer"></div>
     <header><img src="logo.svg" alt="sofra" class="mobile-logo-img"><div class="header-controls"><div class="lang-switch" onclick="toggleLang()"><span class="lang-btn active en-toggle">en</span><span class="slash">/</span><span class="lang-btn tr-toggle">tr</span></div><button id="info-btn" onclick="togglePopup()">[info]</button></div></header>
     <div id="mobile-popup"><div class="sidebar-info-container"></div></div>
-    <aside><div class="desktop-logo-frame" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><img src="logo.svg" alt="sofra" class="logo-img logo-tracking"></div><div class="sidebar-content"><div class="sidebar-info-container"></div></div></aside>
+    <aside><div class="desktop-logo-frame" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><img src="logo.svg" alt="sofra" class="logo-img"></div><div class="sidebar-content"><div class="sidebar-info-container"></div></div></aside>
     <main>
         <div class="meta-strip"><div id="header-log-tag"></div><div class="lang-switch" onclick="toggleLang()"><span class="lang-btn active en-toggle">en</span><span class="slash">/</span><span class="lang-btn tr-toggle">tr</span></div><span id="clock">00:00:00</span></div>
+        <section class="updates-container">
+            <div class="video-box"><video autoplay muted loop playsinline><source src="videos/video1.mp4" type="video/mp4"></video><div class="tag"><span>log_01: site_friction</span></div></div>
+            <div class="video-box"><video autoplay muted loop playsinline><source src="videos/video2.mp4" type="video/mp4"></video><div class="tag"><span>log_02: structural_void</span></div></div>
+        </section>
         <section class="hero-modular" id="hero-boxes"></section>
         <div id="project-feed"></div>
         <footer><span id="footer-status"></span><span id="footer-copy"></span><span id="coords">x: 000 y: 000</span></footer>
@@ -170,12 +173,9 @@
     </div>
 
     <script>
-        if (history.scrollRestoration) { history.scrollRestoration = 'manual'; }
-        window.scrollTo(0, 0);
-
+        if (history.scrollRestoration) { history.scrollRestoration = 'manual'; } window.scrollTo(0, 0);
         let globalContent = { info: null, header: null, footer: null };
-        let currentLang = 'en';
-        let currentPlayer = 'x'; let board = {}; let gameActive = true;
+        let currentLang = 'en'; let currentPlayer = 'x'; let board = {}; let gameActive = true;
         let projectList = []; let lbState = { project: null, index: 0 };
 
         async function loadSiteData() {
@@ -193,18 +193,14 @@
         function updateUI() {
             const lang = currentLang; const info = globalContent.info; if (!info) return;
             if(info.hero_boxes) document.getElementById('hero-boxes').innerHTML = info.hero_boxes.map(box => `<div class="hero-box"><span>${box[lang]}</span></div>`).join('');
-
-            // V5 Modular Block Renderer
-            let modularHTML = info.sections.map(section => {
+            let sidebarHTML = info.sections.map(section => {
                 let content = '';
                 if (section.type === 'text') content = section.content.map(p => `<p class="txt-light">${p[lang]}</p>`).join('');
-                else if (section.type === 'team') content = section.members.map(m => `<div style="margin-bottom:25px"><span class="txt-medium">${m.name}</span><span class="profession light">${m.profession[lang]}</span><p class="txt-light">${m.bio[lang]}</p></div>`).join('');
+                else if (section.type === 'team') content = section.members.map(m => `<div style="margin-bottom:25px"><span class="txt-medium">${m.name}</span><span class="profession">${m.profession[lang]}</span><p class="bio txt-light">${m.bio[lang]}</p></div>`).join('');
                 else if (section.type === 'contact') content = `<div style="margin-bottom:25px"><span class="txt-medium">${section.office_name[lang]}</span><p class="txt-light">${section.address}</p></div>${section.socials.map(s => `<a href="${s.url}" target="_blank" class="contact-link txt-medium">${s.label}</a>`).join('')}`;
                 return `<div class="sidebar-section"><h3>${section.title[lang]}</h3>${content}</div>`;
             }).join('');
-
-            document.querySelectorAll('.sidebar-info-container').forEach(el => el.innerHTML = modularHTML);
-
+            document.querySelectorAll('.sidebar-info-container').forEach(el => el.innerHTML = sidebarHTML);
             if (globalContent.header && gameActive) {
                 document.getElementById('header-log-tag').innerText = globalContent.header.log_version[lang];
                 document.getElementById('info-btn').innerText = document.getElementById('mobile-popup').style.display === 'block' ? globalContent.header.close_label : globalContent.header.info_label;
@@ -228,12 +224,12 @@
             for (let pNum = 1; pNum <= 20; pNum++) {
                 const folder = `project${pNum}`; const firstImg = await probeImage(folder, 1);
                 if (firstImg) {
-                    let meta = { tag: `[log_0${pNum}]`, title: `project_log_${pNum}`, en: `Case study.`, tr: `Vaka çalışması.`, specs: `Loc: TR // 2025` };
+                    let meta = { tag: `[log_0${pNum}]`, title: `project_log_${pNum}`, en: `Investigation.`, tr: `İnceleme.`, specs: `Loc: TR // 2025` };
                     try { const res = await fetch(`images/${folder}/meta.json`); if (res.ok) meta = await res.json(); } catch (e) {}
                     let imgs = [firstImg]; for (let iNum = 2; iNum <= 10; iNum++) { const path = await probeImage(folder, iNum); if (path) imgs.push(path); else break; }
                     projectList.push({ id: pNum, meta, imgs, cur: 0 });
                     const row = document.createElement('section'); row.className = 'project-row';
-                    row.innerHTML = `<div class="project-text"><div class="sidebar-section"><h3 class="mono">${meta.tag}</h3></div><h2 class="txt-medium" style="font-size:4.5vw; line-height:0.9; margin-bottom:25px; font-weight:400;">${meta.title}</h2><p class="txt-light" style="margin-bottom:30px;">${currentLang === 'en' ? meta.en : meta.tr}</p><div style="font-family:'SpaceMonoCustom'; font-size:0.65rem; opacity:0.5; border-top:1px solid rgba(0,0,0,0.1); padding-top:15px;">${meta.specs}</div></div><div class="slider-container" id="slider-${pNum}"><div class="slider-track" onclick="openLightbox(${pNum})">${imgs.map(s => `<img src="${s}" class="slide-img">`).join('')}</div>${imgs.length > 1 ? `<div class="slider-nav"><div class="nav-zone" style="left:0" onclick="moveSlide(${pNum}, -1, event)"><div class="nav-triangle">◀</div></div><div class="nav-zone" style="right:0" onclick="moveSlide(${pNum}, 1, event)"><div class="nav-triangle">▶</div></div></div>` : ''}</div>`;
+                    row.innerHTML = `<div class="project-text"><div class="sidebar-section"><h3 class="mono">${meta.tag}</h3></div><h2 class="txt-medium" style="font-size:4.5vw; line-height:0.9; margin-bottom:25px; font-weight:400;">${meta.title}</h2><p class="txt-light" style="margin-bottom:30px;">${currentLang === 'en' ? meta.en : meta.tr}</p><div style="font-family:'SpaceMonoV5'; font-size:0.65rem; opacity:0.5; border-top:1px solid rgba(0,0,0,0.1); padding-top:15px;">${meta.specs}</div></div><div class="slider-container" id="slider-${pNum}"><div class="slider-track" onclick="openLightbox(${pNum})">${imgs.map(s => `<img src="${s}" class="slide-img">`).join('')}</div>${imgs.length > 1 ? `<div class="slider-nav"><div class="nav-zone" style="left:0" onclick="moveSlide(${pNum}, -1, event)"><div class="nav-triangle">◀</div></div><div class="nav-zone" style="right:0" onclick="moveSlide(${pNum}, 1, event)"><div class="nav-triangle">▶</div></div></div>` : ''}</div>`;
                     feed.appendChild(row);
                 }
             }
@@ -245,7 +241,7 @@
         function changeLightbox(dir) { lbState.index = (lbState.index + dir + lbState.project.imgs.length) % lbState.project.imgs.length; updateLightbox(); }
         function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
         function toggleLang() { currentLang = currentLang === 'en' ? 'tr' : 'en'; document.querySelectorAll('.en-toggle').forEach(el => el.classList.toggle('active', currentLang === 'en')); document.querySelectorAll('.tr-toggle').forEach(el => el.classList.toggle('active', currentLang === 'tr')); updateUI(); projectList.forEach(p => { const row = document.getElementById(`slider-${p.id}`).closest('.project-row'); const desc = row.querySelector('.txt-light'); if (desc) desc.innerText = currentLang === 'en' ? p.meta.en : p.meta.tr; }); }
-        function togglePopup() { const p = document.getElementById('mobile-popup'); p.style.display = (p.style.display === 'block') ? 'none' : 'block'; updateUI(); }
+        function togglePopup() { const p = document.getElementById('mobile-popup'); const isVis = p.style.display === 'block'; p.style.display = isVis ? 'none' : 'block'; updateUI(); }
 
         window.addEventListener('mousedown', (e) => {
             if (!gameActive || e.button === 1 || e.target.closest('aside, header, button, .nav-zone, #lightbox')) return;
