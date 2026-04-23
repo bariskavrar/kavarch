@@ -14,21 +14,10 @@
 
     <style>
         /* 1. V5 SELF-HOSTED FONT DEFINITIONS */
-        @font-face {
-            font-family: 'FuturaLTPro';
-            src: url('FuturaLTPro-Light.woff2') format('woff2');
-            font-weight: 300; /* V5: Bios / Desc */
-        }
-        @font-face {
-            font-family: 'FuturaLTPro';
-            src: url('FuturaLTPro-Book.woff2') format('woff2');
-            font-weight: 400; /* V5: Team Names / Links / Titles */
-        }
-        @font-face {
-            font-family: 'FuturaLTPro';
-            src: url('FuturaLTPro-SemiBold.woff2') format('woff2');
-            font-weight: 600; /* V5: Logo / Hero Text */
-        }
+        @font-face { font-family: 'FuturaLTPro'; src: url('FuturaLTPro-Light.woff2') format('woff2'); font-weight: 300; }
+        @font-face { font-family: 'FuturaLTPro'; src: url('FuturaLTPro-Book.woff2') format('woff2'); font-weight: 400; }
+        @font-face { font-family: 'FuturaLTPro'; src: url('FuturaLTPro-Medium.woff2') format('woff2'); font-weight: 500; }
+        @font-face { font-family: 'FuturaLTPro'; src: url('FuturaLTPro-SemiBold.woff2') format('woff2'); font-weight: 600; }
 
         :root {
             --bg: #ffffff;
@@ -52,26 +41,25 @@
         html { background-color: var(--bg); }
         body { width: 100%; min-height: 100%; margin: 0; padding: 0; }
 
-        /* FIXED INFINITE GRID */
+        /* FIXED INFINITE GRID - STAYS STATIC ON SCROLL */
         body::before {
-            content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-            background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(var(--grid-line) 1px, transparent 1px), 
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
             background-size: var(--grid-size) var(--grid-size);
+            z-index: -1;
+            pointer-events: none;
         }
 
         body { font-family: 'FuturaLTPro', Arial, sans-serif; color: var(--text); cursor: crosshair; display: block; overflow-x: hidden; }
 
-        /* V5 LOGO: TEXT-BASED FOR FONT CONTROL */
-        .logo-text { 
-            font-family: 'FuturaLTPro', sans-serif;
-            font-weight: 600; /* SemiBold */
-            letter-spacing: -0.025em; 
-            line-height: 1; 
-            color: black !important; 
-            text-decoration: none !important; 
-            display: inline-block; 
-        }
-        
+        /* LOGO SCALING */
+        .logo-img { height: 50px; width: auto; transition: 0.2s ease; }
+        .mobile-logo-img { height: 35px; width: auto; }
+
         .lang-switch { font-family: 'Space Mono', monospace; font-size: 0.7rem; display: inline-flex; align-items: baseline; cursor: pointer; user-select: none; padding: 10px 0; }
         .lang-btn { opacity: 0.2; transition: 0.3s; pointer-events: none; }
         .lang-btn.active { opacity: 1; color: var(--orange); font-weight: 700; }
@@ -89,13 +77,12 @@
         .desktop-logo-frame {
             width: 100%; height: 200px !important; min-height: 200px;
             border-bottom: var(--stroke) solid var(--text);
-            display: flex; align-items: center; justify-content: center; font-size: 4.2rem;
+            display: flex; align-items: center; justify-content: center;
             transition: 0.2s; cursor: pointer; background: white;
         }
         .desktop-logo-frame:hover { background: var(--orange); }
-        .desktop-logo-frame:hover .logo-text { color: white !important; }
+        .desktop-logo-frame:hover .logo-img { filter: invert(1) brightness(10); }
 
-        /* HIDE SCROLLBARS */
         .sidebar-content, #mobile-popup { 
             padding: var(--grid-size); flex-grow: 1; overflow-y: auto; 
             scrollbar-width: none; -ms-overflow-style: none;
@@ -103,12 +90,14 @@
         .sidebar-content::-webkit-scrollbar, #mobile-popup::-webkit-scrollbar { display: none; }
 
         .sidebar-section { margin-bottom: 40px; }
-        .sidebar-section h3 { margin-bottom: 12px; font-weight: 400; } /* Links / Titles weight 400 */
+        .sidebar-section h3 { margin-bottom: 10px; font-weight: 400; font-family: "Space Mono", monospace; font-size: 0.7rem; color: var(--orange); letter-spacing: 2px; }
+        .sidebar-section p { text-align: left; line-height: 1.5; font-size: 1rem; font-weight: 300; }
 
-        .name-style { font-size: 1rem; display: block; font-weight: 400; margin-bottom: 4px; } /* Team Names weight 400 */
+        /* V5 WEIGHT MAPPING */
+        .name-style { font-size: 1rem; display: block; font-weight: 400; margin-bottom: 4px; }
         .profession { font-size: 0.8rem; display: block; margin-bottom: 6px; opacity: 0.6; font-weight: 300; }
-        .bio { font-size: 1rem; opacity: 0.8; line-height: 1.4; font-weight: 300; text-align: left; } /* Bios weight 300 */
-        .txt-light { font-weight: 300; font-size: 1rem; line-height: 1.5; text-align: left; }
+        .bio { font-size: 1rem; opacity: 0.8; line-height: 1.4; font-weight: 300; text-align: left; }
+        .office-title { font-size: 1rem; display: block; font-weight: 400; margin-bottom: 4px; }
         .contact-link { display: block; margin-top: 5px; text-decoration: underline !important; color: black !important; font-weight: 400; font-size: 1rem; }
 
         /* MOBILE HEADER */
@@ -117,7 +106,6 @@
             background: white; border-bottom: var(--stroke) solid var(--text); z-index: 3000;
             padding: 0 0 0 25px; justify-content: space-between; align-items: center;
         }
-        .mobile-logo { font-size: 3rem !important; }
         .header-controls { display: flex; align-items: center; gap: 20px; height: 100%; }
 
         #info-btn { 
@@ -141,7 +129,7 @@
             font-family: 'Space Mono', monospace; font-size: 0.7rem; position: sticky; top: 0; z-index: 50;
         }
 
-        /* UPDATES (Videos) */
+        /* UPDATES & HERO */
         .updates-container { display: flex; height: 400px; border-bottom: var(--stroke) solid var(--text); background: black; }
         .video-box { position: relative; width: 50%; height: 100%; overflow: hidden; border-right: var(--stroke) solid var(--text); }
         .video-box:last-child { border-right: none; }
@@ -149,7 +137,6 @@
         .video-box:hover video { filter: grayscale(0); opacity: 1; transform: scale(1.05); }
         .tag { position: absolute; bottom: 20px; left: 20px; background: var(--orange); color: white; padding: 4px 12px; font-family: 'Space Mono'; font-size: 0.6rem; z-index: 10; }
 
-        /* HERO - V5 SEMIBOLD */
         .hero { padding: 120px var(--grid-size); border-bottom: var(--stroke) solid var(--text); background: transparent; }
         .hero h1 { font-size: 11vw; font-weight: 600; line-height: 0.85; letter-spacing: -0.05em; pointer-events: none; }
 
@@ -174,7 +161,7 @@
         .project-row:nth-of-type(odd) .project-text { border-right: var(--stroke) solid var(--text); }
         .project-row:nth-of-type(even) .project-text { border-left: var(--stroke) solid var(--text); }
 
-        .project-text h2 { font-size: 4.5vw; font-weight: 400; line-height: 0.9; margin-bottom: 25px; } /* Titles 400 */
+        .project-text h2 { font-size: 4.5vw; font-weight: 400; line-height: 0.9; margin-bottom: 25px; }
         .project-desc { font-size: 1rem; line-height: 1.5; max-width: 450px; font-weight: 300; margin-bottom: 30px; text-align: left;}
 
         .slider-container { position: relative; background: #eee; overflow: hidden; touch-action: pan-y; }
@@ -189,6 +176,7 @@
         .nav-triangle { color: var(--orange); font-size: 1.5rem; transition: 0.2s; }
         .nav-zone:hover .nav-triangle { transform: scale(1.3); }
 
+        /* FOOTER */
         footer { 
             padding: var(--grid-size); background: white; display: flex; justify-content: space-between; 
             font-family: 'Space Mono'; font-size: 0.7rem; z-index: 100; position: relative; 
@@ -209,7 +197,7 @@
         }
         .lb-modal { position: relative; width: fit-content; max-width: 70vw; height: fit-content; max-height: 85vh; display: flex; align-items: center; justify-content: center; }
         .lb-modal img { max-width: 100%; max-height: 85vh; object-fit: contain; border: var(--stroke) solid black; background: white; }
-        .lb-close { position: fixed; top: 30px; right: 30px; font-size: 1.2rem; color: var(--orange); cursor: pointer; font-family: sans-serif; font-weight: 400; line-height: 1; transition: 0.2s; border: none; background: none; z-index: 5010; }
+        .lb-close { position: fixed; top: 30px; right: 30px; font-size: 1.2rem; color: var(--orange); cursor: pointer; font-family: sans-serif; border: none; background: none; z-index: 5010; }
         .lb-close:hover { transform: scale(1.3); }
         .lb-controls { position: fixed; inset: 0; opacity: 0; transition: 0.3s; pointer-events: none; }
         #lightbox:hover .lb-controls { opacity: 1; }
@@ -217,7 +205,6 @@
         .lb-prev-zone { left: 0; justify-content: flex-start; padding-left: 30px; }
         .lb-next-zone { right: 0; justify-content: flex-end; padding-right: 30px; } 
         .lb-triangle { color: var(--orange); font-size: 1rem; transition: 0.2s; }
-        .lb-nav-zone:hover .lb-triangle { transform: scale(1.3); }
         .lb-dots { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; pointer-events: none; }
         .dot { width: 6px; height: 6px; background: white; border-radius: 50%; opacity: 0.3; transition: 0.3s; }
         .dot.active { opacity: 1; background: var(--orange); transform: scale(1.6); }
@@ -234,14 +221,12 @@
             .updates-container { flex-direction: column; height: auto; border-bottom: var(--stroke) solid var(--text); }
             .video-box { width: 100%; height: 300px; border-right: none; border-bottom: var(--stroke) solid var(--text); }
             .video-box:last-child { border-bottom: none; }
-            /* V5 Mobile project gaps */
-            .project-row { flex-direction: column !important; height: auto; border-bottom: var(--stroke) solid var(--text) !important; margin-top: 80px !important; margin-bottom: 0; border-top: var(--stroke) solid var(--text) !important; }
+            .project-row { flex-direction: column !important; height: auto; border-bottom: var(--stroke) solid var(--text) !important; margin-top: 80px !important; border-top: var(--stroke) solid var(--text) !important; }
             #project-feed .project-row:first-child { margin-top: 0 !important; border-top: none !important; }
             .project-text, .slider-container { width: 100%; height: auto; border: none !important; }
             .project-text { order: 1; padding: 40px 25px; border-bottom: var(--stroke) solid var(--text) !important; border-top: none !important; min-height: 350px; }
             .slider-container { order: 2; height: 450px; }
-            .nav-zone { display: none; } 
-            .meta-strip { display: none; } .hero h1 { font-size: 16vw; font-weight: 600; } .hero { border-bottom: var(--stroke) solid var(--text); }
+            .nav-zone, .meta-strip { display: none; } .hero h1 { font-size: 16vw; font-weight: 600; } .hero { border-bottom: var(--stroke) solid var(--text); }
             footer { justify-content: center; margin-top: 80px !important; border-top: var(--stroke) solid var(--text) !important; }
             #footer-status, #coords { display: none; }
         }
@@ -252,7 +237,7 @@
     <div id="game-layer"></div>
 
     <header>
-        <div class="mobile-logo logo-text">sofra</div>
+        <img src="logo.svg" alt="sofra" class="mobile-logo-img">
         <div class="header-controls">
             <div class="lang-switch" onclick="toggleLang()">
                 <span class="lang-btn active en-toggle">en</span><span class="slash">/</span><span class="lang-btn tr-toggle">tr</span>
@@ -265,7 +250,7 @@
 
     <aside>
         <div class="desktop-logo-frame" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-            <div class="logo-text">sofra</div>
+            <img src="logo.svg" alt="sofra" class="logo-img">
         </div>
         <div class="sidebar-content"><div class="sidebar-info-container"></div></div>
     </aside>
@@ -321,7 +306,6 @@
     </div>
 
     <script>
-        // Force scroll to top on refresh (V5 Standard)
         if (history.scrollRestoration) { history.scrollRestoration = 'manual'; }
         window.scrollTo(0, 0);
 
@@ -348,7 +332,7 @@
             const info = globalContent.info;
             if (!info || !info.sections) return;
 
-            // Modular JSON Renderer (V5)
+            // Modular JSON Block Renderer
             let html = info.sections.map(section => {
                 let content = '';
                 if (section.type === 'text') {
@@ -362,7 +346,7 @@
                         </div>`).join('')}
                 } else if (section.type === 'contact') {
                     content = `
-                        <div style="margin-bottom:25px"><span class="name-style">${section.office_name[lang]}</span><p class="txt-light">${section.address}</p></div>
+                        <div style="margin-bottom:25px"><span class="office-title">${section.office_name[lang]}</span><p class="txt-light">${section.address}</p></div>
                         ${section.socials.map(soc => `<a href="${soc.url}" target="_blank" class="contact-link">${soc.label}</a>`).join('')}
                     `;
                 }
@@ -411,7 +395,7 @@
                     const row = document.createElement('section');
                     row.className = 'project-row';
                     row.innerHTML = `
-                        <div class="project-text"><div class="mono" style="margin-bottom:10px;">${meta.tag}</div><h2>${meta.title}</h2><p class="txt-light" style="margin-bottom:30px;">${currentLang === 'en' ? meta.en : meta.tr}</p><div style="font-family:'Space Mono'; font-size:0.65rem; opacity:0.5; border-top:1px solid rgba(0,0,0,0.1); padding-top:15px;">${meta.specs}</div></div>
+                        <div class="project-text"><div class="project-meta mono" style="margin-bottom:10px;">${meta.tag}</div><h2>${meta.title}</h2><p class="txt-light" style="margin-bottom:30px;">${currentLang === 'en' ? meta.en : meta.tr}</p><div style="font-family:'Space Mono'; font-size:0.65rem; opacity:0.5; border-top:1px solid rgba(0,0,0,0.1); padding-top:15px;">${meta.specs}</div></div>
                         <div class="slider-container" id="slider-${pNum}"><div class="slider-track" onclick="openLightbox(${pNum})">${imgs.map(s => `<img src="${s}" class="slide-img">`).join('')}</div>${imgs.length > 1 ? `<div class="slider-nav"><div class="nav-zone" style="left:0" onclick="moveSlide(${pNum}, -1, event)"><div class="nav-triangle">◀</div></div><div class="nav-zone" style="right:0" onclick="moveSlide(${pNum}, 1, event)"><div class="nav-triangle">▶</div></div></div>` : ''}</div>`;
                     feed.appendChild(row);
                 }
