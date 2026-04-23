@@ -1,22 +1,18 @@
 {
   "sections": [
     {
-      "id": "01_about",
+      "id": "about_block",
       "type": "text",
       "title": { "en": "01_about", "tr": "01_hakkımızda" },
       "paragraphs": [
         {
-          "en": "sofra is a modular architectural laboratory navigating the friction between structural logic and digital craftsmanship.",
-          "tr": "sofra, yapısal mantık ile dijital ustalık arasındaki sürtünmeyi araştıran modüler bir mimari laboratuvardır."
-        },
-        {
-          "en": "we believe in building different, not just building more.",
-          "tr": "sadece daha fazlasını değil, farklı olanı inşa etmeye inanıyoruz."
+          "en": "sofra is an istanbul-based architectural practice focused on the friction between structural logic and digital craftsmanship. we believe in building different, not just building more.",
+          "tr": "sofra, yapısal mantık ile dijital ustalık arasındaki sürtünmeye odaklanan istanbul merkezli bir mimarlık pratiğidir. sadece daha fazlasını değil, farklı olanı inşa etmeye inanıyoruz."
         }
       ]
     },
     {
-      "id": "02_team",
+      "id": "team_block",
       "type": "team",
       "title": { "en": "02_team", "tr": "02_ekip" },
       "members": [
@@ -47,7 +43,7 @@
       ]
     },
     {
-      "id": "03_contact",
+      "id": "contact_block",
       "type": "links",
       "title": { "en": "03_contact", "tr": "03_iletişim" },
       "address_title": { "en": "istanbul laboratory", "tr": "istanbul laboratuvarı" },
