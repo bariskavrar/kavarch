@@ -1,20 +1,36 @@
 {
+  "hero_boxes": [
+    {
+      "en": "structural logic",
+      "tr": "yapısal mantık"
+    },
+    {
+      "en": "digital craft",
+      "tr": "dijital zanaat"
+    },
+    {
+      "en": "urban friction",
+      "tr": "kentsel sürtünme"
+    },
+    {
+      "en": "modular flow",
+      "tr": "modüler akış"
+    }
+  ],
   "sections": [
     {
+      "id": "block_01",
       "type": "text",
       "title": { "en": "01_about", "tr": "01_hakkımızda" },
       "content": [
         {
-          "en": "kavarch is an istanbul-based architectural practice focused on the friction between structural logic and digital craftsmanship.",
-          "tr": "kavarch, yapısal mantık ile dijital ustalık arasındaki sürtünmeye odaklanan istanbul merkezli bir mimarlık pratiğidir."
-        },
-        {
-          "en": "we believe in building different, not just building more.",
-          "tr": "sadece daha fazlasını değil, farklı olanı inşa etmeye inanıyoruz."
+          "en": "sofra is an istanbul-based architectural practice focused on the friction between structural logic and digital craftsmanship. we believe in building different, not just building more.",
+          "tr": "sofra, yapısal mantık ile dijital ustalık arasındaki sürtünmeye odaklanan istanbul merkezli bir mimarlık pratiğidir. sadece daha fazlasını değil, farklı olanı inşa etmeye inanıyoruz."
         }
       ]
     },
     {
+      "id": "block_02",
       "type": "team",
       "title": { "en": "02_team", "tr": "02_ekip" },
       "members": [
@@ -22,23 +38,30 @@
           "name": "barış kavraroğlu",
           "profession": { "en": "founding partner // architect", "tr": "kurucu partner // mimar" },
           "bio": {
-            "en": "Barış Kavraroğlu is an architect and researcher whose work is shaped by academic inquiry and international experience.",
-            "tr": "Barış Kavraroğlu, akademik araştırmalar ve uluslararası deneyimlerin birleşiminden şekillenen bir mimar ve araştırmacıdır."
+            "en": "Barış Kavraroğlu is an architect and researcher whose work is shaped by a blend of academic inquiry and international experience. Following his studies at Mimar Sinan Fine Arts University, he completed his Master’s in Architecture and Urban Design at Politecnico di Milano.",
+            "tr": "Barış Kavraroğlu, akademik araştırmalar ve uluslararası deneyimlerin birleşiminden şekillenen bir mimar ve araştırmacıdır. Mimar Sinan Güzel Sanatlar Üniversitesi'ndeki eğitiminin ardından Milano Politeknik Üniversitesi'nde yüksek lisansını tamamladı."
           }
         },
         {
           "name": "burak kavraroğlu",
           "profession": { "en": "founding partner // architect", "tr": "kurucu partner // mimar" },
-          "bio": { "en": "computational designer.", "tr": "hesaplamalı tasarımcı." }
+          "bio": {
+            "en": "computational designer exploring the digital translation of physical rituals in space.",
+            "tr": "mekandaki fiziksel ritüellerin dijital çevirisini araştıran hesaplamalı tasarımcı."
+          }
         },
         {
           "name": "feyza aksamaz",
           "profession": { "en": "founding partner // architect", "tr": "kurucu partner // mimar" },
-          "bio": { "en": "computational designer.", "tr": "hesaplamalı tasarımcı." }
+          "bio": {
+            "en": "computational designer exploring the digital translation of physical rituals in space.",
+            "tr": "mekandaki fiziksel ritüellerin dijital çevirisini araştıran hesaplamalı tasarımcı."
+          }
         }
       ]
     },
     {
+      "id": "block_03",
       "type": "contact",
       "title": { "en": "03_contact", "tr": "03_iletişim" },
       "office_name": { "en": "istanbul laboratory", "tr": "istanbul laboratuvarı" },
