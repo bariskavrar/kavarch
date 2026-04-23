@@ -43,8 +43,8 @@
       "office_name": { "en": "istanbul laboratory", "tr": "istanbul laboratuvarı" },
       "address": "abbasağa mah. salnameci sk. kaya apt. no:11/4 beşiktaş/istanbul",
       "socials": [
-        { "label": "info@sofrastudio.com", "url": "mailto:info@sofrastudio.com" },
-        { "label": "@sofra.arch", "url": "https://instagram.com/sofra.arch" }
+        { "label": "info@sofra.studio", "url": "mailto:info@sofra.studio" },
+        { "label": "@this.is.sofra", "url": "https://instagram.com/this.is.sofra" }
       ]
     }
   ]
