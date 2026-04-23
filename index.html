@@ -5,15 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>sofra — built different.</title>
     
-    <!-- FAVICON -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://use.typekit.net/jit6sab.css">
     
-    <!-- SPACE MONO FOR TECHNICAL DATA -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-
     <style>
-        /* 1. V5 SELF-HOSTED FONT DEFINITIONS */
+        /* 1. V5 SELF-HOSTED FONTS */
         @font-face { font-family: 'FuturaLTPro'; src: url('FuturaLTPro-Light.woff2') format('woff2'); font-weight: 300; }
         @font-face { font-family: 'FuturaLTPro'; src: url('FuturaLTPro-Book.woff2') format('woff2'); font-weight: 400; }
         @font-face { font-family: 'FuturaLTPro'; src: url('FuturaLTPro-Medium.woff2') format('woff2'); font-weight: 500; }
@@ -32,119 +28,110 @@
             --row-h-desktop: 550px;
         }
 
-        /* RESET & V5 NO LIGATURES */
         * { 
             margin: 0; padding: 0; box-sizing: border-box; text-transform: lowercase !important; -webkit-font-smoothing: antialiased; 
             font-variant-ligatures: none !important; font-feature-settings: "liga" 0 !important;
         }
+
         html { background-color: var(--bg); }
         body { width: 100%; min-height: 100%; margin: 0; padding: 0; }
 
-        /* FIXED INFINITE GRID - STAYS STATIC ON SCROLL */
+        /* FIXED INFINITE GRID */
         body::before {
             content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
             background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
             background-size: var(--grid-size) var(--grid-size);
         }
 
-        body { font-family: 'FuturaLTPro', Arial, sans-serif; color: var(--text); cursor: crosshair; display: block; overflow-x: hidden; }
+        body { font-family: "futura-pt", 'FuturaLTPro', Arial, sans-serif; color: var(--text); cursor: crosshair; display: block; overflow-x: hidden; }
 
-        /* V5 LOGO: TEXT-BASED FOR FONT CONTROL */
-        .logo-text { 
-            font-family: 'FuturaLTPro', sans-serif; font-weight: 600; 
-            letter-spacing: -0.025em; line-height: 1; color: black !important; 
-            text-decoration: none !important; display: inline-block; font-kerning: normal; text-rendering: optimizeLegibility;
-        }
-        .logo-img { height: 50px; width: auto; transition: 0.2s ease; }
+        /* LOGO BRANDING */
+        .logo-tracking { letter-spacing: -0.025em; font-kerning: normal; text-rendering: optimizeLegibility; }
 
-        .lang-switch { font-family: 'Space Mono', monospace; font-size: 0.7rem; display: inline-flex; align-items: baseline; cursor: pointer; user-select: none; padding: 10px 0; }
-        .lang-btn { opacity: 0.2; transition: 0.3s; pointer-events: none; }
-        .lang-btn.active { opacity: 1; color: var(--orange); font-weight: 700; }
-        .lang-switch .slash { opacity: 0.2; margin: 0 1px; }
-
-        .mono { font-family: 'Space Mono', monospace; font-size: 0.7rem; font-weight: 700; color: var(--orange); letter-spacing: 2px; }
-
-        /* SIDEBAR */
         aside {
             width: var(--sidebar-w); height: 100vh; position: fixed; left: 0; top: 0;
             border-right: var(--stroke) solid var(--text); background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(10px); 
             display: flex; flex-direction: column; z-index: 100;
         }
         .desktop-logo-frame {
-            width: 100%; height: 200px !important; min-height: 200px;
-            border-bottom: var(--stroke) solid var(--text); display: flex; align-items: center; justify-content: center;
-            transition: 0.2s; cursor: pointer; background: white;
+            width: 100%; height: 200px !important; min-height: 200px; border-bottom: var(--stroke) solid var(--text);
+            display: flex; align-items: center; justify-content: center; transition: 0.2s; cursor: pointer; background: white;
         }
         .desktop-logo-frame:hover { background: var(--orange); }
         .desktop-logo-frame:hover .logo-img { filter: invert(1) brightness(10); }
+        .logo-img { height: 50px; width: auto; transition: 0.2s; }
 
         .sidebar-content, #mobile-popup { padding: var(--grid-size); flex-grow: 1; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }
         .sidebar-content::-webkit-scrollbar, #mobile-popup::-webkit-scrollbar { display: none; }
 
         .sidebar-section { margin-bottom: 40px; }
-        .sidebar-section h3 { margin-bottom: 12px; font-weight: 400; font-family: "Space Mono", monospace; font-size: 0.7rem; color: var(--orange); letter-spacing: 2px; }
+        .sidebar-section h3 { 
+            margin-bottom: 12px; 
+            font-family: "Space Mono", monospace; 
+            font-size: 0.7rem; 
+            font-weight: 700 !important; /* V5 BOLD FIX */
+            color: var(--orange); 
+            letter-spacing: 2px; 
+        }
         
         .txt-light { font-weight: 300; font-size: 1rem; line-height: 1.5; text-align: left; }
-        .txt-medium { font-weight: 400; font-size: 1rem; text-align: left; } /* Names/Titles at 400 for V5 */
+        .txt-medium { font-weight: 400; font-size: 1rem; text-align: left; }
         .profession { font-size: 0.8rem; display: block; margin-bottom: 6px; opacity: 0.6; font-weight: 300; }
-        .contact-link { display: block; margin-top: 5px; text-decoration: underline !important; color: black !important; font-weight: 400; font-size: 1rem; }
+        .contact-link { display: block; margin-top: 5px; text-decoration: underline !important; color: black !important; font-weight: 400; }
 
-        /* MOBILE HEADER */
+        /* MODULAR HERO BOXES */
+        .hero-modular {
+            display: flex;
+            width: 100%;
+            height: 300px;
+            padding: var(--grid-size);
+            gap: var(--grid-size);
+            border-bottom: var(--stroke) solid var(--text);
+        }
+        .hero-box {
+            flex: 1;
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            border: var(--stroke) solid var(--text);
+            background: rgba(255,255,255,0.45);
+            backdrop-filter: blur(2px);
+            font-weight: 600; /* V5 Hero Weight */
+            font-size: 1.5rem;
+            line-height: 1.1;
+        }
+
         header {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: var(--header-h-mobile);
             background: white; border-bottom: var(--stroke) solid var(--text); z-index: 3000;
             padding: 0 0 0 25px; justify-content: space-between; align-items: center;
         }
         .mobile-logo-img { height: 35px; width: auto; }
-        #info-btn { 
-            background: var(--orange); color: white; border: none; height: 100%; width: 100px; 
-            font-family: 'Space Mono', monospace; font-weight: 700; font-size: 0.8rem; 
-            border-left: var(--stroke) solid var(--text); cursor: pointer; display: flex; align-items: center; justify-content: center;
-        }
-        #mobile-popup { 
-            display: none; position: fixed; top: var(--header-h-mobile); left: 0; width: 100%; height: calc(100vh - var(--header-h-mobile)); 
-            background: white; z-index: 2000; padding: 40px 25px; padding-bottom: calc(140px + env(safe-area-inset-bottom));
-        }
 
-        /* MAIN CONTENT */
         main { margin-left: var(--sidebar-w); width: calc(100% - var(--sidebar-w)); position: relative; z-index: 5; background: transparent; }
-        .meta-strip { height: 80px; padding: 0 var(--grid-size); border-bottom: var(--stroke) solid var(--text); background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(5px); display: flex; justify-content: space-between; align-items: center; font-family: 'Space Mono', monospace; font-size: 0.7rem; position: sticky; top: 0; z-index: 50; }
-
-        /* UPDATES (Videos) */
-        .updates-container { display: flex; height: 400px; border-bottom: var(--stroke) solid var(--text); background: black; }
-        .video-box { position: relative; width: 50%; height: 100%; overflow: hidden; border-right: var(--stroke) solid var(--text); }
-        .video-box:last-child { border-right: none; }
-        .video-box video { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: 0.6s; opacity: 0.8; }
-        .tag { position: absolute; bottom: 20px; left: 20px; background: var(--orange); color: white; padding: 4px 12px; font-family: 'Space Mono'; font-size: 0.6rem; z-index: 10; }
-
-        /* HERO */
-        .hero { padding: 120px var(--grid-size); border-bottom: var(--stroke) solid var(--text); background: transparent; }
-        .hero h1 { font-size: 11vw; font-weight: 600; line-height: 0.85; letter-spacing: -0.05em; pointer-events: none; }
-
-        /* PROJECTS */
-        .project-row { 
-            display: flex; width: 100%; height: var(--row-h-desktop); border-bottom: var(--stroke) solid var(--text); 
-            background: transparent; align-items: stretch; margin-top: 80px; 
+        .meta-strip { 
+            height: 80px; padding: 0 var(--grid-size); border-bottom: var(--stroke) solid var(--text); 
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(5px); display: flex; justify-content: space-between; align-items: center; 
+            font-family: 'Space Mono', monospace; font-size: 0.7rem; position: sticky; top: 0; z-index: 50; 
         }
+
+        .project-row { display: flex; width: 100%; height: var(--row-h-desktop); border-bottom: var(--stroke) solid var(--text); background: transparent; align-items: stretch; margin-top: 80px; }
         #project-feed .project-row:first-child { margin-top: 0; border-top: none; }
         #project-feed .project-row:not(:first-child) { border-top: var(--stroke) solid var(--text); }
         .project-row:nth-of-type(even) { flex-direction: row-reverse; }
         .project-text { width: 50%; padding: var(--grid-size); background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(2px); display: flex; flex-direction: column; justify-content: center; }
         .project-row:nth-of-type(odd) .project-text { border-right: var(--stroke) solid var(--text); }
         .project-row:nth-of-type(even) .project-text { border-left: var(--stroke) solid var(--text); }
-
         .slider-container { width: 50%; position: relative; background: #eee; overflow: hidden; touch-action: pan-y; }
         .slider-track { display: flex; height: 100%; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); will-change: transform; cursor: pointer; }
         .slide-img { min-width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: 0.6s; pointer-events: none; }
         .slider-container:hover .slide-img { filter: grayscale(0); }
-        .slider-nav { position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center; z-index: 10; pointer-events: none; }
         .nav-zone { width: 60px; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; cursor: pointer; pointer-events: auto; }
         .slider-container:hover .nav-zone { opacity: 1; }
-        .nav-triangle { color: var(--orange); font-size: 1.5rem; transition: 0.2s; }
+        .nav-triangle { color: var(--orange); font-size: 1.5rem; }
         
         footer { padding: var(--grid-size); background: white; display: flex; justify-content: space-between; font-family: 'Space Mono'; font-size: 0.7rem; z-index: 100; position: relative; border-top: var(--stroke) solid var(--text); margin-top: 80px; }
 
-        /* LIGHTBOX */
         #lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 5000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
         .lb-grid-overlay { position: absolute; inset: 0; background-image: linear-gradient(var(--grid-line-white) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line-white) 1px, transparent 1px); background-size: var(--grid-size) var(--grid-size); pointer-events: none; z-index: -1; }
         .lb-modal { position: relative; width: fit-content; max-width: 70vw; height: fit-content; max-height: 85vh; display: flex; align-items: center; justify-content: center; }
@@ -153,27 +140,27 @@
         .lb-nav-zone { position: fixed; top: 0; height: 100%; width: 50%; display: flex; align-items: center; cursor: pointer; pointer-events: auto; }
         .lb-prev-zone { left: 0; justify-content: flex-start; padding-left: 30px; }
         .lb-next-zone { right: 0; justify-content: flex-end; padding-right: 30px; } 
-        .lb-triangle { color: var(--orange); font-size: 1rem; transition: 0.2s; }
+        .lb-triangle { color: var(--orange); font-size: 1rem; }
         .lb-dots { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; pointer-events: none; }
         .dot { width: 6px; height: 6px; background: white; border-radius: 50%; opacity: 0.3; transition: 0.3s; }
         .dot.active { opacity: 1; background: var(--orange); transform: scale(1.6); }
 
         #game-layer { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
         .game-token { position: fixed; width: var(--grid-size); height: var(--grid-size); display: flex; align-items: center; justify-content: center; font-family: 'Space Mono'; font-weight: 700; font-size: 1.2rem; animation: tokenIn 0.3s forwards; }
+        @keyframes tokenIn { from { transform: scale(0); } to { transform: scale(1); } }
         @keyframes winPulse { from { transform: scale(1); } to { transform: scale(1.3); color: var(--orange); } }
 
         @media (max-width: 1100px) {
             aside { display: none; } header { display: flex; }
             main { margin-left: 0; width: 100%; margin-top: var(--header-h-mobile); }
-            .updates-container { flex-direction: column; height: auto; border-bottom: var(--stroke) solid var(--text); }
-            .video-box { width: 100%; height: 300px; border-right: none; border-bottom: var(--stroke) solid var(--text); }
-            .video-box:last-child { border-bottom: none; }
+            .hero-modular { flex-direction: column; height: auto; }
+            .hero-box { min-height: 150px; }
             .project-row { flex-direction: column !important; height: auto; border-bottom: var(--stroke) solid var(--text) !important; margin-top: 80px !important; border-top: var(--stroke) solid var(--text) !important; }
             #project-feed .project-row:first-child { margin-top: 0 !important; border-top: none !important; }
             .project-text, .slider-container { width: 100%; height: auto; border: none !important; }
             .project-text { order: 1; padding: 40px 25px; border-bottom: var(--stroke) solid var(--text) !important; min-height: 350px; }
             .slider-container { order: 2; height: 450px; }
-            .nav-zone, .meta-strip { display: none; } .hero h1 { font-size: 16vw; } .hero { border-bottom: var(--stroke) solid var(--text); }
+            .nav-zone, .meta-strip { display: none; } 
             footer { justify-content: center; margin-top: 80px !important; border-top: var(--stroke) solid var(--text) !important; }
             #footer-status, #coords { display: none; }
         }
@@ -181,13 +168,12 @@
 </head>
 <body>
     <div id="game-layer"></div>
-    <header><img src="logo.svg" alt="sofra" class="mobile-logo-img"><div class="header-controls"><div class="lang-switch" onclick="toggleLang()"><span class="lang-btn active en-toggle">en</span><span class="slash">/</span><span class="lang-btn tr-toggle">tr</span></div><button id="info-btn" onclick="togglePopup()">[info]</button></div></header>
+    <header><img src="logo.svg" alt="sofra" class="mobile-logo-img logo-tracking"><div class="header-controls"><div class="lang-switch" onclick="toggleLang()"><span class="lang-btn active en-toggle">en</span><span class="slash">/</span><span class="lang-btn tr-toggle">tr</span></div><button id="info-btn" onclick="togglePopup()">[info]</button></div></header>
     <div id="mobile-popup"><div class="sidebar-info-container"></div></div>
     <aside><div class="desktop-logo-frame" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><img src="logo.svg" alt="sofra" class="logo-img logo-tracking"></div><div class="sidebar-content"><div class="sidebar-info-container"></div></div></aside>
     <main>
         <div class="meta-strip"><div id="header-log-tag"></div><div class="lang-switch" onclick="toggleLang()"><span class="lang-btn active en-toggle">en</span><span class="slash">/</span><span class="lang-btn tr-toggle">tr</span></div><span id="clock" style="font-family: 'Space Mono'; font-size: 0.7rem;">00:00:00</span></div>
-        <section class="updates-container"><div class="video-box"><video autoplay muted loop playsinline><source src="videos/video1.mp4" type="video/mp4"></video><div class="tag"><span>log_01: site_friction</span></div></div><div class="video-box"><video autoplay muted loop playsinline><source src="videos/video2.mp4" type="video/mp4"></video><div class="tag"><span>log_02: structural_void</span></div></div></section>
-        <section class="hero"><h1>built<br><span style="color: var(--orange);">different.</span></h1></section>
+        <section class="hero-modular" id="hero-boxes"></section>
         <div id="project-feed"></div>
         <footer><span id="footer-status"></span><span id="footer-copy"></span><span id="coords">x: 000 y: 000</span></footer>
     </main>
@@ -221,34 +207,32 @@
         function updateUI() {
             const lang = currentLang;
             const info = globalContent.info;
-            if (!info || !info.sections) return;
+            if (!info) return;
 
-            let html = info.sections.map(section => {
+            // Render Hero Boxes
+            if(info.hero_boxes) {
+                const heroCont = document.getElementById('hero-boxes');
+                heroCont.innerHTML = info.hero_boxes.map(box => `<div class="hero-box"><span>${box[lang]}</span></div>`).join('');
+            }
+
+            // Modular Block Renderer
+            let sidebarHTML = info.sections.map(section => {
                 let content = '';
                 if (section.type === 'text') {
                     content = section.content.map(p => `<p class="txt-light">${p[lang]}</p>`).join('');
                 } else if (section.type === 'team') {
-                    content = section.members.map(m => `
-                        <div style="margin-bottom:25px">
-                            <span class="txt-medium">${m.name}</span>
-                            <span class="profession light" style="font-size:0.8rem; opacity:0.6; display:block; margin-bottom:5px;">${m.profession[lang]}</span>
-                            <p class="txt-light">${m.bio[lang]}</p>
-                        </div>`).join('');
+                    content = section.members.map(m => `<div style="margin-bottom:25px"><span class="txt-medium">${m.name}</span><span class="profession light">${m.profession[lang]}</span><p class="txt-light">${m.bio[lang]}</p></div>`).join('');
                 } else if (section.type === 'contact') {
-                    content = `
-                        <div style="margin-bottom:25px"><span class="txt-medium">${section.office_name[lang]}</span><p class="txt-light">${section.address}</p></div>
-                        ${section.socials.map(s => `<a href="${s.url}" target="_blank" class="contact-link">${s.label}</a>`).join('')}
-                    `;
+                    content = `<div style="margin-bottom:25px"><span class="txt-medium">${section.office_name[lang]}</span><p class="txt-light">${section.address}</p></div>${section.socials.map(s => `<a href="${s.url}" target="_blank" class="contact-link txt-medium">${s.label}</a>`).join('')}`;
                 }
                 return `<div class="sidebar-section"><h3>${section.title[lang]}</h3>${content}</div>`;
             }).join('');
 
-            document.querySelectorAll('.sidebar-info-container').forEach(el => el.innerHTML = html);
+            document.querySelectorAll('.sidebar-info-container').forEach(el => el.innerHTML = sidebarHTML);
 
             if (globalContent.header) {
                 document.getElementById('header-log-tag').innerText = globalContent.header.log_version[lang];
-                const infoBtn = document.getElementById('info-btn');
-                infoBtn.innerText = document.getElementById('mobile-popup').style.display === 'block' ? globalContent.header.close_label : globalContent.header.info_label;
+                document.getElementById('info-btn').innerText = document.getElementById('mobile-popup').style.display === 'block' ? globalContent.header.close_label : globalContent.header.info_label;
             }
             if (globalContent.footer) {
                 document.getElementById('footer-status').innerText = globalContent.footer.system_status;
@@ -256,17 +240,15 @@
             }
         }
 
-        const EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp'];
-        async function probeImage(folder, index) {
+        async function probeImage(f, i) {
             for (const ext of EXTENSIONS) {
-                const url = `images/${folder}/${index}.${ext}`;
-                const exists = await new Promise(res => {
-                    const img = new Image(); img.onload = () => res(true); img.onerror = () => res(false); img.src = url;
-                });
+                const url = `images/${f}/${i}.${ext}`;
+                const exists = await new Promise(res => { const img = new Image(); img.onload = () => res(true); img.onerror = () => res(false); img.src = url; });
                 if (exists) return url;
             } return null;
         }
 
+        const EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp'];
         async function initFeed() {
             const feed = document.getElementById('project-feed');
             for (let pNum = 1; pNum <= 20; pNum++) {
@@ -283,9 +265,7 @@
                     projectList.push({ id: pNum, meta, imgs, cur: 0 });
                     const row = document.createElement('section');
                     row.className = 'project-row';
-                    row.innerHTML = `
-                        <div class="project-text"><div class="project-meta mono" style="margin-bottom:10px;">${meta.tag}</div><h2 class="med" style="font-weight:400;">${meta.title}</h2><p class="txt-light" style="margin-bottom:30px;">${currentLang === 'en' ? meta.en : meta.tr}</p><div style="font-family:'Space Mono'; font-size:0.65rem; opacity:0.5; border-top:1px solid rgba(0,0,0,0.1); padding-top:15px;">${meta.specs}</div></div>
-                        <div class="slider-container" id="slider-${pNum}"><div class="slider-track" onclick="openLightbox(${pNum})">${imgs.map(s => `<img src="${s}" class="slide-img">`).join('')}</div>${imgs.length > 1 ? `<div class="slider-nav"><div class="nav-zone" style="left:0" onclick="moveSlide(${pNum}, -1, event)"><div class="nav-triangle">◀</div></div><div class="nav-zone" style="right:0" onclick="moveSlide(${pNum}, 1, event)"><div class="nav-triangle">▶</div></div></div>` : ''}</div>`;
+                    row.innerHTML = `<div class="project-text"><div class="mono" style="margin-bottom:10px;">${meta.tag}</div><h2 class="med" style="font-weight:400; font-size:4.5vw; line-height:0.9; margin-bottom:25px;">${meta.title}</h2><p class="txt-light" style="margin-bottom:30px;">${currentLang === 'en' ? meta.en : meta.tr}</p><div style="font-family:'Space Mono'; font-size:0.65rem; opacity:0.5; border-top:1px solid rgba(0,0,0,0.1); padding-top:15px;">${meta.specs}</div></div><div class="slider-container" id="slider-${pNum}"><div class="slider-track" onclick="openLightbox(${pNum})">${imgs.map(s => `<img src="${s}" class="slide-img">`).join('')}</div>${imgs.length > 1 ? `<div class="slider-nav"><div class="nav-zone" style="left:0" onclick="moveSlide(${pNum}, -1, event)"><div class="nav-triangle">◀</div></div><div class="nav-zone" style="right:0" onclick="moveSlide(${pNum}, 1, event)"><div class="nav-triangle">▶</div></div></div>` : ''}</div>`;
                     feed.appendChild(row);
                 }
             }
