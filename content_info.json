@@ -1,6 +1,6 @@
 {
   "hero_boxes": [
-    { "en": "structural logic", "tr": "yapısal mantık" },
+    { "en": "SOFRA PRIORITIZES COLLABORATION IN ITS PRACTICE", "tr": "SOFRA, FAALİYETLERİNDE İŞ BİRLİĞİNE ÖNCELİK VERİR." },
     { "en": "digital craft", "tr": "dijital zanaat" },
     { "en": "urban friction", "tr": "kentsel sürtünme" },
     { "en": "modular flow", "tr": "modüler akış" }
@@ -27,6 +27,11 @@
         },
         {
           "name": "burak kavraroğlu",
+          "profession": { "en": "founding partner // architect", "tr": "kurucu partner // mimar" },
+          "bio": { "en": "computational designer.", "tr": "hesaplamalı tasarımcı." }
+        },
+        {
+          "name": "feyza aksamaz",
           "profession": { "en": "founding partner // architect", "tr": "kurucu partner // mimar" },
           "bio": { "en": "computational designer.", "tr": "hesaplamalı tasarımcı." }
         }
